@@ -9,7 +9,6 @@ export function Nav({}: NavProps) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    maxHeight: 40,
+    minHeight: 50,
   },
 });

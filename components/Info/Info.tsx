@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { TextInfo } from "./TextInfo";
 
 interface InfoProps {}
 
@@ -17,23 +18,20 @@ export function Info({}: InfoProps) {
         <View style={styles.humbView} />
       </View>
       <View style={styles.containerInfo}>
-        <Text>calories: 200/2400</Text>
-        <Text>calories: 200/2400</Text>
-        <Text>calories: 200/2400</Text>
-        <Text>calories: 200/2400</Text>
-        <Text>calories: 200/2400</Text>
-        <Text>calories: 200/2400</Text>
+        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   containerHero: {
-    flex: 1,
+    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     textAlign: "center",
@@ -47,5 +45,7 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 16,
   },
-  containerInfo: {},
+  containerInfo: {
+    padding: 20,
+  },
 });
