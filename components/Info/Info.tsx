@@ -8,18 +8,11 @@ export function Info({}: InfoProps) {
   return (
     <View style={styles.container}>
       <View style={styles.containerHero}>
-        <View style={styles.humbView}>
-          <Text>Humb</Text>
-        </View>
         <View>
           <Text style={styles.macros}>Macros</Text>
-          <Text style={styles.date}>August 8, 2021</Text>
         </View>
-        <View style={styles.humbView} />
       </View>
       <View style={styles.containerInfo}>
-        <TextInfo name="Calories" value={100} maxValue={1000} />
-        <TextInfo name="Calories" value={100} maxValue={1000} />
         <TextInfo name="Calories" value={100} maxValue={1000} />
         <TextInfo name="Calories" value={100} maxValue={1000} />
         <TextInfo name="Calories" value={100} maxValue={1000} />
@@ -35,9 +28,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     textAlign: "center",
-  },
-  humbView: {
-    flex: 1,
   },
   macros: {
     fontSize: 36,

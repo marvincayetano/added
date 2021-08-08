@@ -1,20 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Info from "./components/Info";
-import Nav from "./components/Nav";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Home } from "./pages/Home";
+import { Button, Text } from "react-native";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Nav />
-      <Info />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="August 8, 2021"
+          component={Home}
+          options={{
+            headerRight: () => (
+              <Button
+                onPress={() => alert("This is a button!")}
+                title="Add"
+                color="#111"
+              />
+            ),
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // height: "100%",
-    backgroundColor: "#fff",
-  },
-});
