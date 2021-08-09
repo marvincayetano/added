@@ -16,6 +16,9 @@ export function Info({}: InfoProps) {
         <TextInfo name="Calories" value={100} maxValue={1000} />
         <TextInfo name="Calories" value={100} maxValue={1000} />
         <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={100} maxValue={1000} />
       </View>
     </View>
   );

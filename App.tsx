@@ -11,7 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="August 8, 2021"
+          name="Today"
           component={Home}
           options={{
             headerRight: () => (
