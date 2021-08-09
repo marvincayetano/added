@@ -1,3 +1,4 @@
+import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import {
   View,
@@ -6,12 +7,14 @@ import {
   StyleSheet,
   Alert,
   TouchableHighlight,
+  TextInput,
 } from "react-native";
 
 interface ModalAddProps {}
 
 export function ModalAdd({}: ModalAddProps) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState();
 
   return (
     <View style={styles.centeredView}>
@@ -25,7 +28,17 @@ export function ModalAdd({}: ModalAddProps) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <TextInput style={styles.modalText}></TextInput>
+            <Picker
+              selectedValue={selectedLanguage}
+              onValueChange={(itemValue, itemIndex) =>
+                setSelectedLanguage(itemValue)
+              }
+            >
+              <Picker.Item label="Java" value="java" />
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+            <TextInput style={styles.modalText}></TextInput>
 
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -88,5 +101,10 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    borderWidth: 1,
+    borderRadius: 12,
+    width: 250,
+    fontSize: 30,
+    padding: 5,
   },
 });
