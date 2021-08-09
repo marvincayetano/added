@@ -12,6 +12,9 @@ export function Macro({}: MacroProps) {
       <View>
         <Text>asdfasdf</Text>
       </View>
+      <View>
+        <Text>asdfasdf</Text>
+      </View>
     </View>
   );
 }
@@ -19,6 +22,8 @@ export function Macro({}: MacroProps) {
 const styles = StyleSheet.create({
   container: {
     display: "flex",
+    flexDirection: "row",
     justifyContent: "space-between",
+    paddingHorizontal: 20,
   },
 });

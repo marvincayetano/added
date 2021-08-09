@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import Info from "../components/Info";
-import { Macros } from "../components/Table/Macros";
+import Macros from "../components/Table";
 
 interface HomeProps {}
 

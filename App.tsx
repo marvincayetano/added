@@ -17,7 +17,14 @@ export default function App() {
             headerRight: () => (
               <Button
                 onPress={() => alert("This is a button!")}
-                title="Add"
+                title="Foods"
+                color="#111"
+              />
+            ),
+            headerLeft: () => (
+              <Button
+                onPress={() => alert("This is a button!")}
+                title="YDA"
                 color="#111"
               />
             ),
