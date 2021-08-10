@@ -6,7 +6,10 @@ interface MacroProps {}
 export function Macro({}: MacroProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.item}>Banana</Text>
+      <View>
+        <Text style={styles.item}>Banana</Text>
+        <Text style={styles.subItem}>120 Calories / 9 Protein</Text>
+      </View>
       <Text style={styles.qty}>2pcs</Text>
       <View>
         <Button title="remove" onPress={() => console.log("asdfasdf")}>
@@ -26,12 +29,16 @@ const styles = StyleSheet.create({
     maxHeight: 80,
     padding: 15,
     marginHorizontal: 10,
-    borderWidth: 1,
+    backgroundColor: "#fff",
     borderRadius: 4,
+    marginBottom: 8,
   },
   item: {
     fontSize: 18,
     fontWeight: "500",
+  },
+  subItem: {
+    fontSize: 12,
   },
   qty: {
     fontSize: 18,

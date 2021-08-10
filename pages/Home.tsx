@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
@@ -8,10 +8,14 @@ interface HomeProps {}
 
 export function Home({}: HomeProps) {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Info />
-      <ModalAdd />
-      <Macros />
+      <ScrollView>
+        <Macros />
+      </ScrollView>
+      <View style={{ position: "absolute", right: 50, bottom: 50 }}>
+        <ModalAdd />
+      </View>
     </View>
   );
 }

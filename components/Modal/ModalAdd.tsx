@@ -60,7 +60,7 @@ export function ModalAdd({}: ModalAddProps) {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={styles.textStyle}>Cancel</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -72,7 +72,7 @@ export function ModalAdd({}: ModalAddProps) {
           setModalVisible(true);
         }}
       >
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text style={{ ...styles.textStyle, padding: 5 }}>Add</Text>
       </TouchableHighlight>
     </View>
   );
@@ -106,6 +106,13 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     zIndex: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
   },
   textStyle: {
     color: "white",
@@ -118,7 +125,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     width: 250,
-    fontSize: 30,
+    fontSize: 25,
     padding: 5,
   },
 });

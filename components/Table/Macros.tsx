@@ -10,6 +10,7 @@ export function Macros({}: MacrosProps) {
       <Macro />
       <Macro />
       <Macro />
+      <Macro />
     </View>
   );
 }
