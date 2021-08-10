@@ -1,4 +1,3 @@
-import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import {
   View,
@@ -9,6 +8,7 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 interface ModalAddProps {}
 
@@ -28,9 +28,10 @@ export function ModalAdd({}: ModalAddProps) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <TextInput style={styles.modalText}></TextInput>
+            <TextInput placeholder="@banana/banana" style={styles.modalText} />
             <Picker
               selectedValue={selectedLanguage}
+              style={{ height: 150, width: 250 }}
               onValueChange={(itemValue, itemIndex) =>
                 setSelectedLanguage(itemValue)
               }
@@ -38,7 +39,20 @@ export function ModalAdd({}: ModalAddProps) {
               <Picker.Item label="Java" value="java" />
               <Picker.Item label="JavaScript" value="js" />
             </Picker>
-            <TextInput style={styles.modalText}></TextInput>
+            <TextInput placeholder="qty" style={styles.modalText}></TextInput>
+
+            <TouchableHighlight
+              style={{
+                ...styles.openButton,
+                backgroundColor: "#40c87b",
+                marginBottom: 20,
+              }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Add</Text>
+            </TouchableHighlight>
 
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -46,7 +60,7 @@ export function ModalAdd({}: ModalAddProps) {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Cancel</Text>
             </TouchableHighlight>
           </View>
         </View>
