@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Home } from "./pages/Home";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
+import { Foods } from "./pages/Foods";
+import { YDA } from "./pages/YDA";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,23 +15,25 @@ export default function App() {
         <Stack.Screen
           name="Today"
           component={Home}
-          options={{
+          options={({ navigation }) => ({
             headerRight: () => (
               <Button
-                onPress={() => alert("This is a button!")}
+                onPress={() => navigation.navigate("Foods")}
                 title="Foods"
                 color="#111"
               />
             ),
             headerLeft: () => (
               <Button
-                onPress={() => alert("This is a button!")}
+                onPress={() => navigation.navigate("Yesterday")}
                 title="YDA"
                 color="#111"
               />
             ),
-          }}
+          })}
         />
+        <Stack.Screen name="Yesterday" component={YDA} />
+        <Stack.Screen name="Foods" component={Foods} />
       </Stack.Navigator>
     </NavigationContainer>
   );

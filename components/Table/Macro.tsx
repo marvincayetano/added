@@ -7,10 +7,9 @@ export function Macro({}: MacroProps) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.item}>Banana</Text>
+        <Text style={styles.item}>2 or 200g Banana</Text>
         <Text style={styles.subItem}>120 Calories / 9 Protein</Text>
       </View>
-      <Text style={styles.qty}>2pcs</Text>
       <View>
         <Button title="remove" onPress={() => console.log("asdfasdf")}>
           remove
