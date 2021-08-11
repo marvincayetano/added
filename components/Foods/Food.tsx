@@ -1,17 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 
-interface MacroProps {}
+interface FoodProps {}
 
-export function Macro({}: MacroProps) {
+export function Food({}: FoodProps) {
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.item}>2 or 200g Banana</Text>
         <Text style={styles.subItem}>120 Calories / 9 Protein</Text>
-      </View>
-      <View>
-        <Button title="remove" onPress={() => console.log("asdfasdf")} />
       </View>
     </View>
   );
