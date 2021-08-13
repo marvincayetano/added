@@ -5,8 +5,17 @@ import { useForm, Controller } from "react-hook-form";
 interface FoodAddProps {}
 
 interface FormData {
-  firstName: string;
-  lastName: string;
+  foodName: string;
+  caloriesPP: string;
+  caloriesPG: string;
+  proteinPP: string;
+  proteinPG: string;
+  fatPP: string;
+  fatPG: string;
+  carbsPP: string;
+  carbsPG: string;
+  fiberPP: string;
+  fiberPG: string;
 }
 
 export function FoodAdd({}: FoodAddProps) {
@@ -15,7 +24,20 @@ export function FoodAdd({}: FoodAddProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data: any) => {
+    // Map remove empty
+    Object.keys(data).forEach((key: any) => {
+      if (data[key] === "" || data[key] === "0") {
+        delete data[key];
+      }
+    });
+
+    if (data.foodName) {
+      if (Object.keys(data.foodName).length <= 1) {
+        // TODO: Return error
+      }
+    }
+  });
 
   return (
     <View style={styles.container}>
@@ -34,10 +56,10 @@ export function FoodAdd({}: FoodAddProps) {
             value={value}
           />
         )}
-        name="firstName"
+        name="foodName"
         defaultValue=""
       />
-      {errors.firstName && (
+      {errors.foodName && (
         <Text style={{ color: "red" }}>This is required.</Text>
       )}
 
@@ -47,7 +69,7 @@ export function FoodAdd({}: FoodAddProps) {
           <Controller
             control={control}
             rules={{
-              maxLength: 100,
+              maxLength: 3,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
@@ -59,8 +81,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="caloriesPP"
+            defaultValue="0"
           />
         </View>
 
@@ -69,7 +91,7 @@ export function FoodAdd({}: FoodAddProps) {
           <Controller
             control={control}
             rules={{
-              maxLength: 100,
+              maxLength: 3,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
@@ -81,8 +103,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="caloriesPG"
+            defaultValue="0"
           />
         </View>
       </View>
@@ -105,8 +127,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="proteinPP"
+            defaultValue="0"
           />
         </View>
 
@@ -127,8 +149,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="proteinPG"
+            defaultValue="0"
           />
         </View>
       </View>
@@ -151,8 +173,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="fatPP"
+            defaultValue="0"
           />
         </View>
 
@@ -173,8 +195,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="fatPG"
+            defaultValue="0"
           />
         </View>
       </View>
@@ -197,8 +219,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="carbsPP"
+            defaultValue="0"
           />
         </View>
 
@@ -219,8 +241,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="carbsPG"
+            defaultValue="0"
           />
         </View>
       </View>
@@ -243,8 +265,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="fiberPP"
+            defaultValue="0"
           />
         </View>
 
@@ -265,8 +287,8 @@ export function FoodAdd({}: FoodAddProps) {
                 value={value}
               />
             )}
-            name="lastName"
-            defaultValue=""
+            name="fiberPG"
+            defaultValue="0"
           />
         </View>
       </View>
