@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, Button, TextInput, View, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import AsyncStorage from "@react-native-community/async-storage";
 
 interface FoodAddProps {}
 
