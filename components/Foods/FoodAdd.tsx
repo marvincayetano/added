@@ -19,6 +19,26 @@ interface FormData {
   fiberPG: string;
 }
 
+const _storeData = async () => {
+  try {
+    await AsyncStorage.setItem("@MySuperStore:key", "I like to save it.");
+  } catch (error) {
+    // Error saving data
+  }
+};
+
+const _retrieveData = async () => {
+  try {
+    const value = await AsyncStorage.getItem("TASKS");
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+};
+
 export function FoodAdd({}: FoodAddProps) {
   const {
     control,
@@ -36,6 +56,8 @@ export function FoodAdd({}: FoodAddProps) {
     if (data.foodName) {
       if (Object.keys(data.foodName).length <= 1) {
         // TODO: Return error
+      } else {
+        // Save here
       }
     }
   });
