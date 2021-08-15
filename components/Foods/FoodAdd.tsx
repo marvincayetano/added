@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Text, Button, TextInput, View, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
-import AsyncStorage from "@react-native-community/async-storage";
+import Constants from "expo-constants";
 
 interface FoodAddProps {}
 
@@ -21,23 +22,28 @@ interface FormData {
 
 const _storeData = async () => {
   try {
-    await AsyncStorage.setItem("@Added", "I like to save it.");
+    const jsonValue = JSON.stringify({
+      foodName: "Banana",
+      CaloriePG: 100,
+    });
+
+    await AsyncStorage.setItem("@foods", jsonValue);
   } catch (error) {
-    // Error saving data
+    console.log(error);
   }
 };
 
-// const _retrieveData = async () => {
-//   try {
-//     const value = await AsyncStorage.getItem("TASKS");
-//     if (value !== null) {
-//       // We have data!!
-//       console.log(value);
-//     }
-//   } catch (error) {
-//     // Error retrieving data
-//   }
-// };
+const _retrieveData = async () => {
+  try {
+    const value = await AsyncStorage.getItem("TASKS");
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+};
 
 export function FoodAdd({}: FoodAddProps) {
   const {
