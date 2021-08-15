@@ -21,23 +21,23 @@ interface FormData {
 
 const _storeData = async () => {
   try {
-    await AsyncStorage.setItem("@MySuperStore:key", "I like to save it.");
+    await AsyncStorage.setItem("@Added", "I like to save it.");
   } catch (error) {
     // Error saving data
   }
 };
 
-const _retrieveData = async () => {
-  try {
-    const value = await AsyncStorage.getItem("TASKS");
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
-    }
-  } catch (error) {
-    // Error retrieving data
-  }
-};
+// const _retrieveData = async () => {
+//   try {
+//     const value = await AsyncStorage.getItem("TASKS");
+//     if (value !== null) {
+//       // We have data!!
+//       console.log(value);
+//     }
+//   } catch (error) {
+//     // Error retrieving data
+//   }
+// };
 
 export function FoodAdd({}: FoodAddProps) {
   const {
@@ -45,6 +45,7 @@ export function FoodAdd({}: FoodAddProps) {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+
   const onSubmit = handleSubmit((data: any) => {
     // Map remove empty
     Object.keys(data).forEach((key: any) => {
