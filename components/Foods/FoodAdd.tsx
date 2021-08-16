@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Text, Button, TextInput, View, StyleSheet } from "react-native";
+import {
+  Text,
+  Button,
+  TextInput,
+  View,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import Constants from "expo-constants";
@@ -80,270 +87,274 @@ export function FoodAdd({}: FoodAddProps) {
       } else {
         // Save here
         _storeData(data);
-        _retrieveData();
+        // _retrieveData();
       }
     }
   });
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Name</Text>
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            autoCapitalize="none"
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            placeholder="Banana"
-          />
-        )}
-        name="foodName"
-        defaultValue=""
-      />
-      {errors.foodName && (
-        <Text style={{ color: "red" }}>This is required.</Text>
-      )}
-
-      <View style={styles.inputContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.label}>Calories per piece</Text>
+    <View style={{ flex: 1 }}>
+      <ScrollView style={{ marginTop: 20 }}>
+        <View style={styles.container}>
+          <Text style={styles.label}>Name</Text>
           <Controller
             control={control}
             rules={{
-              maxLength: 3,
+              required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                keyboardType="numeric"
                 autoCapitalize="none"
                 style={styles.input}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                placeholder="Banana"
               />
             )}
-            name="caloriesPP"
-            defaultValue="0"
+            name="foodName"
+            defaultValue=""
           />
-        </View>
+          {errors.foodName && (
+            <Text style={{ color: "red" }}>This is required.</Text>
+          )}
 
-        <View style={{ flex: 1, marginLeft: 5 }}>
-          <Text style={styles.label}>per 100G</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 3,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+          <View style={styles.inputContainer}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.label}>Calories per piece</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 3,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="caloriesPP"
+                defaultValue="0"
               />
-            )}
-            name="caloriesPG"
-            defaultValue="0"
-          />
-        </View>
-      </View>
+            </View>
 
-      <View style={styles.inputContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.label}>Protein per piece</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <View style={{ flex: 1, marginLeft: 5 }}>
+              <Text style={styles.label}>per 100G</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 3,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="caloriesPG"
+                defaultValue="0"
               />
-            )}
-            name="proteinPP"
-            defaultValue="0"
-          />
-        </View>
+            </View>
+          </View>
 
-        <View style={{ flex: 1, marginLeft: 5 }}>
-          <Text style={styles.label}>per 100G</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+          <View style={styles.inputContainer}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.label}>Protein per piece</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="proteinPP"
+                defaultValue="0"
               />
-            )}
-            name="proteinPG"
-            defaultValue="0"
-          />
-        </View>
-      </View>
+            </View>
 
-      <View style={styles.inputContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.label}>Fat per piece</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <View style={{ flex: 1, marginLeft: 5 }}>
+              <Text style={styles.label}>per 100G</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="proteinPG"
+                defaultValue="0"
               />
-            )}
-            name="fatPP"
-            defaultValue="0"
-          />
-        </View>
+            </View>
+          </View>
 
-        <View style={{ flex: 1, marginLeft: 5 }}>
-          <Text style={styles.label}>per 100G</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+          <View style={styles.inputContainer}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.label}>Fat per piece</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="fatPP"
+                defaultValue="0"
               />
-            )}
-            name="fatPG"
-            defaultValue="0"
-          />
-        </View>
-      </View>
+            </View>
 
-      <View style={styles.inputContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.label}>Carbs per piece</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <View style={{ flex: 1, marginLeft: 5 }}>
+              <Text style={styles.label}>per 100G</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="fatPG"
+                defaultValue="0"
               />
-            )}
-            name="carbsPP"
-            defaultValue="0"
-          />
-        </View>
+            </View>
+          </View>
 
-        <View style={{ flex: 1, marginLeft: 5 }}>
-          <Text style={styles.label}>per 100G</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+          <View style={styles.inputContainer}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.label}>Carbs per piece</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="carbsPP"
+                defaultValue="0"
               />
-            )}
-            name="carbsPG"
-            defaultValue="0"
-          />
-        </View>
-      </View>
+            </View>
 
-      <View style={styles.inputContainer}>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.label}>Fiber per piece</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+            <View style={{ flex: 1, marginLeft: 5 }}>
+              <Text style={styles.label}>per 100G</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="carbsPG"
+                defaultValue="0"
               />
-            )}
-            name="fiberPP"
-            defaultValue="0"
-          />
-        </View>
+            </View>
+          </View>
 
-        <View style={{ flex: 1, marginLeft: 5 }}>
-          <Text style={styles.label}>per 100G</Text>
-          <Controller
-            control={control}
-            rules={{
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                keyboardType="numeric"
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
+          <View style={styles.inputContainer}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.label}>Fiber per piece</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="fiberPP"
+                defaultValue="0"
               />
-            )}
-            name="fiberPG"
-            defaultValue="0"
-          />
-        </View>
-      </View>
+            </View>
 
-      <View style={{ marginTop: 26 }}>
-        <Button title="Save" onPress={onSubmit} />
-        {/* <Button title="Delete" onPress={onSubmit} /> */}
-      </View>
+            <View style={{ flex: 1, marginLeft: 5 }}>
+              <Text style={styles.label}>per 100G</Text>
+              <Controller
+                control={control}
+                rules={{
+                  maxLength: 100,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    keyboardType="numeric"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="fiberPG"
+                defaultValue="0"
+              />
+            </View>
+          </View>
+
+          <View style={{ marginTop: 26 }}>
+            <Button title="Save" onPress={onSubmit} />
+            {/* <Button title="Delete" onPress={onSubmit} /> */}
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }

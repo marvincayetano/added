@@ -11,9 +11,6 @@ export function Foods({}: FoodsProps) {
       <ScrollView style={{ marginTop: 20 }}>
         <FoodsComponent />
       </ScrollView>
-      <View style={{ position: "absolute", right: 50, bottom: 50 }}>
-        <ModalAdd />
-      </View>
     </View>
   );
 }
