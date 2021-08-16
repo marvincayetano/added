@@ -20,14 +20,28 @@ interface FormData {
   fiberPG: string;
 }
 
-const _storeData = async () => {
+const _storeData = async (data: FormData) => {
   try {
-    const jsonValue = JSON.stringify({
-      foodName: "Banana",
-      CaloriePG: 100,
-    });
+    AsyncStorage.getItem("@foods").then((value: string | null) => {
+      if (value && value.length) {
+        const jsonGetValue = JSON.parse(value) as FormData[];
+        // Check if the name is already in the storage
+        const isExist = jsonGetValue.map((food) => {
+          return food.foodName === data.foodName;
+        });
 
-    await AsyncStorage.setItem("@foods", jsonValue);
+        if (isExist) {
+          // Return error here
+          return { error: "Food name already exists!" };
+        }
+
+        AsyncStorage.setItem("@foods", JSON.stringify([...jsonGetValue, data]));
+
+        return { success: "Successfully added new food!" };
+      } else {
+        AsyncStorage.setItem("@foods", JSON.stringify([data]));
+      }
+    });
   } catch (error) {
     console.log(error);
   }
@@ -35,7 +49,7 @@ const _storeData = async () => {
 
 const _retrieveData = async () => {
   try {
-    const value = await AsyncStorage.getItem("TASKS");
+    const value = await AsyncStorage.getItem("@foods");
     if (value !== null) {
       // We have data!!
       console.log(value);
@@ -65,6 +79,8 @@ export function FoodAdd({}: FoodAddProps) {
         // TODO: Return error
       } else {
         // Save here
+        _storeData(data);
+        _retrieveData();
       }
     }
   });
@@ -84,6 +100,7 @@ export function FoodAdd({}: FoodAddProps) {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            placeholder="Banana"
           />
         )}
         name="foodName"
@@ -325,7 +342,7 @@ export function FoodAdd({}: FoodAddProps) {
 
       <View style={{ marginTop: 26 }}>
         <Button title="Save" onPress={onSubmit} />
-        <Button title="Delete" onPress={onSubmit} />
+        {/* <Button title="Delete" onPress={onSubmit} /> */}
       </View>
     </View>
   );
