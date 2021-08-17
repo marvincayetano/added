@@ -1,14 +1,27 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
+import { FormData } from "./FoodAdd";
 
-interface FoodProps {}
-
-export function Food({}: FoodProps) {
+export function Food({
+  foodName,
+  caloriesPP,
+  caloriesPG,
+  proteinPP,
+  proteinPG,
+  fatPP,
+  fatPG,
+  carbsPP,
+  carbsPG,
+  fiberPP,
+  fiberPG,
+}: FormData) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.item}>2 or 200g Banana</Text>
-        <Text style={styles.subItem}>120 Calories / 9 Protein</Text>
+        <Text style={styles.item}>{`${foodName}`}</Text>
+        <Text style={styles.subItem}>{`${caloriesPP} Calories per piece  ${
+          caloriesPG ? `| ${caloriesPG} Calories per 100g` : ""
+        } ${proteinPP ? `| ${proteinPP} Protein per piece` : ""}`}</Text>
       </View>
     </View>
   );

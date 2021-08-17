@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Text,
   Button,
@@ -9,22 +9,23 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
-import Constants from "expo-constants";
 
-interface FoodAddProps {}
+interface FoodAddProps {
+  navigation: any;
+}
 
-interface FormData {
+export interface FormData {
   foodName: string;
-  caloriesPP: string;
-  caloriesPG: string;
-  proteinPP: string;
-  proteinPG: string;
-  fatPP: string;
-  fatPG: string;
-  carbsPP: string;
-  carbsPG: string;
-  fiberPP: string;
-  fiberPG: string;
+  caloriesPP?: string;
+  caloriesPG?: string;
+  proteinPP?: string;
+  proteinPG?: string;
+  fatPP?: string;
+  fatPG?: string;
+  carbsPP?: string;
+  carbsPG?: string;
+  fiberPP?: string;
+  fiberPG?: string;
 }
 
 const _storeData = async (data: FormData) => {
@@ -33,17 +34,16 @@ const _storeData = async (data: FormData) => {
       if (value && value.length) {
         const jsonGetValue = JSON.parse(value) as FormData[];
         // Check if the name is already in the storage
-        const isExist = jsonGetValue.map((food) => {
+        const isExist = jsonGetValue.filter((food) => {
           return food.foodName === data.foodName;
         });
 
-        if (isExist) {
+        if (isExist.length) {
           // Return error here
           return { error: "Food name already exists!" };
         }
 
         AsyncStorage.setItem("@foods", JSON.stringify([...jsonGetValue, data]));
-
         return { success: "Successfully added new food!" };
       } else {
         AsyncStorage.setItem("@foods", JSON.stringify([data]));
@@ -66,7 +66,7 @@ const _retrieveData = async () => {
   }
 };
 
-export function FoodAdd({}: FoodAddProps) {
+export function FoodAdd({ navigation }: FoodAddProps) {
   const {
     control,
     handleSubmit,
@@ -87,7 +87,8 @@ export function FoodAdd({}: FoodAddProps) {
       } else {
         // Save here
         _storeData(data);
-        // _retrieveData();
+        _retrieveData();
+        navigation.goBack();
       }
     }
   });
