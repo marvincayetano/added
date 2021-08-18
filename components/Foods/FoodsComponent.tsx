@@ -29,10 +29,11 @@ export function FoodsComponent({}: FoodsComponentProps) {
   return (
     <View>
       {foods &&
-        foods.map((food) => {
+        foods.map((food, i) => {
           return (
             // TODO: Make this props ...props
             <Food
+              key={i}
               foodName={food.foodName}
               caloriesPP={food.caloriesPP}
               caloriesPG={food.caloriesPG}
