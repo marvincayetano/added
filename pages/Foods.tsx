@@ -8,7 +8,7 @@ interface FoodsProps {}
 export function Foods({}: FoodsProps) {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView style={{ marginTop: 20 }}>
+      <ScrollView>
         <FoodsComponent />
       </ScrollView>
     </View>

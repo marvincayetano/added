@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
+import Swipeout from "react-native-swipeout";
 import { Food } from "./Food";
 import { FormData } from "./FoodAdd";
 
@@ -12,7 +13,6 @@ export function FoodsComponent({}: FoodsComponentProps) {
       const value = await AsyncStorage.getItem("@foods");
       if (value !== null) {
         // We have data!!
-        console.log(JSON.parse(value));
         setFoods(JSON.parse(value));
       }
     } catch (error) {
@@ -24,7 +24,11 @@ export function FoodsComponent({}: FoodsComponentProps) {
   const [foods, setFoods] = useState<FormData[]>();
   useEffect(() => {
     _retrieveData();
-  }, []);
+  }, [foods]);
+
+  const [index, setIndex] = useState({});
+
+  const swipeoutBtns = [{}];
 
   return (
     <View>
@@ -32,14 +36,29 @@ export function FoodsComponent({}: FoodsComponentProps) {
         foods.map((food, i) => {
           return (
             // TODO: Make this props ...props
-            <Food
+            <Swipeout
               key={i}
-              foodName={food.foodName}
-              caloriesPP={food.caloriesPP}
-              caloriesPG={food.caloriesPG}
-              proteinPP={food.proteinPP}
-              proteinPG={food.proteinPG}
-            />
+              autoClose={true}
+              backgroundColor={"white"}
+              right={[
+                {
+                  text: "Delete",
+                  backgroundColor: "red",
+                  onPress: () => {
+                    console.log(i);
+                  },
+                },
+              ]}
+            >
+              <Food
+                key={i}
+                foodName={food.foodName}
+                caloriesPP={food.caloriesPP}
+                caloriesPG={food.caloriesPG}
+                proteinPP={food.proteinPP}
+                proteinPG={food.proteinPG}
+              />
+            </Swipeout>
           );
         })}
     </View>
