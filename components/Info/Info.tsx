@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { TextInfo } from "./TextInfo";
 import { Bar } from "react-native-progress";
 
@@ -11,6 +11,7 @@ export function Info({}: InfoProps) {
       <View style={styles.containerHero}>
         <View>
           <Text style={styles.macros}>Macros</Text>
+          <Button title="edit" onPress={() => console.log("ASD")}></Button>
         </View>
       </View>
       <View style={styles.containerInfo}>
