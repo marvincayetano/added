@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,13 +8,23 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 
-interface ModalAddProps {}
+interface ModalAddProps {
+  fnAddFood: Function;
+}
 
-export function ModalAdd({}: ModalAddProps) {
+export function ModalAdd({ fnAddFood }: ModalAddProps) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [textFood, setTextFood] = useState("@");
+  const [isPerPiece, setIsPerPiece] = useState(false);
+  useEffect(() => {
+    // Check if food is per piece or gram
+    if (textFood.charAt(0) === "@") {
+      setIsPerPiece(true);
+    } else {
+      setIsPerPiece(false);
+    }
+  }, [textFood]);
 
   return (
     <View style={styles.centeredView}>
@@ -28,18 +38,26 @@ export function ModalAdd({}: ModalAddProps) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <TextInput placeholder="@banana/banana" style={styles.modalText} />
-            <Picker
-              selectedValue={selectedLanguage}
-              style={{ height: 150, width: 250 }}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedLanguage(itemValue)
-              }
-            >
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+            <Text style={{ ...styles.textStyle, color: "gray" }}>
+              {isPerPiece ? "Per piece" : "Per 100G"}
+            </Text>
+            <TextInput
+              placeholder="@banana/banana"
+              onChangeText={(text) => {
+                setTextFood(text);
+              }}
+              value={textFood}
+              style={styles.modalText}
+              autoCapitalize="none"
+            />
             <TextInput placeholder="qty" style={styles.modalText}></TextInput>
+            <Text
+              style={{ ...styles.textStyle, color: "gray", paddingBottom: 20 }}
+            >
+              {
+                // HERE: Show the macros here depending if per piece or per 100g
+              }
+            </Text>
 
             <TouchableHighlight
               style={{

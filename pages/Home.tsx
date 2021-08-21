@@ -10,7 +10,9 @@ interface HomeProps {}
 export function Home({}: HomeProps) {
   const [foods, setFoods] = useState<[FormData] | undefined>();
 
-  async function AddNewFood(index: number) {}
+  async function AddNewFood(food: FormData) {
+    console.log(food);
+  }
 
   async function DeleteFood(index: number) {}
 
@@ -21,7 +23,7 @@ export function Home({}: HomeProps) {
         <Macros foods={foods} />
       </ScrollView>
       <View style={{ position: "absolute", right: 50, bottom: 50 }}>
-        <ModalAdd />
+        <ModalAdd fnAddFood={AddNewFood} />
       </View>
     </View>
   );
