@@ -8,10 +8,13 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface ModalAddProps {
   fnAddFood: Function;
 }
+
+const _retrieveData = async () => {};
 
 export function ModalAdd({ fnAddFood }: ModalAddProps) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,7 +28,25 @@ export function ModalAdd({ fnAddFood }: ModalAddProps) {
       setIsPerPiece(false);
     }
   }, [textFood]);
+  const [foods, setFoods] = useState<FormData[] | undefined>();
+  useEffect(() => {
+    getFoods();
+    console.log(foods);
+  }, []);
 
+  const getFoods = async () => {
+    try {
+      const value: string | null = await AsyncStorage.getItem("@foods");
+
+      if (value !== null) {
+        // We have data!!
+        const jsonGetValue = JSON.parse(value) as FormData[];
+        setFoods(jsonGetValue);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -55,7 +76,7 @@ export function ModalAdd({ fnAddFood }: ModalAddProps) {
               style={{ ...styles.textStyle, color: "gray", paddingBottom: 20 }}
             >
               {
-                // HERE: Show the macros here depending if per piece or per 100g
+                // Show the macros here depending if per piece or per 100g
               }
             </Text>
 
