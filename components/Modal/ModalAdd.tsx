@@ -63,6 +63,7 @@ export function ModalAdd({ fnAddFood }: ModalAddProps) {
               {isPerPiece ? "Per piece" : "Per 100G"}
             </Text>
             <TextInput
+              // HERE: Placeholder changes when typing
               placeholder="@banana/banana"
               onChangeText={(text) => {
                 setTextFood(text);
