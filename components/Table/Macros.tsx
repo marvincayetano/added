@@ -4,7 +4,7 @@ import { FormData } from "../Foods/FoodAdd";
 import { Macro } from "./Macro";
 
 interface MacrosProps {
-  foods: [FormData] | undefined;
+  foods: FormData[] | undefined;
 }
 
 export function Macros({ foods }: MacrosProps) {
