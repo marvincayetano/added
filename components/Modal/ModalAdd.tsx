@@ -20,14 +20,27 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [textFood, setTextFood] = useState("@");
   const [isPerPiece, setIsPerPiece] = useState(false);
+  const [filteredFoods, setFilteredFoods] = useState<any>([]);
 
   useEffect(() => {
     // Check if food is per piece or gram
+    let foodName = "";
     if (textFood.charAt(0) === "@") {
+      foodName = textFood.substr(1);
       setIsPerPiece(true);
     } else {
       setIsPerPiece(false);
     }
+
+    if (foods) {
+      setFilteredFoods(
+        foods.filter((food: FormData) => {
+          return food.foodName === foodName;
+        })
+      );
+    }
+
+    console.log(filteredFoods);
   }, [textFood]);
 
   return (
@@ -47,12 +60,12 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
             </Text>
             <View style={styles.modalText}>
               <Autocomplete
-                data={foods!}
+                data={filteredFoods ?? []}
                 value={textFood}
-                onChangeText={(text) => setTextFood(text)}
+                onChangeText={(text) => setTextFood(text.toLowerCase())}
                 flatListProps={{
                   // keyExtractor: (_, idx) => idx,
-                  renderItem: ({ item }) => <Text>{item}</Text>,
+                  renderItem: ({ item }) => <Text>{item.foodName}</Text>,
                 }}
               />
             </View>

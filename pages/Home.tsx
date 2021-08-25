@@ -10,25 +10,22 @@ interface HomeProps {}
 
 export function Home({}: HomeProps) {
   const [foods, setFoods] = useState<FormData[] | undefined>();
-  const [availFoods, setAvailFoods] = useState<FormData[] | undefined>();
+  const [availFoods, setAvailFoods] = useState<FormData[] | undefined>([]);
   useEffect(() => {
-    getFoods();
-  }, []);
-
-  const getFoods = async () => {
-    try {
-      const value: string | null = await AsyncStorage.getItem("@foods");
-
-      if (value !== null) {
-        // We have data!!
-        const jsonGetValue = JSON.parse(value) as FormData[];
-        setAvailFoods(jsonGetValue);
-        console.log(availFoods);
+    AsyncStorage.getItem("@foods").then((value) => {
+      try {
+        if (value !== null) {
+          // We have data!!
+          const jsonGetValue = JSON.parse(value) as FormData[];
+          setAvailFoods(jsonGetValue);
+          console.log("AVAIL", availFoods);
+        }
+      } catch (error) {
+        console.log(error);
+        // Error retrieving data
       }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
+    });
+  }, []);
 
   async function AddNewFood(food: FormData) {
     console.log(food);
@@ -42,7 +39,7 @@ export function Home({}: HomeProps) {
       <ScrollView>
         <Macros foods={foods} />
       </ScrollView>
-      <View style={{ position: "absolute", right: 50, bottom: 50 }}>
+      <View style={{ position: "absolute", right: 50, bottom: 100 }}>
         <ModalAdd foods={availFoods} fnAddFood={AddNewFood} />
       </View>
     </View>

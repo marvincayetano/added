@@ -8,21 +8,21 @@ import { FormData } from "./FoodAdd";
 interface FoodsComponentProps {}
 
 export function FoodsComponent({}: FoodsComponentProps) {
-  const _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("@foods");
-      if (value !== null) {
-        // We have data!!
-        setFoods(JSON.parse(value));
-      }
-    } catch (error) {
-      // Error retrieving data
-      console.log(error);
-    }
-  };
-
   const [foods, setFoods] = useState<FormData[]>();
   useEffect(() => {
+    async function _retrieveData() {
+      try {
+        const value = await AsyncStorage.getItem("@foods");
+        if (value !== null) {
+          // We have data!!
+          setFoods(JSON.parse(value));
+        }
+      } catch (error) {
+        // Error retrieving data
+        console.log(error);
+      }
+    }
+
     _retrieveData();
   }, [foods]);
 

@@ -29,6 +29,7 @@ export interface FormData {
 }
 
 const _storeData = async (data: FormData) => {
+  data.foodName = data.foodName.toLowerCase();
   try {
     AsyncStorage.getItem("@foods").then((value: string | null) => {
       if (value && value.length) {
