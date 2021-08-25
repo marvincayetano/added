@@ -8,15 +8,18 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
+import Autocomplete from "react-native-autocomplete-input";
 
 interface ModalAddProps {
+  foods: FormData[];
   fnAddFood: Function;
 }
 
-export function ModalAdd({ fnAddFood }: ModalAddProps) {
+export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [textFood, setTextFood] = useState("@");
   const [isPerPiece, setIsPerPiece] = useState(false);
+
   useEffect(() => {
     // Check if food is per piece or gram
     if (textFood.charAt(0) === "@") {
@@ -41,6 +44,15 @@ export function ModalAdd({ fnAddFood }: ModalAddProps) {
             <Text style={{ ...styles.textStyle, color: "gray" }}>
               {isPerPiece ? "Per piece" : "Per 100G"}
             </Text>
+            <Autocomplete
+              data={foods}
+              value={textFood}
+              onChangeText={(text) => setTextFood(text)}
+              flatListProps={{
+                // keyExtractor: (_, idx) => idx,
+                renderItem: ({ item }) => <Text>{item}</Text>,
+              }}
+            />
             <TextInput
               // HERE: Placeholder changes when typing
               placeholder="@banana/banana"
