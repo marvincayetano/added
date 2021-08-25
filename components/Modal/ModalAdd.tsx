@@ -8,10 +8,11 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
+import { FormData } from "../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
 
 interface ModalAddProps {
-  foods: FormData[];
+  foods: FormData[] | undefined;
   fnAddFood: Function;
 }
 
@@ -44,25 +45,17 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
             <Text style={{ ...styles.textStyle, color: "gray" }}>
               {isPerPiece ? "Per piece" : "Per 100G"}
             </Text>
-            <Autocomplete
-              data={foods}
-              value={textFood}
-              onChangeText={(text) => setTextFood(text)}
-              flatListProps={{
-                // keyExtractor: (_, idx) => idx,
-                renderItem: ({ item }) => <Text>{item}</Text>,
-              }}
-            />
-            <TextInput
-              // HERE: Placeholder changes when typing
-              placeholder="@banana/banana"
-              onChangeText={(text) => {
-                setTextFood(text);
-              }}
-              value={textFood}
-              style={styles.modalText}
-              autoCapitalize="none"
-            />
+            <View style={styles.modalText}>
+              <Autocomplete
+                data={foods!}
+                value={textFood}
+                onChangeText={(text) => setTextFood(text)}
+                flatListProps={{
+                  // keyExtractor: (_, idx) => idx,
+                  renderItem: ({ item }) => <Text>{item}</Text>,
+                }}
+              />
+            </View>
             <TextInput placeholder="qty" style={styles.modalText}></TextInput>
             <Text
               style={{ ...styles.textStyle, color: "gray", paddingBottom: 20 }}

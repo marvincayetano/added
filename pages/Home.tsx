@@ -43,7 +43,7 @@ export function Home({}: HomeProps) {
         <Macros foods={foods} />
       </ScrollView>
       <View style={{ position: "absolute", right: 50, bottom: 50 }}>
-        <ModalAdd foods={foods} fnAddFood={AddNewFood} />
+        <ModalAdd foods={availFoods} fnAddFood={AddNewFood} />
       </View>
     </View>
   );
