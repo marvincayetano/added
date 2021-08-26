@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableHighlight,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { FormData } from "../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
@@ -21,6 +22,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [textFood, setTextFood] = useState("@");
   const [isPerPiece, setIsPerPiece] = useState(false);
   const [filteredFoods, setFilteredFoods] = useState<any>([]);
+  const [currentFood, setCurrentFood] = useState<FormData>();
 
   useEffect(() => {
     // Check if food is per piece or gram
@@ -63,9 +65,22 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 data={filteredFoods ?? []}
                 value={textFood}
                 onChangeText={(text) => setTextFood(text.toLowerCase())}
+                containerStyle={{ backgroundColor: "white" }}
                 flatListProps={{
-                  // keyExtractor: (_, idx) => idx,
-                  renderItem: ({ item }) => <Text>{item.foodName}</Text>,
+                  renderItem: ({ item }) => (
+                    <TouchableOpacity
+                      style={{ padding: 5 }}
+                      onPress={() => {
+                        setCurrentFood(item);
+                        setTextFood(
+                          isPerPiece ? "@" + item.foodName : item.foodName
+                        );
+                        setFilteredFoods([]);
+                      }}
+                    >
+                      <Text>{item.foodName}</Text>
+                    </TouchableOpacity>
+                  ),
                 }}
               />
             </View>
