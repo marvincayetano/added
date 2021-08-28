@@ -25,6 +25,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [currentFood, setCurrentFood] = useState<FormData | undefined>(
     undefined
   );
+  const [quantity, setQuantity] = useState<number>(1);
 
   useEffect(() => {
     // Check if food is per piece or gram
@@ -86,12 +87,19 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 }}
               />
             </View>
-            <TextInput placeholder="qty" style={styles.modalText}></TextInput>
+            <TextInput
+              placeholder="qty"
+              style={styles.modalText}
+              keyboardType="number-pad"
+              value="1"
+              onChangeText={(text) => {
+                setQuantity(parseInt(text));
+              }}
+            />
             <Text
               style={{
                 ...styles.textStyle,
                 paddingBottom: 20,
-                borderWidth: 1,
                 margin: 5,
               }}
             >
@@ -102,6 +110,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                     width: "100%",
                     justifyContent: "flex-start",
                     minWidth: "100%",
+                    borderWidth: 1,
                     padding: 10,
                   }}
                 >
@@ -119,19 +128,48 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                       borderBottomWidth: 2,
                       borderStyle: "solid",
                       borderColor: "gray",
+                      marginBottom: 5,
                     }}
                   >
                     <Text
                       style={{
-                        fontSize: 18,
+                        fontSize: 20,
                       }}
                     >
                       Nutrition Facts
                     </Text>
                   </View>
+                  <View
+                    style={{
+                      borderBottomWidth: 4,
+                      borderStyle: "solid",
+                      borderColor: "gray",
+                      marginBottom: 5,
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text>Serving size</Text>
+                    <Text>{isPerPiece ? "per piece" : "100G"}</Text>
+                  </View>
                   {isPerPiece ? (
                     <View>
-                      <Text>Calories: {currentFood.caloriesPP}</Text>
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Text style={{ fontSize: 20, fontWeight: "400" }}>
+                          Calories
+                        </Text>
+                        <Text style={{ fontSize: 20, fontWeight: "400" }}>
+                          {currentFood.caloriesPP}
+                        </Text>
+                      </View>
+
                       {currentFood.proteinPP && (
                         <Text>Protein: {currentFood.proteinPP}</Text>
                       )}
@@ -174,6 +212,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
               }}
               onPress={() => {
                 setModalVisible(!modalVisible);
+                fnAddFood(currentFood, quantity);
               }}
             >
               <Text style={styles.textStyle}>Add</Text>

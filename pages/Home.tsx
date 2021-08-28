@@ -27,8 +27,9 @@ export function Home({}: HomeProps) {
     });
   }, []);
 
-  async function AddNewFood(food: FormData) {
-    console.log(food);
+  async function AddNewFood(food: FormData, qty: number) {
+    console.log("FOOD", food);
+    console.log("QUANTITY", qty);
   }
 
   async function DeleteFood(index: number) {}
