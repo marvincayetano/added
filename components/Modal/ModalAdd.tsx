@@ -22,7 +22,9 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [textFood, setTextFood] = useState("@");
   const [isPerPiece, setIsPerPiece] = useState(false);
   const [filteredFoods, setFilteredFoods] = useState<any>([]);
-  const [currentFood, setCurrentFood] = useState<FormData>();
+  const [currentFood, setCurrentFood] = useState<FormData | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     // Check if food is per piece or gram
@@ -86,11 +88,82 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
             </View>
             <TextInput placeholder="qty" style={styles.modalText}></TextInput>
             <Text
-              style={{ ...styles.textStyle, color: "gray", paddingBottom: 20 }}
+              style={{
+                ...styles.textStyle,
+                paddingBottom: 20,
+                borderWidth: 1,
+                margin: 5,
+              }}
             >
-              {
-                // Show the macros here depending if per piece or per 100g
-              }
+              {currentFood && (
+                <View
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "flex-start",
+                    minWidth: "100%",
+                    padding: 10,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      paddingBottom: 5,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {currentFood.foodName}
+                  </Text>
+                  <View
+                    style={{
+                      borderBottomWidth: 2,
+                      borderStyle: "solid",
+                      borderColor: "gray",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 18,
+                      }}
+                    >
+                      Nutrition Facts
+                    </Text>
+                  </View>
+                  {isPerPiece ? (
+                    <View>
+                      <Text>Calories: {currentFood.caloriesPP}</Text>
+                      {currentFood.proteinPP && (
+                        <Text>Protein: {currentFood.proteinPP}</Text>
+                      )}
+                      {currentFood.carbsPP && (
+                        <Text>Carbs: {currentFood.carbsPP}</Text>
+                      )}
+                      {currentFood.fiberPP && (
+                        <Text>Fiber: {currentFood.fiberPP}</Text>
+                      )}
+                      {currentFood.fatPP && (
+                        <Text>Fat: {currentFood.fatPP}</Text>
+                      )}
+                    </View>
+                  ) : (
+                    <View>
+                      <Text>Calories: {currentFood.caloriesPG}</Text>
+                      {currentFood.proteinPG && (
+                        <Text>Protein: {currentFood.proteinPG}</Text>
+                      )}
+                      {currentFood.carbsPG && (
+                        <Text>Carbs: {currentFood.carbsPG}</Text>
+                      )}
+                      {currentFood.fiberPG && (
+                        <Text>Fiber: {currentFood.fiberPG}</Text>
+                      )}
+                      {currentFood.fatPG && (
+                        <Text>Fat: {currentFood.fatPG}</Text>
+                      )}
+                    </View>
+                  )}
+                </View>
+              )}
             </Text>
 
             <TouchableHighlight
