@@ -1,20 +1,31 @@
 import React from "react";
+import { FormData } from "../Foods/FoodAdd";
 import { StyleSheet, View, Text, Button } from "react-native";
 
-interface MacroProps {}
+interface MacroProps {
+  food: { food: FormData; qty: number } | undefined;
+  index: number;
+}
 
-export function Macro({}: MacroProps) {
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.item}>2 or 200g Banana</Text>
-        <Text style={styles.subItem}>120 Calories / 9 Protein</Text>
+export function Macro({ food, index }: MacroProps) {
+  if (food) {
+    return (
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.item}>{`${food.qty}`}</Text>
+          <Text style={styles.subItem}>{`${food.food.foodName}`}</Text>
+        </View>
+        <View>
+          <Button
+            title="remove"
+            onPress={() => console.log("INDEX #", index)}
+          />
+        </View>
       </View>
-      <View>
-        <Button title="remove" onPress={() => console.log("asdfasdf")} />
-      </View>
-    </View>
-  );
+    );
+  } else {
+    return null;
+  }
 }
 
 const styles = StyleSheet.create({
