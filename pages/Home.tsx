@@ -18,7 +18,6 @@ export function Home({}: HomeProps) {
           // We have data!!
           const jsonGetValue = JSON.parse(value) as FormData[];
           setAvailFoods(jsonGetValue);
-          console.log("AVAIL", availFoods);
         }
       } catch (error) {
         console.log(error);
@@ -32,7 +31,6 @@ export function Home({}: HomeProps) {
           // We have data!!
           const jsonGetValue = JSON.parse(value);
           setAddedFoods(jsonGetValue);
-          console.log(jsonGetValue);
         }
       } catch (error) {
         console.log(error);

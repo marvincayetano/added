@@ -3,8 +3,8 @@ import { FormData } from "../Foods/FoodAdd";
 import { StyleSheet, View, Text, Button } from "react-native";
 
 interface MacroProps {
-  food: { food: FormData; qty: number } | undefined;
-  index: number;
+  food?: { food: FormData; qty: number } | undefined;
+  index?: number;
 }
 
 export function Macro({ food, index }: MacroProps) {
@@ -12,7 +12,7 @@ export function Macro({ food, index }: MacroProps) {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.item}>{`${food.qty}`}</Text>
+          <Text style={styles.item}>{`${food.qty} ${food.food.foodName}`}</Text>
           <Text style={styles.subItem}>{`${food.food.foodName}`}</Text>
         </View>
         <View>

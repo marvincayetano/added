@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { FormData } from "../Foods/FoodAdd";
 import { Macro } from "./Macro";
 
@@ -8,14 +8,16 @@ interface MacrosProps {
 }
 
 export function Macros({ foods }: MacrosProps) {
-  return (
-    <View style={styles.container}>
-      {foods?.map((food, index) => {
-        <Text>ADASD</Text>;
-        // <Macro food={food} index={index} />;
-      })}
-    </View>
-  );
+  if (foods) {
+    return (
+      <View style={styles.container}>
+        {foods?.map((food, index) => (
+          <Macro food={food} index={index} />
+        ))}
+      </View>
+    );
+  }
+  return null;
 }
 
 const styles = StyleSheet.create({
