@@ -12,6 +12,7 @@ export function Info({}: InfoProps) {
         <View>
           <Text style={styles.macros}>Macros</Text>
           <Button title="edit" onPress={() => console.log("ASD")}></Button>
+          <Button title="new day" onPress={() => console.log("ASD")}></Button>
         </View>
       </View>
       <View style={styles.containerInfo}>

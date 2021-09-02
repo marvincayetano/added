@@ -12,7 +12,8 @@ export function Macros({ foods }: MacrosProps) {
     return (
       <View style={styles.container}>
         {foods?.map((food, index) => (
-          <Macro food={food} index={index} />
+          // I know index shouldn't be used here I know I know
+          <Macro key={index} food={food} index={index} />
         ))}
       </View>
     );
