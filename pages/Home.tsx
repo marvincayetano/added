@@ -39,7 +39,7 @@ export function Home({}: HomeProps) {
     });
   }, []);
 
-  function AddNewFood(food: FormData, qty: number) {
+  function AddNewFood(food: FormData, qty: number, isPerPiece: boolean) {
     try {
       AsyncStorage.getItem("@added").then((value: string | null) => {
         if (value && value.length) {
@@ -48,7 +48,7 @@ export function Home({}: HomeProps) {
 
           AsyncStorage.setItem(
             "@added",
-            JSON.stringify([...jsonGetValue, { food, qty }])
+            JSON.stringify([...jsonGetValue, { food, qty, isPerPiece }])
           );
           return { success: "Successfully added new food!" };
         } else {

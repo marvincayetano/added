@@ -212,7 +212,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
               }}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                fnAddFood(currentFood, quantity);
+                fnAddFood(currentFood, quantity, isPerPiece);
               }}
             >
               <Text style={styles.textStyle}>Add</Text>

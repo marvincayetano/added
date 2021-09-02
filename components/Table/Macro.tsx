@@ -9,11 +9,29 @@ interface MacroProps {
 
 export function Macro({ food, index }: MacroProps) {
   if (food) {
+    const {
+      foodName,
+      caloriesPP,
+      caloriesPG,
+      proteinPP,
+      proteinPG,
+      carbsPG,
+      carbsPP,
+      fatPG,
+      fatPP,
+    } = food.food;
+
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.item}>{`${food.qty} ${food.food.foodName}`}</Text>
-          <Text style={styles.subItem}>{`${food.food.foodName}`}</Text>
+          <Text style={styles.item}>{`${food.qty} ${foodName}`}</Text>
+          {caloriesPP && <Text>{`${caloriesPP} calories/piece`}</Text>}
+          {caloriesPG && (
+            <Text
+              style={{ marginLeft: 10 }}
+            >{`| ${caloriesPG} calories/100g`}</Text>
+          )}
+          {proteinPP && <Text>Protein {proteinPP}</Text>}
         </View>
         <View>
           <Button
