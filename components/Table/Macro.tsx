@@ -5,9 +5,10 @@ import { StyleSheet, View, Text, Button } from "react-native";
 interface MacroProps {
   food?: { food: FormData; qty: number } | undefined;
   index?: number;
+  fnDelete: Function;
 }
 
-export function Macro({ food, index }: MacroProps) {
+export function Macro({ food, index, fnDelete }: MacroProps) {
   if (food) {
     const {
       foodName,
@@ -36,7 +37,9 @@ export function Macro({ food, index }: MacroProps) {
         <View>
           <Button
             title="remove"
-            onPress={() => console.log("INDEX #", index)}
+            onPress={() => {
+              fnDelete(index);
+            }}
           />
         </View>
       </View>

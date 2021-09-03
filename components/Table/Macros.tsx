@@ -5,15 +5,16 @@ import { Macro } from "./Macro";
 
 interface MacrosProps {
   foods: [{ food: FormData; qty: number }] | undefined | null;
+  fnDelete: Function;
 }
 
-export function Macros({ foods }: MacrosProps) {
+export function Macros({ foods, fnDelete }: MacrosProps) {
   if (foods) {
     return (
       <View style={styles.container}>
         {foods?.map((food, index) => (
           // I know index shouldn't be used here I know I know
-          <Macro key={index} food={food} index={index} />
+          <Macro key={index} food={food} index={index} fnDelete={fnDelete} />
         ))}
       </View>
     );

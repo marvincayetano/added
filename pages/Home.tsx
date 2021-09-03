@@ -10,7 +10,7 @@ interface HomeProps {}
 
 export function Home({}: HomeProps) {
   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
-  const [availFoods, setAvailFoods] = useState<FormData[] | undefined>([]);
+  const [availFoods, setAvailFoods] = useState<FormData[]>([]);
   useEffect(() => {
     AsyncStorage.getItem("@foods").then((value) => {
       try {
@@ -39,7 +39,7 @@ export function Home({}: HomeProps) {
     });
   }, []);
 
-  function AddNewFood(food: FormData, qty: number, isPerPiece: boolean) {
+  function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {
     try {
       AsyncStorage.getItem("@added").then((value: string | null) => {
         if (value && value.length) {
@@ -50,7 +50,7 @@ export function Home({}: HomeProps) {
             "@added",
             JSON.stringify([...jsonGetValue, { food, qty, isPerPiece }])
           );
-          return { success: "Successfully added new food!" };
+          setAddedFoods([...availFoods, { food, qty, isPerPiece }]);
         } else {
           AsyncStorage.setItem("@added", JSON.stringify([{ food, qty }]));
         }
@@ -60,16 +60,25 @@ export function Home({}: HomeProps) {
     }
   }
 
-  async function DeleteFood(index: number) {}
+  function deleteFood(index: number) {
+    try {
+      const filteredArray = addedFoods!.splice(index, index);
+      console.log(filteredArray);
+      //   setAvailFoods(filteredArray);
+      //   AsyncStorage.setItem("@added", JSON.stringify(filteredArray));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <View style={{ flex: 1 }}>
       <Info />
       <ScrollView>
-        <Macros foods={addedFoods} />
+        <Macros foods={addedFoods} fnDelete={deleteFood} />
       </ScrollView>
       <View style={{ position: "absolute", right: 50, bottom: 100 }}>
-        <ModalAdd foods={availFoods} fnAddFood={AddNewFood} />
+        <ModalAdd foods={availFoods} fnAddFood={addNewFood} />
       </View>
     </View>
   );
