@@ -62,10 +62,12 @@ export function Home({}: HomeProps) {
 
   function deleteFood(index: number) {
     try {
-      const filteredArray = addedFoods!.splice(index, index);
-      console.log(filteredArray);
-      //   setAvailFoods(filteredArray);
-      //   AsyncStorage.setItem("@added", JSON.stringify(filteredArray));
+      const filteredArray = addedFoods!.filter((_: unknown, i: number) => {
+        return i !== index;
+      });
+
+      setAvailFoods(filteredArray);
+      AsyncStorage.setItem("@added", JSON.stringify(filteredArray));
     } catch (error) {
       console.log(error);
     }

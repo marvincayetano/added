@@ -55,18 +55,6 @@ const _storeData = async (data: FormData) => {
   }
 };
 
-const _retrieveData = async () => {
-  try {
-    const value = await AsyncStorage.getItem("@foods");
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
-    }
-  } catch (error) {
-    // Error retrieving data
-  }
-};
-
 export function FoodAdd({ navigation }: FoodAddProps) {
   const {
     control,
@@ -88,7 +76,6 @@ export function FoodAdd({ navigation }: FoodAddProps) {
       } else {
         // Save here
         _storeData(data);
-        _retrieveData();
         navigation.goBack();
       }
     }

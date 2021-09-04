@@ -44,8 +44,6 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
         })
       );
     }
-
-    console.log(filteredFoods);
   }, [textFood]);
 
   return (
