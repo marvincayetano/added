@@ -66,7 +66,7 @@ export function Home({}: HomeProps) {
         return i !== index;
       });
 
-      setAvailFoods(filteredArray);
+      setAddedFoods(filteredArray);
       AsyncStorage.setItem("@added", JSON.stringify(filteredArray));
     } catch (error) {
       console.log(error);
