@@ -12,6 +12,7 @@ export function Home({}: HomeProps) {
   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
   useEffect(() => {
+    // AsyncStorage.setItem("@foods", JSON.stringify([]));
     AsyncStorage.getItem("@foods").then((value) => {
       try {
         if (value !== null) {
