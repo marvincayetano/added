@@ -9,6 +9,7 @@ interface MacroProps {
 }
 
 export function Macro({ food, index, fnDelete }: MacroProps) {
+  console.log("food", food);
   if (food) {
     const {
       foodName,

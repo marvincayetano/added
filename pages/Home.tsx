@@ -53,7 +53,10 @@ export function Home({}: HomeProps) {
           );
           setAddedFoods([...availFoods, { food, qty, isPerPiece }]);
         } else {
-          AsyncStorage.setItem("@added", JSON.stringify([{ food, qty }]));
+          AsyncStorage.setItem(
+            "@added",
+            JSON.stringify([{ food, qty, isPerPiece }])
+          );
         }
       });
     } catch (error) {
