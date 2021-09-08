@@ -15,6 +15,15 @@ interface TotalMacro {
 
 interface HomeProps {}
 
+function getTotalMacros(foods: any): TotalMacro {
+  return {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fiber: 0,
+  };
+}
+
 export function Home({}: HomeProps) {
   const [totalMacro, setTotalMacro] = useState<TotalMacro>();
   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
