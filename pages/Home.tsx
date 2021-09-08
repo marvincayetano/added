@@ -6,9 +6,17 @@ import Macros from "../components/Table";
 import { FormData } from "../components/Foods/FoodAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+interface TotalMacro {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fiber: number;
+}
+
 interface HomeProps {}
 
 export function Home({}: HomeProps) {
+  const [totalMacro, setTotalMacro] = useState<TotalMacro>();
   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
   useEffect(() => {
