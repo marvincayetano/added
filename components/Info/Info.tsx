@@ -2,10 +2,13 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { TextInfo } from "./TextInfo";
 import { Bar } from "react-native-progress";
+import { TotalMacro } from "../../pages/Home";
 
-interface InfoProps {}
+interface InfoProps {
+  totalMacro: TotalMacro;
+}
 
-export function Info({}: InfoProps) {
+export function Info({ totalMacro }: InfoProps) {
   return (
     <View>
       <View style={styles.containerHero}>
@@ -16,16 +19,16 @@ export function Info({}: InfoProps) {
         </View>
       </View>
       <View style={styles.containerInfo}>
-        <TextInfo name="Calories" value={100} maxValue={1000} />
+        <TextInfo name="Calories" value={totalMacro.calories} maxValue={1000} />
         <Bar style={styles.bar} progress={0.3} width={300} />
 
-        <TextInfo name="Protein" value={100} maxValue={1000} />
+        <TextInfo name="Protein" value={totalMacro.protein} maxValue={1000} />
         <Bar style={styles.bar} color="#f29441" progress={0.3} width={300} />
 
-        <TextInfo name="Carb" value={100} maxValue={1000} />
+        <TextInfo name="Carb" value={totalMacro.carbs} maxValue={1000} />
         <Bar style={styles.bar} color="#f29441" progress={0.3} width={300} />
 
-        <TextInfo name="Fiber" value={100} maxValue={1000} />
+        <TextInfo name="Fiber" value={totalMacro.fiber} maxValue={1000} />
         <Bar style={styles.bar} color="#f29441" progress={0.3} width={300} />
       </View>
     </View>

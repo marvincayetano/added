@@ -6,7 +6,7 @@ import Macros from "../components/Table";
 import { FormData } from "../components/Foods/FoodAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface TotalMacro {
+export interface TotalMacro {
   calories: number;
   protein: number;
   carbs: number;
@@ -16,12 +16,44 @@ interface TotalMacro {
 interface HomeProps {}
 
 function getTotalMacros(foods: any): TotalMacro {
-  return {
+  // CALCULATE EACH HERE
+  let returnValue: TotalMacro = {
     calories: 0,
     protein: 0,
     carbs: 0,
     fiber: 0,
   };
+
+  const calculateValue = (value: string | undefined, qty: number): number =>
+    parseInt(value ?? "0") * qty;
+
+  foods.forEach(
+    (added: { food: FormData; isPerPiece: boolean; qty: number }) => {
+      const { food } = added;
+      if (added.isPerPiece) {
+        returnValue.calories =
+          returnValue.calories + calculateValue(food.caloriesPP, added.qty);
+        returnValue.protein =
+          returnValue.protein + calculateValue(food.proteinPP, added.qty);
+        returnValue.carbs =
+          returnValue.carbs + calculateValue(food.carbsPP, added.qty);
+        returnValue.fiber =
+          returnValue.fiber + calculateValue(food.fiberPP, added.qty);
+      } else {
+        returnValue.calories =
+          returnValue.calories + calculateValue(food.caloriesPG, added.qty);
+        returnValue.protein =
+          returnValue.protein + calculateValue(food.proteinPG, added.qty);
+        returnValue.carbs =
+          returnValue.carbs + calculateValue(food.carbsPG, added.qty);
+        returnValue.fiber =
+          returnValue.fiber + calculateValue(food.fiberPG, added.qty);
+      }
+    }
+  );
+
+  console.log("RETURN VALUE", returnValue);
+  return returnValue;
 }
 
 export function Home({}: HomeProps) {
@@ -49,6 +81,7 @@ export function Home({}: HomeProps) {
           // We have data!!
           const jsonGetValue = JSON.parse(value);
           setAddedFoods(jsonGetValue);
+          setTotalMacro(getTotalMacros(jsonGetValue));
         }
       } catch (error) {
         console.log(error);
@@ -96,7 +129,7 @@ export function Home({}: HomeProps) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Info />
+      <Info totalMacro={totalMacro!} />
       <ScrollView>
         <Macros foods={addedFoods} fnDelete={deleteFood} />
       </ScrollView>
