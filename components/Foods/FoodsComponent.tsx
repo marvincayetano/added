@@ -10,13 +10,14 @@ interface FoodsComponentProps {}
 export function FoodsComponent({}: FoodsComponentProps) {
   const [foods, setFoods] = useState<FormData[]>();
   useEffect(() => {
-    async function _retrieveData() {
+    function _retrieveData() {
       try {
-        const value = await AsyncStorage.getItem("@foods");
-        if (value !== null) {
-          // We have data!!
-          setFoods(JSON.parse(value));
-        }
+        AsyncStorage.getItem("@foods").then((value) => {
+          if (value !== null) {
+            // We have data!!
+            setFoods(JSON.parse(value));
+          }
+        });
       } catch (error) {
         // Error retrieving data
         console.log(error);
@@ -25,10 +26,6 @@ export function FoodsComponent({}: FoodsComponentProps) {
 
     _retrieveData();
   }, [foods]);
-
-  const [index, setIndex] = useState({});
-
-  const swipeoutBtns = [{}];
 
   return (
     <View>
@@ -44,6 +41,26 @@ export function FoodsComponent({}: FoodsComponentProps) {
                 {
                   text: "Delete",
                   backgroundColor: "red",
+                  onPress: () => {
+                    console.log("DELETE ITEM", i);
+                    const filteredArray = foods!.filter(
+                      (_: unknown, index: number) => {
+                        return i !== index;
+                      }
+                    );
+
+                    AsyncStorage.setItem(
+                      "@foods",
+                      JSON.stringify(filteredArray)
+                    );
+                  },
+                },
+              ]}
+              left={[
+                {
+                  text: "Edit",
+                  backgroundColor: "white",
+                  color: "blue",
                   onPress: () => {
                     console.log(i);
                   },

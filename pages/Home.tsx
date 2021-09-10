@@ -57,7 +57,13 @@ function getTotalMacros(foods: any): TotalMacro {
 }
 
 export function Home({}: HomeProps) {
-  const [totalMacro, setTotalMacro] = useState<TotalMacro>();
+  const [totalMacro, setTotalMacro] = useState<TotalMacro>({
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fiber: 0,
+  });
+
   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
   useEffect(() => {
@@ -77,6 +83,7 @@ export function Home({}: HomeProps) {
 
     AsyncStorage.getItem("@added").then((value) => {
       try {
+        console.log("JSON", value);
         if (value !== null) {
           // We have data!!
           const jsonGetValue = JSON.parse(value);

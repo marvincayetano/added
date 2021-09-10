@@ -9,6 +9,8 @@ interface InfoProps {
 }
 
 export function Info({ totalMacro }: InfoProps) {
+  console.log("WHAT", totalMacro);
+
   return (
     <View>
       <View style={styles.containerHero}>
