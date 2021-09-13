@@ -4,6 +4,7 @@ import { TextInfo } from "./TextInfo";
 import { Bar } from "react-native-progress";
 import { TotalMacro } from "../../pages/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ModalMacro } from "../Modal/ModalMacros";
 
 interface InfoProps {
   totalMacro: TotalMacro;
@@ -42,10 +43,12 @@ export function Info({ totalMacro }: InfoProps) {
   return (
     <View>
       <View style={styles.containerHero}>
-        <View>
+        <View
+          style={{ flex: 1, flexDirection: "column", alignItems: "center" }}
+        >
           <Text style={styles.macros}>Macros</Text>
-          <Button title="edit" onPress={() => console.log("ASD")}></Button>
-          <Button title="new day" onPress={() => console.log("ASD")}></Button>
+          <ModalMacro />
+          {/* <Button title="new day" onPress={() => console.log("ASD")}></Button> */}
         </View>
       </View>
       <View style={styles.containerInfo}>
