@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,12 +9,19 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
-import { FormData } from "../Foods/FoodAdd";
+import { TotalMacro } from "../../pages/Home";
 
-interface ModalMacroProps {}
+interface ModalMacroProps {
+  maxValues: TotalMacro;
+}
 
-export function ModalMacro({}: ModalMacroProps) {
+export function ModalMacro({ maxValues }: ModalMacroProps) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [calories, setCalories] = useState(maxValues.calories);
+  const [protein, setProtein] = useState(maxValues.protein);
+  const [carbs, setCarbs] = useState(maxValues.carbs);
+  const [fiber, setFiber] = useState(maxValues.fiber);
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -34,12 +42,12 @@ export function ModalMacro({}: ModalMacroProps) {
               CALORIES
             </Text>
             <TextInput
-              placeholder="qty"
+              placeholder="1000"
               style={styles.modalText}
               keyboardType="number-pad"
-              value="1"
+              value={`${calories}`}
               onChangeText={(text) => {
-                // setQuantity(parseInt(text));
+                setCalories(parseInt(text));
               }}
             />
             <Text
@@ -50,12 +58,12 @@ export function ModalMacro({}: ModalMacroProps) {
               PROTEIN
             </Text>
             <TextInput
-              placeholder="qty"
+              placeholder="1000"
               style={styles.modalText}
               keyboardType="number-pad"
-              value="1"
+              value={`${protein}`}
               onChangeText={(text) => {
-                // setQuantity(parseInt(text));
+                setProtein(parseInt(text));
               }}
             />
             <Text
@@ -66,12 +74,12 @@ export function ModalMacro({}: ModalMacroProps) {
               CARBS
             </Text>
             <TextInput
-              placeholder="qty"
+              placeholder="1000"
               style={styles.modalText}
               keyboardType="number-pad"
-              value="1"
+              value={`${carbs}`}
               onChangeText={(text) => {
-                // setQuantity(parseInt(text));
+                setCarbs(parseInt(text));
               }}
             />
             <Text
@@ -82,12 +90,12 @@ export function ModalMacro({}: ModalMacroProps) {
               FIBER
             </Text>
             <TextInput
-              placeholder="qty"
+              placeholder="1000"
               style={styles.modalText}
               keyboardType="number-pad"
-              value="1"
+              value={`${fiber}`}
               onChangeText={(text) => {
-                // setQuantity(parseInt(text));
+                setFiber(parseInt(text));
               }}
             />
 
@@ -110,7 +118,7 @@ export function ModalMacro({}: ModalMacroProps) {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={styles.textStyle}>Close</Text>
+              <Text style={styles.buttonTextStyle}>Close</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -152,8 +160,8 @@ const styles = StyleSheet.create({
   },
   openButton: {
     backgroundColor: "#111",
-    borderRadius: 20,
     padding: 5,
+    borderRadius: 20,
     height: 35,
     elevation: 2,
     zIndex: 10,
@@ -169,7 +177,12 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
     textAlign: "left",
-    margin: 5,
+    padding: 5,
+  },
+  buttonTextStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   textStyle: {
     color: "white",

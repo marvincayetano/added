@@ -47,7 +47,7 @@ export function Info({ totalMacro }: InfoProps) {
           style={{ flex: 1, flexDirection: "column", alignItems: "center" }}
         >
           <Text style={styles.macros}>Macros</Text>
-          <ModalMacro />
+          <ModalMacro maxValues={maxValues} />
           {/* <Button title="new day" onPress={() => console.log("ASD")}></Button> */}
         </View>
       </View>
