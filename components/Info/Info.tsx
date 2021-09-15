@@ -28,17 +28,18 @@ export function Info({ totalMacro }: InfoProps) {
           if (jsonGetValue) {
             setMaxValues(jsonGetValue);
           }
-
-          //   AsyncStorage.setItem(
-          //     "@added",
-          //     JSON.stringify([...jsonGetValue, { food, qty, isPerPiece }])
-          //   );
         }
       });
     } catch (error) {
       console.log(error);
     }
   }, []);
+
+  const saveMacros = (macros: TotalMacro) => {
+    setMaxValues(macros);
+    // Save all the macros to the AsyncStorage
+    AsyncStorage.setItem("@maxvalues", JSON.stringify(macros));
+  };
 
   return (
     <View>
@@ -47,7 +48,7 @@ export function Info({ totalMacro }: InfoProps) {
           style={{ flex: 1, flexDirection: "column", alignItems: "center" }}
         >
           <Text style={styles.macros}>Macros</Text>
-          <ModalMacro maxValues={maxValues} />
+          <ModalMacro maxValues={maxValues} saveMacros={saveMacros} />
           {/* <Button title="new day" onPress={() => console.log("ASD")}></Button> */}
         </View>
       </View>

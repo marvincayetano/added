@@ -13,9 +13,10 @@ import { TotalMacro } from "../../pages/Home";
 
 interface ModalMacroProps {
   maxValues: TotalMacro;
+  saveMacros: Function;
 }
 
-export function ModalMacro({ maxValues }: ModalMacroProps) {
+export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [calories, setCalories] = useState(maxValues.calories);
   const [protein, setProtein] = useState(maxValues.protein);
@@ -106,6 +107,7 @@ export function ModalMacro({ maxValues }: ModalMacroProps) {
                 marginBottom: 20,
               }}
               onPress={() => {
+                saveMacros({ calories, protein, carbs, fiber });
                 setModalVisible(!modalVisible);
               }}
             >
