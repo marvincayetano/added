@@ -18,10 +18,16 @@ interface ModalMacroProps {
 
 export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [calories, setCalories] = useState(maxValues.calories);
-  const [protein, setProtein] = useState(maxValues.protein);
-  const [carbs, setCarbs] = useState(maxValues.carbs);
-  const [fiber, setFiber] = useState(maxValues.fiber);
+  const [calories, setCalories] = useState<number>(0);
+  const [protein, setProtein] = useState<number>(0);
+  const [carbs, setCarbs] = useState<number>(0);
+  const [fiber, setFiber] = useState<number>(0);
+  useEffect(() => {
+    setCalories(maxValues.calories);
+    setProtein(maxValues.protein);
+    setCarbs(maxValues.carbs);
+    setFiber(maxValues.fiber);
+  }, []);
 
   return (
     <View style={styles.centeredView}>
