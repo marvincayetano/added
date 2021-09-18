@@ -10,8 +10,13 @@ interface InfoProps {
   totalMacro: TotalMacro;
 }
 
+const calculateProgress = (total: number, max: number) => {
+  const returnValue = total / max;
+  if (isNaN(returnValue)) return 0;
+  return returnValue;
+};
+
 export function Info({ totalMacro }: InfoProps) {
-  console.log("INFO WHAT", totalMacro);
   const [maxValues, setMaxValues] = useState<TotalMacro>({
     calories: 0,
     protein: 0,
@@ -41,7 +46,6 @@ export function Info({ totalMacro }: InfoProps) {
     AsyncStorage.setItem("@maxvalues", JSON.stringify(macros));
   };
 
-  console.log(totalMacro.calories / maxValues.calories);
   return (
     <View>
       <View style={styles.containerHero}>
@@ -61,8 +65,7 @@ export function Info({ totalMacro }: InfoProps) {
         />
         <Bar
           style={styles.bar}
-          //   progress={totalMacro.calories / maxValues.calories}
-          progress={0.03461538461538462}
+          progress={calculateProgress(totalMacro.calories, maxValues.calories)}
           width={350}
         />
 
@@ -74,7 +77,7 @@ export function Info({ totalMacro }: InfoProps) {
         <Bar
           style={styles.bar}
           color="#d54d2f"
-          //   progress={totalMacro.protein / maxValues.protein}
+          progress={calculateProgress(totalMacro.protein, maxValues.protein)}
           width={350}
         />
 
@@ -86,7 +89,7 @@ export function Info({ totalMacro }: InfoProps) {
         <Bar
           style={styles.bar}
           color="#0e7930"
-          //   progress={totalMacro.carbs / maxValues.carbs}
+          progress={calculateProgress(totalMacro.carbs, maxValues.carbs)}
           width={350}
         />
 
@@ -98,7 +101,7 @@ export function Info({ totalMacro }: InfoProps) {
         <Bar
           style={styles.bar}
           color="#f29441"
-          //   progress={totalMacro.fiber / maxValues.fiber}
+          progress={calculateProgress(totalMacro.fiber, maxValues.fiber)}
           width={350}
         />
       </View>
