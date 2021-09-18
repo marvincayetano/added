@@ -41,6 +41,7 @@ export function Info({ totalMacro }: InfoProps) {
     AsyncStorage.setItem("@maxvalues", JSON.stringify(macros));
   };
 
+  console.log(totalMacro.calories / maxValues.calories);
   return (
     <View>
       <View style={styles.containerHero}>
@@ -58,28 +59,48 @@ export function Info({ totalMacro }: InfoProps) {
           value={totalMacro.calories}
           maxValue={maxValues.calories}
         />
-        <Bar style={styles.bar} progress={0.3} width={350} />
+        <Bar
+          style={styles.bar}
+          //   progress={totalMacro.calories / maxValues.calories}
+          progress={0.03461538461538462}
+          width={350}
+        />
 
         <TextInfo
           name="Protein"
           value={totalMacro.protein}
           maxValue={maxValues.protein}
         />
-        <Bar style={styles.bar} color="#d54d2f" progress={0.3} width={350} />
+        <Bar
+          style={styles.bar}
+          color="#d54d2f"
+          //   progress={totalMacro.protein / maxValues.protein}
+          width={350}
+        />
 
         <TextInfo
           name="Carb"
           value={totalMacro.carbs}
           maxValue={maxValues.carbs}
         />
-        <Bar style={styles.bar} color="#0e7930" progress={0.3} width={350} />
+        <Bar
+          style={styles.bar}
+          color="#0e7930"
+          //   progress={totalMacro.carbs / maxValues.carbs}
+          width={350}
+        />
 
         <TextInfo
           name="Fiber"
           value={totalMacro.fiber}
           maxValue={maxValues.fiber}
         />
-        <Bar style={styles.bar} color="#f29441" progress={0.3} width={350} />
+        <Bar
+          style={styles.bar}
+          color="#f29441"
+          //   progress={totalMacro.fiber / maxValues.fiber}
+          width={350}
+        />
       </View>
     </View>
   );

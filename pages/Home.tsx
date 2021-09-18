@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { Text, ScrollView, View, TouchableOpacity } from "react-native";
 import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
@@ -136,6 +136,27 @@ export function Home({}: HomeProps) {
 
   return (
     <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        style={{
+          width: 90,
+          alignSelf: "center",
+          borderRadius: 50,
+        }}
+        onPress={() => {
+          console.log("NEW DAY");
+        }}
+      >
+        <Text
+          style={{
+            paddingHorizontal: 10,
+            color: "green",
+            fontSize: 16,
+            fontWeight: "600",
+          }}
+        >
+          new day
+        </Text>
+      </TouchableOpacity>
       <Info totalMacro={totalMacro!} />
       <ScrollView>
         <Macros foods={addedFoods} fnDelete={deleteFood} />

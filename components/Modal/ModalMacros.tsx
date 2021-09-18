@@ -126,7 +126,7 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
                 setModalVisible(!modalVisible);
               }}
             >
-              <Text style={styles.buttonTextStyle}>Close</Text>
+              <Text style={styles.textStyle}>Close</Text>
             </TouchableHighlight>
           </View>
         </View>
