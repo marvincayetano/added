@@ -66,7 +66,12 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 data={filteredFoods ?? []}
                 value={textFood}
                 onChangeText={(text) => setTextFood(text.toLowerCase())}
-                containerStyle={{ backgroundColor: "white" }}
+                containerStyle={{
+                  backgroundColor: "white",
+                }}
+                inputContainerStyle={{
+                  borderWidth: 0,
+                }}
                 flatListProps={{
                   renderItem: ({ item }) => (
                     <TouchableOpacity
@@ -87,7 +92,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
             </View>
             <TextInput
               placeholder="qty"
-              style={styles.modalText}
+              style={{ ...styles.modalText, zIndex: -1 }}
               keyboardType="number-pad"
               value="1"
               onChangeText={(text) => {
