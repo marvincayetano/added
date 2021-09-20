@@ -94,9 +94,14 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
               placeholder="qty"
               style={{ ...styles.modalText, zIndex: -1 }}
               keyboardType="number-pad"
-              value="1"
+              value={`${quantity}`}
               onChangeText={(text) => {
-                setQuantity(parseInt(text));
+                const value = parseInt(text);
+                if (isNaN(value)) {
+                  setQuantity(1);
+                } else {
+                  setQuantity(parseInt(text));
+                }
               }}
             />
             <Text
