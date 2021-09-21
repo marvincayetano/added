@@ -143,7 +143,13 @@ export function Home({}: HomeProps) {
           borderRadius: 50,
         }}
         onPress={() => {
-          console.log("NEW DAY");
+          try {
+            AsyncStorage.setItem("@yda", JSON.stringify(setAddedFoods));
+            AsyncStorage.setItem("@added", JSON.stringify([]));
+            setAddedFoods([]);
+          } catch (error) {
+            console.log(error);
+          }
         }}
       >
         <Text
