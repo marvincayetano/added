@@ -5,7 +5,7 @@ import { Macro } from "./Macro";
 
 interface MacrosProps {
   foods: [{ food: FormData; qty: number }] | undefined | null;
-  fnDelete: Function;
+  fnDelete?: Function;
 }
 
 export function Macros({ foods, fnDelete }: MacrosProps) {

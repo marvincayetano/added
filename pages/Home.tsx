@@ -15,7 +15,7 @@ export interface TotalMacro {
 
 interface HomeProps {}
 
-function getTotalMacros(foods: any): TotalMacro {
+export function getTotalMacros(foods: any): TotalMacro {
   // CALCULATE EACH HERE
   let returnValue: TotalMacro = {
     calories: 0,

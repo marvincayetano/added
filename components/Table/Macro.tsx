@@ -5,10 +5,10 @@ import { StyleSheet, View, Text, Button } from "react-native";
 interface MacroProps {
   food?: { food: FormData; qty: number } | undefined;
   index?: number;
-  fnDelete: Function;
+  fnDelete?: Function;
 }
 
-export function Macro({ food, index, fnDelete }: MacroProps) {
+export function Macro({ food, index, fnDelete = undefined }: MacroProps) {
   console.log("food", food);
   if (food) {
     const {
@@ -36,12 +36,14 @@ export function Macro({ food, index, fnDelete }: MacroProps) {
           {proteinPP && <Text>Protein {proteinPP}</Text>}
         </View>
         <View>
-          <Button
-            title="remove"
-            onPress={() => {
-              fnDelete(index);
-            }}
-          />
+          {fnDelete && (
+            <Button
+              title="remove"
+              onPress={() => {
+                fnDelete(index);
+              }}
+            />
+          )}
         </View>
       </View>
     );
