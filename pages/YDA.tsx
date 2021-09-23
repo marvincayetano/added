@@ -20,7 +20,7 @@ export function YDA({}: YDAProps) {
   useEffect(() => {
     AsyncStorage.getItem("@yda").then((value) => {
       try {
-        if (value !== null) {
+        if (value) {
           // We have data!!
           const jsonGetValue = JSON.parse(value);
           setAddedFoods(jsonGetValue);
@@ -35,7 +35,7 @@ export function YDA({}: YDAProps) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Info totalMacro={totalMacro!} />
+      <Info totalMacro={totalMacro!} isYDA={true} />
       <ScrollView>
         <Macros foods={addedFoods} />
       </ScrollView>

@@ -8,6 +8,7 @@ import { ModalMacro } from "../Modal/ModalMacros";
 
 interface InfoProps {
   totalMacro: TotalMacro;
+  isYDA?: boolean;
 }
 
 const calculateProgress = (total: number, max: number) => {
@@ -16,7 +17,7 @@ const calculateProgress = (total: number, max: number) => {
   return returnValue;
 };
 
-export function Info({ totalMacro }: InfoProps) {
+export function Info({ totalMacro, isYDA = false }: InfoProps) {
   const [maxValues, setMaxValues] = useState<TotalMacro>({
     calories: 0,
     protein: 0,
@@ -53,8 +54,11 @@ export function Info({ totalMacro }: InfoProps) {
           style={{ flex: 1, flexDirection: "column", alignItems: "center" }}
         >
           <Text style={styles.macros}>Macros</Text>
-          <ModalMacro maxValues={maxValues} saveMacros={saveMacros} />
-          {/* <Button title="new day" onPress={() => console.log("ASD")}></Button> */}
+          {!isYDA ? (
+            <ModalMacro maxValues={maxValues} saveMacros={saveMacros} />
+          ) : (
+            <Text>Yesterday's total</Text>
+          )}
         </View>
       </View>
       <View style={styles.containerInfo}>
