@@ -138,7 +138,7 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
           setModalVisible(true);
         }}
       >
-        <Text style={{ ...styles.textStyle, padding: 5 }}>Edit Macros</Text>
+        <Text style={{ ...styles.textStyle, color: "gray" }}>Edit Macros</Text>
       </TouchableHighlight>
     </View>
   );
@@ -167,19 +167,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: "#111",
     padding: 5,
     borderRadius: 20,
     height: 35,
     elevation: 2,
     zIndex: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
   },
   textTitle: {
     color: "black",

@@ -10,9 +10,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-interface ModalNewDayProps {}
+interface ModalProps {}
 
-export function ModalNewDay({}: ModalNewDayProps) {
+export function ModalComponent({}: ModalProps) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -26,7 +26,9 @@ export function ModalNewDay({}: ModalNewDayProps) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text></Text>
+            <Text style={{ fontSize: 25, paddingBottom: 25 }}>
+              Reset to a new day?
+            </Text>
 
             <TouchableHighlight
               style={{
@@ -35,7 +37,7 @@ export function ModalNewDay({}: ModalNewDayProps) {
                 marginBottom: 20,
               }}
               onPress={() => {
-                console.log("CONFIRM");
+                setModalVisible(false);
               }}
             >
               <Text style={styles.textStyle}>Confirm</Text>
@@ -44,7 +46,7 @@ export function ModalNewDay({}: ModalNewDayProps) {
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
-                console.log("CANCEL");
+                setModalVisible(false);
               }}
             >
               <Text style={styles.textStyle}>Cancel</Text>
@@ -59,7 +61,19 @@ export function ModalNewDay({}: ModalNewDayProps) {
           setModalVisible(true);
         }}
       >
-        <Text style={{ ...styles.textStyle, padding: 5 }}>new day</Text>
+        <Text
+          style={{
+            ...styles.textStyle,
+            padding: 5,
+
+            color: "green",
+            borderWidth: 1,
+            borderRadius: 12,
+            borderColor: "green",
+          }}
+        >
+          new day
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -67,9 +81,9 @@ export function ModalNewDay({}: ModalNewDayProps) {
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
     marginTop: 22,
   },
   modalView: {
@@ -88,23 +102,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: "#40c87b",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    zIndex: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
+    width: 90,
+    alignSelf: "center",
+    borderRadius: 50,
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    padding: 5,
   },
   modalText: {
     marginBottom: 15,

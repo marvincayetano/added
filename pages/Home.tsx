@@ -5,6 +5,7 @@ import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
 import { FormData } from "../components/Foods/FoodAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ModalComponent } from "../components/Modal/ModalComponent";
 
 export interface TotalMacro {
   calories: number;
@@ -52,7 +53,6 @@ export function getTotalMacros(foods: any): TotalMacro {
     }
   );
 
-  console.log("RETURN VALUE", returnValue);
   return returnValue;
 }
 
@@ -83,7 +83,6 @@ export function Home({}: HomeProps) {
 
     AsyncStorage.getItem("@added").then((value) => {
       try {
-        console.log("JSON", value);
         if (value !== null) {
           // We have data!!
           const jsonGetValue = JSON.parse(value);
@@ -136,7 +135,8 @@ export function Home({}: HomeProps) {
 
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity
+      <ModalComponent></ModalComponent>
+      {/* <TouchableOpacity
         style={{
           width: 90,
           alignSelf: "center",
@@ -162,7 +162,7 @@ export function Home({}: HomeProps) {
         >
           new day
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Info totalMacro={totalMacro!} />
       <ScrollView>
         <Macros foods={addedFoods} fnDelete={deleteFood} />
