@@ -6,6 +6,7 @@ import Macros from "../components/Table";
 import { FormData } from "../components/Foods/FoodAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalComponent } from "../components/Modal/ModalComponent";
+import { AsyncStorageGet, AsyncStorageSet } from "../utils/AsyncStorage";
 
 export interface TotalMacro {
   calories: number;
@@ -68,57 +69,21 @@ export function Home({}: HomeProps) {
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
 
   useEffect(() => {
-    // AsyncStorage.setItem("@foods", JSON.stringify([]));
-    AsyncStorage.getItem("@foods").then((value) => {
-      try {
-        if (value !== null) {
-          // We have data!!
-          const jsonGetValue = JSON.parse(value) as FormData[];
-          setAvailFoods(jsonGetValue);
-        }
-      } catch (error) {
-        console.log(error);
-        // Error retrieving data
-      }
-    });
+    let data = AsyncStorageGet("foods");
+    if (data) {
+      setAvailFoods(data);
+    }
 
-    AsyncStorage.getItem("@added").then((value) => {
-      try {
-        if (value !== null) {
-          // We have data!!
-          const jsonGetValue = JSON.parse(value);
-          setAddedFoods(jsonGetValue);
-          setTotalMacro(getTotalMacros(jsonGetValue));
-        }
-      } catch (error) {
-        console.log(error);
-        // Error retrieving data
-      }
-    });
+    data = AsyncStorageGet("added");
+    if (data) {
+      setAddedFoods(data);
+      setTotalMacro(getTotalMacros(data));
+    }
   }, []);
 
   function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {
-    try {
-      AsyncStorage.getItem("@added").then((value: string | null) => {
-        if (value && value.length) {
-          const jsonGetValue = JSON.parse(value);
-          // Check if the name is already in the storage
-
-          AsyncStorage.setItem(
-            "@added",
-            JSON.stringify([...jsonGetValue, { food, qty, isPerPiece }])
-          );
-          setAddedFoods([...addedFoods, { food, qty, isPerPiece }]);
-        } else {
-          AsyncStorage.setItem(
-            "@added",
-            JSON.stringify([{ food, qty, isPerPiece }])
-          );
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    AsyncStorageSet("added", { food, qty, isPerPiece });
+    setAddedFoods([...addedFoods, { food, qty, isPerPiece }]);
   }
 
   function deleteFood(index: number) {
