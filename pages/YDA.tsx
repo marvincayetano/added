@@ -4,6 +4,7 @@ import { ScrollView, TouchableOpacity, View } from "react-native";
 import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
+import { AsyncStorageGet } from "../utils/AsyncStorage";
 import { getTotalMacros, TotalMacro } from "./Home";
 
 interface YDAProps {}
@@ -18,19 +19,11 @@ export function YDA({}: YDAProps) {
   });
 
   useEffect(() => {
-    AsyncStorage.getItem("@yda").then((value) => {
-      try {
-        if (value) {
-          // We have data!!
-          const jsonGetValue = JSON.parse(value);
-          setAddedFoods(jsonGetValue);
-          setTotalMacro(getTotalMacros(jsonGetValue));
-        }
-      } catch (error) {
-        console.log(error);
-        // Error retrieving data
-      }
-    });
+    const data = AsyncStorageGet("yda");
+    if (data) {
+      setAddedFoods(data);
+      setTotalMacro(getTotalMacros(data));
+    }
   }, []);
 
   return (
