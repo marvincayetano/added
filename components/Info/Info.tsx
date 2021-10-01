@@ -5,6 +5,7 @@ import { Bar } from "react-native-progress";
 import { TotalMacro } from "../../pages/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalMacro } from "../Modal/ModalMacros";
+import { AsyncStorageGet } from "../../utils/AsyncStorage";
 
 interface InfoProps {
   totalMacro: TotalMacro;
@@ -26,19 +27,8 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
   });
   useEffect(() => {
     // Set the total max values here from the asyncstorage
-    try {
-      AsyncStorage.getItem("@maxvalues").then((value: string | null) => {
-        if (value) {
-          const jsonGetValue = JSON.parse(value);
-          // Check if the name is already in the storage
-          if (jsonGetValue) {
-            setMaxValues(jsonGetValue);
-          }
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const data = AsyncStorageGet("maxvalues");
+    if (data) setMaxValues(data);
   }, []);
 
   const saveMacros = (macros: TotalMacro) => {

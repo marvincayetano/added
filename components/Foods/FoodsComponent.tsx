@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Swipeout from "react-native-swipeout";
+import { AsyncStorageGet, AsyncStorageSet } from "../../utils/AsyncStorage";
 import { Food } from "./Food";
 import { FormData } from "./FoodAdd";
 
@@ -10,21 +11,10 @@ interface FoodsComponentProps {}
 export function FoodsComponent({}: FoodsComponentProps) {
   const [foods, setFoods] = useState<FormData[]>();
   useEffect(() => {
-    function _retrieveData() {
-      try {
-        AsyncStorage.getItem("@foods").then((value) => {
-          if (value !== null) {
-            // We have data!!
-            setFoods(JSON.parse(value));
-          }
-        });
-      } catch (error) {
-        // Error retrieving data
-        console.log(error);
-      }
+    const data = AsyncStorageGet("foods");
+    if (data) {
+      setFoods(data);
     }
-
-    _retrieveData();
   }, [foods]);
 
   return (
@@ -49,10 +39,7 @@ export function FoodsComponent({}: FoodsComponentProps) {
                       }
                     );
 
-                    AsyncStorage.setItem(
-                      "@foods",
-                      JSON.stringify(filteredArray)
-                    );
+                    AsyncStorageSet("foods", filteredArray);
                   },
                 },
               ]}
