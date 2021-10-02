@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Swipeout from "react-native-swipeout";
@@ -9,12 +8,9 @@ import { FormData } from "./FoodAdd";
 interface FoodsComponentProps {}
 
 export function FoodsComponent({}: FoodsComponentProps) {
-  const [foods, setFoods] = useState<FormData[]>();
+  const [foods, setFoods] = useState<FormData[]>([]);
   useEffect(() => {
-    const data = AsyncStorageGet("foods");
-    if (data) {
-      setFoods(data);
-    }
+    AsyncStorageGet("foods", setFoods);
   }, [foods]);
 
   return (
