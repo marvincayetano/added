@@ -19,11 +19,10 @@ export function YDA({}: YDAProps) {
   });
 
   useEffect(() => {
-    const data = AsyncStorageGet("yda");
-    if (data) {
+    AsyncStorageGet("yda", (data: Object) => {
       setAddedFoods(data);
       setTotalMacro(getTotalMacros(data));
-    }
+    });
   }, []);
 
   return (

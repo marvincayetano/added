@@ -69,15 +69,11 @@ export function Home({}: HomeProps) {
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
 
   useEffect(() => {
-    // let data = AsyncStorageGet("foods");
-    // if (data) {
-    //   setAvailFoods(data);
-    // }
-    // data = AsyncStorageGet("added");
-    // if (data) {
-    //   setAddedFoods(data);
-    //   setTotalMacro(getTotalMacros(data));
-    // }
+    AsyncStorageGet("foods", setAvailFoods);
+    AsyncStorageGet("added", (data: Object) => {
+      setAddedFoods(data);
+      setTotalMacro(getTotalMacros(data));
+    });
   }, []);
 
   function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {
