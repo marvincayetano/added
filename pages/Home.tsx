@@ -94,36 +94,15 @@ export function Home({}: HomeProps) {
     }
   }
 
+  function moveToYDA() {
+    AsyncStorageSet("yda", addedFoods);
+    AsyncStorageSet("added", []);
+    setAddedFoods([]);
+  }
+
   return (
     <View style={{ flex: 1 }}>
-      <ModalComponent></ModalComponent>
-      {/* <TouchableOpacity
-        style={{
-          width: 90,
-          alignSelf: "center",
-          borderRadius: 50,
-        }}
-        onPress={() => {
-          try {
-            AsyncStorage.setItem("@yda", JSON.stringify(setAddedFoods));
-            AsyncStorage.setItem("@added", JSON.stringify([]));
-            setAddedFoods([]);
-          } catch (error) {
-            console.log(error);
-          }
-        }}
-      >
-        <Text
-          style={{
-            paddingHorizontal: 10,
-            color: "green",
-            fontSize: 16,
-            fontWeight: "600",
-          }}
-        >
-          new day
-        </Text>
-      </TouchableOpacity> */}
+      <ModalComponent action={moveToYDA} />
       <Info totalMacro={totalMacro!} />
       <ScrollView>
         <Macros foods={addedFoods} fnDelete={deleteFood} />

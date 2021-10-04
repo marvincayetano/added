@@ -1,12 +1,15 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export function AsyncStorageGet(storageName: string, fnAction: Function) {
+export function AsyncStorageGet(
+  storageName: string,
+  fnAction: Function | undefined
+) {
   try {
     AsyncStorage.getItem(`@${storageName}`).then((value: string | null) => {
       if (value && value.length) {
         const jsonGetValue = JSON.parse(value);
         // Check if the name is already in the storage
-        fnAction(jsonGetValue);
+        if (fnAction !== undefined) fnAction(jsonGetValue);
       }
     });
   } catch (error) {

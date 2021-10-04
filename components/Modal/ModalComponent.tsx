@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -10,9 +11,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-interface ModalProps {}
+interface ModalProps {
+  action: Function | undefined;
+}
 
-export function ModalComponent({}: ModalProps) {
+export function ModalComponent({ action }: ModalProps) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -37,6 +40,7 @@ export function ModalComponent({}: ModalProps) {
                 marginBottom: 20,
               }}
               onPress={() => {
+                if (action) action();
                 setModalVisible(false);
               }}
             >
@@ -81,9 +85,6 @@ export function ModalComponent({}: ModalProps) {
 
 const styles = StyleSheet.create({
   centeredView: {
-    // flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
     marginTop: 22,
   },
   modalView: {
