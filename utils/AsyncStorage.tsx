@@ -38,3 +38,12 @@ export function AsyncStorageSet(storageName: string, setValue: any) {
     return null;
   }
 }
+
+export function AsyncStorageClear(storageName: string) {
+  try {
+    AsyncStorage.setItem(`@${storageName}`, JSON.stringify([]));
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

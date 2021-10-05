@@ -6,7 +6,11 @@ import Macros from "../components/Table";
 import { FormData } from "../components/Foods/FoodAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalComponent } from "../components/Modal/ModalComponent";
-import { AsyncStorageGet, AsyncStorageSet } from "../utils/AsyncStorage";
+import {
+  AsyncStorageClear,
+  AsyncStorageGet,
+  AsyncStorageSet,
+} from "../utils/AsyncStorage";
 
 export interface TotalMacro {
   calories: number;
@@ -69,6 +73,7 @@ export function Home({}: HomeProps) {
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
 
   useEffect(() => {
+    // AsyncStorageClear("added");
     AsyncStorageGet("foods", setAvailFoods);
     AsyncStorageGet("added", (data: Object) => {
       setAddedFoods(data);
