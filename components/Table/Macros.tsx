@@ -10,7 +10,6 @@ interface MacrosProps {
 
 export function Macros({ foods, fnDelete }: MacrosProps) {
   if (foods) {
-    console.log(foods);
     return (
       <View style={styles.container}>
         {foods?.map((food, index) => (

@@ -28,7 +28,6 @@ export function FoodsComponent({}: FoodsComponentProps) {
                   text: "Delete",
                   backgroundColor: "red",
                   onPress: () => {
-                    console.log("DELETE ITEM", i);
                     const filteredArray = foods!.filter(
                       (_: unknown, index: number) => {
                         return i !== index;

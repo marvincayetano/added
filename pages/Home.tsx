@@ -7,6 +7,7 @@ import { FormData } from "../components/Foods/FoodAdd";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalComponent } from "../components/Modal/ModalComponent";
 import {
+  AsyncStorageAdd,
   AsyncStorageClear,
   AsyncStorageGet,
   AsyncStorageSet,
@@ -73,16 +74,17 @@ export function Home({}: HomeProps) {
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
 
   useEffect(() => {
-    // AsyncStorageClear("added");
+    // AsyncStorageClear("yda");
     AsyncStorageGet("foods", setAvailFoods);
     AsyncStorageGet("added", (data: Object) => {
+      // TODO: THIS IS NOT WORKING
       setAddedFoods(data);
       setTotalMacro(getTotalMacros(data));
     });
   }, []);
 
   function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {
-    AsyncStorageSet("added", { food, qty, isPerPiece });
+    AsyncStorageAdd("added", { food, qty, isPerPiece });
     setAddedFoods([...addedFoods, { food, qty, isPerPiece }]);
   }
 
@@ -101,7 +103,7 @@ export function Home({}: HomeProps) {
 
   function moveToYDA() {
     AsyncStorageSet("yda", addedFoods);
-    AsyncStorageSet("added", []);
+    AsyncStorageClear("added");
     setAddedFoods([]);
   }
 
