@@ -58,6 +58,59 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                borderRadius: 8,
+                marginBottom: 50,
+              }}
+            >
+              <View
+                style={{
+                  width: 100,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <TouchableOpacity
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: 7,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "green",
+                      fontSize: 18,
+                      fontWeight: "500",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    List
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: 7,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "500",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    Manual
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
             <Text style={{ ...styles.textStyle, color: "gray" }}>
               {isPerPiece ? "Per piece" : "Per 100G"}
             </Text>
@@ -258,7 +311,6 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
