@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { FormData } from "../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
+import { ModalAddManualInput } from "./ModalAddManualInput";
 
 interface ModalAddProps {
   foods: FormData[] | undefined;
@@ -83,7 +84,6 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 >
                   <Text
                     style={{
-                      color: "green",
                       fontSize: 18,
                       fontWeight: "500",
                       textDecorationLine: "underline",
@@ -101,6 +101,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 >
                   <Text
                     style={{
+                      color: "green",
                       fontSize: 18,
                       fontWeight: "500",
                       textDecorationLine: "underline",
@@ -110,6 +111,17 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                   </Text>
                 </TouchableOpacity>
               </View>
+            </View>
+            <View
+              style={{
+                width: 250,
+                display: "flex",
+              }}
+            >
+              <ModalAddManualInput
+                label="Calories"
+                fnSet={() => console.log("GAGO")}
+              />
             </View>
             <Text style={{ ...styles.textStyle, color: "gray" }}>
               {isPerPiece ? "Per piece" : "Per 100G"}
