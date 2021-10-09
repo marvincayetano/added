@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 import FoodsComponent from "../components/Foods";
-import { ModalAdd } from "../components/Modal/ModalAdd";
 
 interface FoodsProps {}
 

@@ -1,8 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Info from "../components/Info";
-import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
 import { AsyncStorageGet } from "../utils/AsyncStorage";
 import { getTotalMacros, TotalMacro } from "./Home";

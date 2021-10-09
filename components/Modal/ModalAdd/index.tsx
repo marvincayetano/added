@@ -9,7 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { FormData } from "../Foods/FoodAdd";
+import { FormData } from "../../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
 import { ModalAddManualInput } from "./ModalAddManualInput";
 
@@ -120,6 +120,22 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
             >
               <ModalAddManualInput
                 label="Calories"
+                fnSet={() => console.log("GAGO")}
+              />
+              <ModalAddManualInput
+                label="Protein"
+                fnSet={() => console.log("GAGO")}
+              />
+              <ModalAddManualInput
+                label="Fat"
+                fnSet={() => console.log("GAGO")}
+              />
+              <ModalAddManualInput
+                label="Carbs"
+                fnSet={() => console.log("GAGO")}
+              />
+              <ModalAddManualInput
+                label="Fiber"
                 fnSet={() => console.log("GAGO")}
               />
             </View>
