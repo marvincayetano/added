@@ -26,6 +26,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [currentFood, setCurrentFood] = useState<FormData | undefined>(
     undefined
   );
+  const [isManual, setIsManual] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
 
   useEffect(() => {
@@ -76,6 +77,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 }}
               >
                 <TouchableOpacity
+                  onPress={() => setIsManual(false)}
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
@@ -84,6 +86,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 >
                   <Text
                     style={{
+                      color: !isManual ? "green" : "blue",
                       fontSize: 18,
                       fontWeight: "500",
                       textDecorationLine: "underline",
@@ -93,6 +96,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                  onPress={() => setIsManual(true)}
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
@@ -101,7 +105,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 >
                   <Text
                     style={{
-                      color: "green",
+                      color: isManual ? "green" : "blue",
                       fontSize: 18,
                       fontWeight: "500",
                       textDecorationLine: "underline",
@@ -112,33 +116,36 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 </TouchableOpacity>
               </View>
             </View>
-            <View
-              style={{
-                width: 250,
-                display: "flex",
-              }}
-            >
-              <ModalAddManualInput
-                label="Calories"
-                fnSet={() => console.log("GAGO")}
-              />
-              <ModalAddManualInput
-                label="Protein"
-                fnSet={() => console.log("GAGO")}
-              />
-              <ModalAddManualInput
-                label="Fat"
-                fnSet={() => console.log("GAGO")}
-              />
-              <ModalAddManualInput
-                label="Carbs"
-                fnSet={() => console.log("GAGO")}
-              />
-              <ModalAddManualInput
-                label="Fiber"
-                fnSet={() => console.log("GAGO")}
-              />
-            </View>
+            {isManual && (
+              <View
+                style={{
+                  width: 250,
+                  display: "flex",
+                }}
+              >
+                <ModalAddManualInput
+                  label="Calories"
+                  fnSet={() => console.log("GAGO")}
+                />
+                <ModalAddManualInput
+                  label="Protein"
+                  fnSet={() => console.log("GAGO")}
+                />
+                <ModalAddManualInput
+                  label="Fat"
+                  fnSet={() => console.log("GAGO")}
+                />
+                <ModalAddManualInput
+                  label="Carbs"
+                  fnSet={() => console.log("GAGO")}
+                />
+                <ModalAddManualInput
+                  label="Fiber"
+                  fnSet={() => console.log("GAGO")}
+                />
+              </View>
+            )}
+
             <Text style={{ ...styles.textStyle, color: "gray" }}>
               {isPerPiece ? "Per piece" : "Per 100G"}
             </Text>
