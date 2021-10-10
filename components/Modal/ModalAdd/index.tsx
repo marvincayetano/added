@@ -29,6 +29,12 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [isManual, setIsManual] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
 
+  const [calories, setCalories] = useState(0);
+  const [protein, setProtein] = useState(0);
+  const [fat, setFat] = useState(0);
+  const [carbs, setCarbs] = useState(0);
+  const [fiber, setFiber] = useState(0);
+
   useEffect(() => {
     // Check if food is per piece or gram
     let foodName = "";
@@ -123,26 +129,11 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                   display: "flex",
                 }}
               >
-                <ModalAddManualInput
-                  label="Calories"
-                  fnSet={() => console.log("GAGO")}
-                />
-                <ModalAddManualInput
-                  label="Protein"
-                  fnSet={() => console.log("GAGO")}
-                />
-                <ModalAddManualInput
-                  label="Fat"
-                  fnSet={() => console.log("GAGO")}
-                />
-                <ModalAddManualInput
-                  label="Carbs"
-                  fnSet={() => console.log("GAGO")}
-                />
-                <ModalAddManualInput
-                  label="Fiber"
-                  fnSet={() => console.log("GAGO")}
-                />
+                <ModalAddManualInput label="Calories" fnSet={setCalories} />
+                <ModalAddManualInput label="Protein" fnSet={setProtein} />
+                <ModalAddManualInput label="Fat" fnSet={setFat} />
+                <ModalAddManualInput label="Carbs" fnSet={setCarbs} />
+                <ModalAddManualInput label="Fiber" fnSet={setFiber} />
               </View>
             )}
 
