@@ -12,6 +12,7 @@ import {
 import { FormData } from "../../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
 import { ModalAddManualInput } from "./ModalAddManualInput";
+import { AddManualForm } from "./AddManualForm";
 
 interface ModalAddProps {
   foods: FormData[] | undefined;
@@ -28,12 +29,6 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   );
   const [isManual, setIsManual] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
-
-  const [calories, setCalories] = useState(0);
-  const [protein, setProtein] = useState(0);
-  const [fat, setFat] = useState(0);
-  const [carbs, setCarbs] = useState(0);
-  const [fiber, setFiber] = useState(0);
 
   useEffect(() => {
     // Check if food is per piece or gram
@@ -122,20 +117,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 </TouchableOpacity>
               </View>
             </View>
-            {isManual && (
-              <View
-                style={{
-                  width: 250,
-                  display: "flex",
-                }}
-              >
-                <ModalAddManualInput label="Calories" fnSet={setCalories} />
-                <ModalAddManualInput label="Protein" fnSet={setProtein} />
-                <ModalAddManualInput label="Fat" fnSet={setFat} />
-                <ModalAddManualInput label="Carbs" fnSet={setCarbs} />
-                <ModalAddManualInput label="Fiber" fnSet={setFiber} />
-              </View>
-            )}
+            {isManual && <AddManualForm fnAddFood={fnAddFood} />}
 
             <Text style={{ ...styles.textStyle, color: "gray" }}>
               {isPerPiece ? "Per piece" : "Per 100G"}
