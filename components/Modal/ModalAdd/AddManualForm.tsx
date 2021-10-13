@@ -14,7 +14,9 @@ export function AddManualForm({ fnAddFood }: AddManualFormProps) {
   const [carbs, setCarbs] = useState(0);
   const [fiber, setFiber] = useState(0);
 
-  function submitForm() {}
+  function submitForm() {
+    //   fnAddFood(currentFood, quantity, isPerPiece);
+  }
 
   return (
     <View
