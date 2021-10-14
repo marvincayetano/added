@@ -24,7 +24,7 @@ export function ModalAddManualInput({
           padding: 8,
         }}
       >
-        Calories
+        {label}
       </Text>
       <TextInput
         style={{
@@ -33,7 +33,8 @@ export function ModalAddManualInput({
           paddingLeft: 20,
           borderBottomColor: "gray",
         }}
-      ></TextInput>
+        onChangeText={(text) => fnSet(text)}
+      />
     </View>
   );
 }
