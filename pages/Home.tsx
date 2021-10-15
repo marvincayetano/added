@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View, TouchableOpacity } from "react-native";
+import { ScrollView, View } from "react-native";
 import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
