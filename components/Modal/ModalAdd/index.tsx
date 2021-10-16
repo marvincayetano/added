@@ -62,242 +62,240 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
       >
         <View style={styles.centeredView}>
           <ModalContainer title="Add Food">
-            <View style={styles.modalView}>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                borderRadius: 8,
+                marginBottom: 50,
+              }}
+            >
               <View
                 style={{
+                  width: 100,
                   display: "flex",
                   flexDirection: "row",
-                  borderRadius: 8,
-                  marginBottom: 50,
+                  justifyContent: "center",
                 }}
               >
-                <View
+                <TouchableOpacity
+                  onPress={() => setIsManual(false)}
                   style={{
-                    width: 100,
-                    display: "flex",
-                    flexDirection: "row",
                     justifyContent: "center",
+                    alignItems: "center",
+                    padding: 7,
                   }}
                 >
-                  <TouchableOpacity
-                    onPress={() => setIsManual(false)}
+                  <Text
                     style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      padding: 7,
+                      color: !isManual ? "green" : "blue",
+                      fontSize: 18,
+                      fontWeight: "500",
+                      textDecorationLine: "underline",
                     }}
                   >
-                    <Text
-                      style={{
-                        color: !isManual ? "green" : "blue",
-                        fontSize: 18,
-                        fontWeight: "500",
-                        textDecorationLine: "underline",
-                      }}
-                    >
-                      List
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => setIsManual(true)}
+                    List
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setIsManual(true)}
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: 7,
+                  }}
+                >
+                  <Text
                     style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      padding: 7,
+                      color: isManual ? "green" : "blue",
+                      fontSize: 18,
+                      fontWeight: "500",
+                      textDecorationLine: "underline",
                     }}
                   >
-                    <Text
-                      style={{
-                        color: isManual ? "green" : "blue",
-                        fontSize: 18,
-                        fontWeight: "500",
-                        textDecorationLine: "underline",
-                      }}
-                    >
-                      Manual
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                    Manual
+                  </Text>
+                </TouchableOpacity>
               </View>
-              {isManual && <AddManualForm fnAddFood={fnAddFood} />}
+            </View>
+            {isManual && <AddManualForm fnAddFood={fnAddFood} />}
 
-              <Text style={{ ...styles.textStyle, color: "gray" }}>
-                {isPerPiece ? "Per piece" : "Per 100G"}
-              </Text>
-              <View style={styles.modalText}>
-                <Autocomplete
-                  data={filteredFoods ?? []}
-                  value={textFood}
-                  onChangeText={(text) => setTextFood(text.toLowerCase())}
-                  containerStyle={{
-                    backgroundColor: "white",
-                  }}
-                  inputContainerStyle={{
-                    borderWidth: 0,
-                  }}
-                  flatListProps={{
-                    renderItem: ({ item }) => (
-                      <TouchableOpacity
-                        style={{ padding: 5 }}
-                        onPress={() => {
-                          setCurrentFood(item);
-                          setTextFood(
-                            isPerPiece ? "@" + item.foodName : item.foodName
-                          );
-                          setFilteredFoods([]);
-                        }}
-                      >
-                        <Text>{item.foodName}</Text>
-                      </TouchableOpacity>
-                    ),
-                  }}
-                />
-              </View>
-              <TextInput
-                placeholder="qty"
-                style={{ ...styles.modalText, zIndex: -1 }}
-                keyboardType="number-pad"
-                value={`${quantity}`}
-                onChangeText={(text) => {
-                  const value = parseInt(text);
-                  if (isNaN(value)) {
-                    setQuantity(1);
-                  } else {
-                    setQuantity(parseInt(text));
-                  }
+            <Text style={{ ...styles.textStyle, color: "gray" }}>
+              {isPerPiece ? "Per piece" : "Per 100G"}
+            </Text>
+            <View style={styles.modalText}>
+              <Autocomplete
+                data={filteredFoods ?? []}
+                value={textFood}
+                onChangeText={(text) => setTextFood(text.toLowerCase())}
+                containerStyle={{
+                  backgroundColor: "white",
+                }}
+                inputContainerStyle={{
+                  borderWidth: 0,
+                }}
+                flatListProps={{
+                  renderItem: ({ item }) => (
+                    <TouchableOpacity
+                      style={{ padding: 5 }}
+                      onPress={() => {
+                        setCurrentFood(item);
+                        setTextFood(
+                          isPerPiece ? "@" + item.foodName : item.foodName
+                        );
+                        setFilteredFoods([]);
+                      }}
+                    >
+                      <Text>{item.foodName}</Text>
+                    </TouchableOpacity>
+                  ),
                 }}
               />
-              <Text
-                style={{
-                  ...styles.textStyle,
-                  paddingBottom: 20,
-                  margin: 5,
-                }}
-              >
-                {currentFood && (
+            </View>
+            <TextInput
+              placeholder="qty"
+              style={{ ...styles.modalText, zIndex: -1 }}
+              keyboardType="number-pad"
+              value={`${quantity}`}
+              onChangeText={(text) => {
+                const value = parseInt(text);
+                if (isNaN(value)) {
+                  setQuantity(1);
+                } else {
+                  setQuantity(parseInt(text));
+                }
+              }}
+            />
+            <Text
+              style={{
+                ...styles.textStyle,
+                paddingBottom: 20,
+                margin: 5,
+              }}
+            >
+              {currentFood && (
+                <View
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "flex-start",
+                    minWidth: "100%",
+                    borderWidth: 1,
+                    padding: 10,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      paddingBottom: 5,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {currentFood.foodName}
+                  </Text>
                   <View
                     style={{
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "flex-start",
-                      minWidth: "100%",
-                      borderWidth: 1,
-                      padding: 10,
+                      borderBottomWidth: 2,
+                      borderStyle: "solid",
+                      borderColor: "gray",
+                      marginBottom: 5,
                     }}
                   >
                     <Text
                       style={{
                         fontSize: 20,
-                        paddingBottom: 5,
-                        fontWeight: "bold",
                       }}
                     >
-                      {currentFood.foodName}
+                      Nutrition Facts
                     </Text>
-                    <View
-                      style={{
-                        borderBottomWidth: 2,
-                        borderStyle: "solid",
-                        borderColor: "gray",
-                        marginBottom: 5,
-                      }}
-                    >
-                      <Text
+                  </View>
+                  <View
+                    style={{
+                      borderBottomWidth: 4,
+                      borderStyle: "solid",
+                      borderColor: "gray",
+                      marginBottom: 5,
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text>Serving size</Text>
+                    <Text>{isPerPiece ? "per piece" : "100G"}</Text>
+                  </View>
+                  {isPerPiece ? (
+                    <View>
+                      <View
                         style={{
-                          fontSize: 20,
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
                         }}
                       >
-                        Nutrition Facts
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        borderBottomWidth: 4,
-                        borderStyle: "solid",
-                        borderColor: "gray",
-                        marginBottom: 5,
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text>Serving size</Text>
-                      <Text>{isPerPiece ? "per piece" : "100G"}</Text>
-                    </View>
-                    {isPerPiece ? (
-                      <View>
-                        <View
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <Text style={{ fontSize: 20, fontWeight: "400" }}>
-                            Calories
-                          </Text>
-                          <Text style={{ fontSize: 20, fontWeight: "400" }}>
-                            {currentFood.caloriesPP}
-                          </Text>
-                        </View>
-
-                        {currentFood.proteinPP && (
-                          <Text>Protein: {currentFood.proteinPP}</Text>
-                        )}
-                        {currentFood.carbsPP && (
-                          <Text>Carbs: {currentFood.carbsPP}</Text>
-                        )}
-                        {currentFood.fiberPP && (
-                          <Text>Fiber: {currentFood.fiberPP}</Text>
-                        )}
-                        {currentFood.fatPP && (
-                          <Text>Fat: {currentFood.fatPP}</Text>
-                        )}
+                        <Text style={{ fontSize: 20, fontWeight: "400" }}>
+                          Calories
+                        </Text>
+                        <Text style={{ fontSize: 20, fontWeight: "400" }}>
+                          {currentFood.caloriesPP}
+                        </Text>
                       </View>
-                    ) : (
-                      <View>
-                        <Text>Calories: {currentFood.caloriesPG}</Text>
-                        {currentFood.proteinPG && (
-                          <Text>Protein: {currentFood.proteinPG}</Text>
-                        )}
-                        {currentFood.carbsPG && (
-                          <Text>Carbs: {currentFood.carbsPG}</Text>
-                        )}
-                        {currentFood.fiberPG && (
-                          <Text>Fiber: {currentFood.fiberPG}</Text>
-                        )}
-                        {currentFood.fatPG && (
-                          <Text>Fat: {currentFood.fatPG}</Text>
-                        )}
-                      </View>
-                    )}
-                  </View>
-                )}
-              </Text>
 
-              <TouchableHighlight
-                style={{
-                  ...styles.openButton,
-                  backgroundColor: "#40c87b",
-                  marginBottom: 20,
-                }}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  fnAddFood(currentFood, quantity, isPerPiece);
-                }}
-              >
-                <Text style={styles.textStyle}>Add</Text>
-              </TouchableHighlight>
+                      {currentFood.proteinPP && (
+                        <Text>Protein: {currentFood.proteinPP}</Text>
+                      )}
+                      {currentFood.carbsPP && (
+                        <Text>Carbs: {currentFood.carbsPP}</Text>
+                      )}
+                      {currentFood.fiberPP && (
+                        <Text>Fiber: {currentFood.fiberPP}</Text>
+                      )}
+                      {currentFood.fatPP && (
+                        <Text>Fat: {currentFood.fatPP}</Text>
+                      )}
+                    </View>
+                  ) : (
+                    <View>
+                      <Text>Calories: {currentFood.caloriesPG}</Text>
+                      {currentFood.proteinPG && (
+                        <Text>Protein: {currentFood.proteinPG}</Text>
+                      )}
+                      {currentFood.carbsPG && (
+                        <Text>Carbs: {currentFood.carbsPG}</Text>
+                      )}
+                      {currentFood.fiberPG && (
+                        <Text>Fiber: {currentFood.fiberPG}</Text>
+                      )}
+                      {currentFood.fatPG && (
+                        <Text>Fat: {currentFood.fatPG}</Text>
+                      )}
+                    </View>
+                  )}
+                </View>
+              )}
+            </Text>
 
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Close</Text>
-              </TouchableHighlight>
-            </View>
+            <TouchableHighlight
+              style={{
+                ...styles.openButton,
+                backgroundColor: "#40c87b",
+                marginBottom: 20,
+              }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                fnAddFood(currentFood, quantity, isPerPiece);
+              }}
+            >
+              <Text style={styles.textStyle}>Add</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.textStyle}>Close</Text>
+            </TouchableHighlight>
           </ModalContainer>
         </View>
       </Modal>
@@ -320,20 +318,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-  },
-  modalView: {
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   openButton: {
     backgroundColor: "#40c87b",
