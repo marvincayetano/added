@@ -117,54 +117,58 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 </TouchableOpacity>
               </View>
             </View>
-            {isManual && <AddManualForm fnAddFood={fnAddFood} />}
-
-            <Text style={{ ...styles.textStyle, color: "gray" }}>
-              {isPerPiece ? "Per piece" : "Per 100G"}
-            </Text>
-            <View style={styles.modalText}>
-              <Autocomplete
-                data={filteredFoods ?? []}
-                value={textFood}
-                onChangeText={(text) => setTextFood(text.toLowerCase())}
-                containerStyle={{
-                  backgroundColor: "white",
-                }}
-                inputContainerStyle={{
-                  borderWidth: 0,
-                }}
-                flatListProps={{
-                  renderItem: ({ item }) => (
-                    <TouchableOpacity
-                      style={{ padding: 5 }}
-                      onPress={() => {
-                        setCurrentFood(item);
-                        setTextFood(
-                          isPerPiece ? "@" + item.foodName : item.foodName
-                        );
-                        setFilteredFoods([]);
-                      }}
-                    >
-                      <Text>{item.foodName}</Text>
-                    </TouchableOpacity>
-                  ),
-                }}
-              />
-            </View>
-            <TextInput
-              placeholder="qty"
-              style={{ ...styles.modalText, zIndex: -1 }}
-              keyboardType="number-pad"
-              value={`${quantity}`}
-              onChangeText={(text) => {
-                const value = parseInt(text);
-                if (isNaN(value)) {
-                  setQuantity(1);
-                } else {
-                  setQuantity(parseInt(text));
-                }
-              }}
-            />
+            {isManual ? (
+              <AddManualForm fnAddFood={fnAddFood} />
+            ) : (
+              <>
+                <Text style={{ ...styles.textStyle, color: "gray" }}>
+                  {isPerPiece ? "Per piece" : "Per 100G"}
+                </Text>
+                <View style={styles.modalText}>
+                  <Autocomplete
+                    data={filteredFoods ?? []}
+                    value={textFood}
+                    onChangeText={(text) => setTextFood(text.toLowerCase())}
+                    containerStyle={{
+                      backgroundColor: "white",
+                    }}
+                    inputContainerStyle={{
+                      borderWidth: 0,
+                    }}
+                    flatListProps={{
+                      renderItem: ({ item }) => (
+                        <TouchableOpacity
+                          style={{ padding: 5 }}
+                          onPress={() => {
+                            setCurrentFood(item);
+                            setTextFood(
+                              isPerPiece ? "@" + item.foodName : item.foodName
+                            );
+                            setFilteredFoods([]);
+                          }}
+                        >
+                          <Text>{item.foodName}</Text>
+                        </TouchableOpacity>
+                      ),
+                    }}
+                  />
+                </View>
+                <TextInput
+                  placeholder="qty"
+                  style={{ ...styles.modalText, zIndex: -1 }}
+                  keyboardType="number-pad"
+                  value={`${quantity}`}
+                  onChangeText={(text) => {
+                    const value = parseInt(text);
+                    if (isNaN(value)) {
+                      setQuantity(1);
+                    } else {
+                      setQuantity(parseInt(text));
+                    }
+                  }}
+                />
+              </>
+            )}
             <Text
               style={{
                 ...styles.textStyle,

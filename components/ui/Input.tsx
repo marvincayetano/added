@@ -15,6 +15,7 @@ export function Input({ label, fnSet }: InputProps) {
         marginBottom: 8,
         overflow: "hidden",
         width: 280,
+        borderRadius: 25,
       }}
     >
       <Text
