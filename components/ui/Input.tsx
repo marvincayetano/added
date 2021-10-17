@@ -1,15 +1,20 @@
 import React from "react";
 import { Text, TextInput, View } from "react-native";
 
-interface InputProps {}
+interface InputProps {
+  label: string;
+  fnSet: Function;
+}
 
-export function Input({}: InputProps) {
+export function Input({ label, fnSet }: InputProps) {
   return (
     <View
       style={{
         display: "flex",
         flexDirection: "row",
         marginBottom: 8,
+        overflow: "hidden",
+        width: 280,
       }}
     >
       <Text
@@ -18,16 +23,16 @@ export function Input({}: InputProps) {
           padding: 8,
         }}
       >
-        {/* {label} */}
+        {label}
       </Text>
       <TextInput
         style={{
           borderBottomWidth: 1,
-          width: 180,
+          width: "100%",
           paddingLeft: 20,
           borderBottomColor: "gray",
         }}
-        // onChangeText={(text) => fnSet(text)}
+        onChangeText={(text) => fnSet(text)}
       />
     </View>
   );

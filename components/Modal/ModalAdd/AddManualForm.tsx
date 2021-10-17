@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { ModalAddManualInput } from "./ModalAddManualInput";
+import { Input } from "../../ui/Input";
 
 interface AddManualFormProps {
   fnAddFood: Function;
@@ -21,16 +21,15 @@ export function AddManualForm({ fnAddFood }: AddManualFormProps) {
   return (
     <View
       style={{
-        width: 250,
         display: "flex",
       }}
     >
-      <ModalAddManualInput label="Name(Optional)" fnSet={setCalories} />
-      <ModalAddManualInput label="Calories" fnSet={setCalories} />
-      <ModalAddManualInput label="Protein" fnSet={setProtein} />
-      <ModalAddManualInput label="Fat" fnSet={setFat} />
-      <ModalAddManualInput label="Carbs" fnSet={setCarbs} />
-      <ModalAddManualInput label="Fiber" fnSet={setFiber} />
+      <Input label="Name(Optional)" fnSet={setName} />
+      <Input label="Calories" fnSet={setCalories} />
+      <Input label="Protein" fnSet={setProtein} />
+      <Input label="Fat" fnSet={setFat} />
+      <Input label="Carbs" fnSet={setCarbs} />
+      <Input label="Fiber" fnSet={setFiber} />
     </View>
   );
 }

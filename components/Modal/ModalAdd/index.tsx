@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import { FormData } from "../../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
-import { ModalAddManualInput } from "./ModalAddManualInput";
 import { AddManualForm } from "./AddManualForm";
 import { ModalContainer } from "../../ui/ModalContainer";
 
