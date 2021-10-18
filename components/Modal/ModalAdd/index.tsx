@@ -24,7 +24,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [textFood, setTextFood] = useState("@");
   const [isPerPiece, setIsPerPiece] = useState(false);
   const [filteredFoods, setFilteredFoods] = useState<any>([]);
-  const [currentFood, setCurrentFood] = useState<FormData | undefined>(
+  const [currentFood, setCurrentFood] = useState<FormData | any | undefined>(
     undefined
   );
   const [isManual, setIsManual] = useState(false);
@@ -48,6 +48,11 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
       );
     }
   }, [textFood]);
+
+  function submitForm() {
+    setModalVisible(!modalVisible);
+    fnAddFood(currentFood, quantity, isPerPiece);
+  }
 
   return (
     <View style={styles.centeredView}>
@@ -118,9 +123,14 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
               </View>
             </View>
             {isManual ? (
-              <AddManualForm fnAddFood={fnAddFood} />
+              <AddManualForm
+                setCurrentFood={setCurrentFood}
+                setQuantity={setQuantity}
+                setIsPerPiece={setIsPerPiece}
+              />
             ) : (
               <>
+                {/* TODO: Move this to its own component */}
                 <Text style={{ ...styles.textStyle, color: "gray" }}>
                   {isPerPiece ? "Per piece" : "Per 100G"}
                 </Text>
@@ -284,8 +294,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
                 marginBottom: 20,
               }}
               onPress={() => {
-                setModalVisible(!modalVisible);
-                fnAddFood(currentFood, quantity, isPerPiece);
+                submitForm();
               }}
             >
               <Text style={styles.textStyle}>Add</Text>
