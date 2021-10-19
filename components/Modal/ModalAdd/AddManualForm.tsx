@@ -22,7 +22,7 @@ export function AddManualForm({
   const [fiber, setFiber] = useState(0);
   useEffect(() => {
     setQuantity(1);
-    setIsPerPiece(true);
+    setIsPerPiece(false);
   }, []);
 
   useEffect(() => {
