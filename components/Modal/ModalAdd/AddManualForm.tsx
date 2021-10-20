@@ -15,26 +15,26 @@ export function AddManualForm({
   setIsPerPiece,
 }: AddManualFormProps) {
   const [foodName, setFoodName] = useState("");
-  const [calories, setCalories] = useState(0);
-  const [protein, setProtein] = useState(0);
-  const [fat, setFat] = useState(0);
-  const [carbs, setCarbs] = useState(0);
-  const [fiber, setFiber] = useState(0);
+  const [calories, setCalories] = useState("0");
+  const [protein, setProtein] = useState("0");
+  const [fat, setFat] = useState("0");
+  const [carbs, setCarbs] = useState("0");
+  const [fiber, setFiber] = useState("0");
   useEffect(() => {
-    setQuantity(1);
+    setQuantity("1");
     setIsPerPiece(false);
   }, []);
 
-  useEffect(() => {
-    setCurrentFood({
-      foodName,
-      caloriesPP: calories,
-      proteinPP: protein,
-      fatPP: fat,
-      carbsPP: carbs,
-      fiberPP: fiber,
-    });
-  }, [foodName, calories, protein, fat, carbs, fiber]);
+  //   useEffect(() => {
+  //     setCurrentFood({
+  //       foodName,
+  //       caloriesPP: calories,
+  //       proteinPP: protein,
+  //       fatPP: fat,
+  //       carbsPP: carbs,
+  //       fiberPP: fiber,
+  //     });
+  //   }, [foodName, calories, protein, fat, carbs, fiber]);
 
   return (
     <View

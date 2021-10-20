@@ -30,6 +30,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   function submitForm() {
     setModalVisible(!modalVisible);
     fnAddFood(currentFood, quantity, isPerPiece);
+    console.log(currentFood);
   }
 
   return (
@@ -132,7 +133,7 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
             </TouchableHighlight>
 
             <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              style={{ ...styles.openButton, backgroundColor: "#e34128" }}
               onPress={() => {
                 setModalVisible(!modalVisible);
               }}
