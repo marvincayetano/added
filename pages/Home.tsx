@@ -86,6 +86,7 @@ export function Home({}: HomeProps) {
   function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {
     AsyncStorageAdd("added", { food, qty, isPerPiece });
     setAddedFoods([...addedFoods, { food, qty, isPerPiece }]);
+    setTotalMacro(getTotalMacros([...addedFoods, { food, qty, isPerPiece }]));
   }
 
   function deleteFood(index: number) {
