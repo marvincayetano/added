@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Home } from "./pages/Home";
 import { Button } from "react-native";
@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator>
         <Stack.Screen
           name="Today"
@@ -21,14 +21,12 @@ export default function App() {
               <Button
                 onPress={() => navigation.navigate("Foods")}
                 title="Foods"
-                color="#111"
               />
             ),
             headerLeft: () => (
               <Button
                 onPress={() => navigation.navigate("Yesterday")}
                 title="YDA"
-                color="#111"
               />
             ),
           })}
@@ -42,7 +40,6 @@ export default function App() {
               <Button
                 onPress={() => navigation.navigate("AddFood")}
                 title="New"
-                color="#111"
               />
             ),
           })}

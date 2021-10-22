@@ -6,6 +6,7 @@ import { TotalMacro } from "../../pages/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalMacro } from "../Modal/ModalMacros";
 import { AsyncStorageGet, AsyncStorageSet } from "../../utils/AsyncStorage";
+import { useTheme } from "@react-navigation/native";
 
 interface InfoProps {
   totalMacro: TotalMacro;
@@ -30,6 +31,8 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
     AsyncStorageGet("maxvalues", setMaxValues);
   }, []);
 
+  const { colors } = useTheme();
+
   function saveMacros(macros: TotalMacro) {
     setMaxValues(macros);
     // Save all the macros to the AsyncStorage
@@ -42,7 +45,7 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
         <View
           style={{ flex: 1, flexDirection: "column", alignItems: "center" }}
         >
-          <Text style={styles.macros}>Macros</Text>
+          <Text style={{ ...styles.macros, color: colors.text }}>Macros</Text>
           {!isYDA ? (
             <ModalMacro maxValues={maxValues} saveMacros={saveMacros} />
           ) : (
