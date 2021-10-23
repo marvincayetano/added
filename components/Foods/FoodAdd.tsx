@@ -355,6 +355,7 @@ const styles = StyleSheet.create({
   label: {
     marginTop: 20,
     fontSize: 18,
+    color: "#fff",
   },
   inputContainer: {
     display: "flex",
@@ -364,6 +365,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   input: {
+    color: "#fff",
     borderWidth: 1,
     borderRadius: 6,
     borderColor: "gray",

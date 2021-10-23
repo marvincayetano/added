@@ -6,12 +6,21 @@ import { Button } from "react-native";
 import { Foods } from "./pages/Foods";
 import { YDA } from "./pages/YDA";
 import { FoodAdd } from "./components/Foods/FoodAdd";
+import tailwind from "tailwind-rn";
 
 const Stack = createNativeStackNavigator();
 
+const MyTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: "#fff",
+    secondary: "#f29441",
+  },
+};
 export default function App() {
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer theme={MyTheme}>
       <Stack.Navigator>
         <Stack.Screen
           name="Today"
@@ -21,12 +30,14 @@ export default function App() {
               <Button
                 onPress={() => navigation.navigate("Foods")}
                 title="Foods"
+                color={MyTheme.colors.secondary}
               />
             ),
             headerLeft: () => (
               <Button
                 onPress={() => navigation.navigate("Yesterday")}
                 title="YDA"
+                color={MyTheme.colors.secondary}
               />
             ),
           })}
@@ -40,6 +51,7 @@ export default function App() {
               <Button
                 onPress={() => navigation.navigate("AddFood")}
                 title="New"
+                color={MyTheme.colors.secondary}
               />
             ),
           })}

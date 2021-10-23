@@ -63,6 +63,7 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
           style={styles.bar}
           progress={calculateProgress(totalMacro.calories, maxValues.calories)}
           width={350}
+          color="#fff"
         />
 
         <TextInfo
@@ -72,7 +73,7 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
         />
         <Bar
           style={styles.bar}
-          color="#d54d2f"
+          color="#fff"
           progress={calculateProgress(totalMacro.protein, maxValues.protein)}
           width={350}
         />
@@ -84,7 +85,7 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
         />
         <Bar
           style={styles.bar}
-          color="#0e7930"
+          color="#fff"
           progress={calculateProgress(totalMacro.carbs, maxValues.carbs)}
           width={350}
         />
@@ -96,7 +97,7 @@ export function Info({ totalMacro, isYDA = false }: InfoProps) {
         />
         <Bar
           style={styles.bar}
-          color="#f29441"
+          color="#fff"
           progress={calculateProgress(totalMacro.fiber, maxValues.fiber)}
           width={350}
         />
