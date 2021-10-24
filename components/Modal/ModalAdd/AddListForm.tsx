@@ -38,6 +38,7 @@ export function AddListForm({
       foodName = textFood.substr(1);
       setIsPerPiece(true);
     } else {
+      foodName = textFood;
       setIsPerPiece(false);
     }
 

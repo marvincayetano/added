@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Home } from "./pages/Home";
@@ -6,7 +6,7 @@ import { Button } from "react-native";
 import { Foods } from "./pages/Foods";
 import { YDA } from "./pages/YDA";
 import { FoodAdd } from "./components/Foods/FoodAdd";
-import tailwind from "tailwind-rn";
+import { AsyncStorageGet } from "./utils/AsyncStorage";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,13 +18,18 @@ const MyTheme = {
     secondary: "#f29441",
   },
 };
+
 export default function App() {
+  const [addedFoods, setAddedFoods] = useState(() => {
+    return AsyncStorageGet("added");
+  });
+
   return (
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator>
         <Stack.Screen
           name="Today"
-          component={Home}
+          //   component={Home}
           options={({ navigation }) => ({
             headerRight: () => (
               <Button
@@ -41,7 +46,16 @@ export default function App() {
               />
             ),
           })}
-        />
+        >
+          {(props) => (
+            <Home
+              {...props}
+              addedFoods={addedFoods}
+              setAddedFoods={setAddedFoods}
+            />
+          )}
+        </Stack.Screen>
+
         <Stack.Screen name="Yesterday" component={YDA} />
         <Stack.Screen
           name="Foods"

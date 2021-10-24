@@ -20,7 +20,10 @@ export interface TotalMacro {
   fiber: number;
 }
 
-interface HomeProps {}
+interface HomeProps {
+  addedFoods: any | undefined;
+  setAddedFoods: Function;
+}
 
 export function getTotalMacros(foods: any): TotalMacro {
   // CALCULATE EACH HERE
@@ -62,7 +65,7 @@ export function getTotalMacros(foods: any): TotalMacro {
   return returnValue;
 }
 
-export function Home({}: HomeProps) {
+export function Home({ addedFoods, setAddedFoods }: HomeProps) {
   const [totalMacro, setTotalMacro] = useState<TotalMacro>({
     calories: 0,
     protein: 0,
@@ -70,7 +73,7 @@ export function Home({}: HomeProps) {
     fiber: 0,
   });
 
-  const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
+  //   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
 
   useEffect(() => {
@@ -96,7 +99,7 @@ export function Home({}: HomeProps) {
       });
 
       setAddedFoods(filteredArray);
-      AsyncStorage.setItem("@added", JSON.stringify(filteredArray));
+      AsyncStorageSet("added", JSON.stringify(filteredArray));
     } catch (error) {
       console.log(error);
     }
