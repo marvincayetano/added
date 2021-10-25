@@ -4,7 +4,6 @@ import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
 import { FormData } from "../components/Foods/FoodAdd";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalComponent } from "../components/Modal/ModalComponent";
 import {
   AsyncStorageAdd,
@@ -78,6 +77,7 @@ export function Home({ addedFoods, setAddedFoods }: HomeProps) {
 
   useEffect(() => {
     // AsyncStorageClear("yda");
+    AsyncStorageClear("added");
     AsyncStorageGet("foods", setAvailFoods);
     AsyncStorageGet("added", (data: Object) => {
       // TODO: THIS IS NOT WORKING
