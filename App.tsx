@@ -17,6 +17,7 @@ const Stack = createNativeStackNavigator();
 // Modal should be closed when clicking the outside part
 // White bar on top of the navigation should be removed
 // After clicking new day, totalmacros are not resseting
+// BarCode Scanner not showing anything
 
 const MyTheme = {
   ...DarkTheme,
@@ -71,7 +72,7 @@ export default function App() {
           options={({ navigation }) => ({
             headerRight: () => (
               <Button
-                onPress={() => navigation.navigate("AddFood")}
+                onPress={() => navigation.navigate("Add")}
                 title="New"
                 color={MyTheme.colors.secondary}
               />
@@ -79,7 +80,7 @@ export default function App() {
           })}
         />
         <Stack.Screen
-          name="AddFood"
+          name="Add"
           component={FoodAdd}
           options={({ navigation }) => ({
             headerRight: () => (
