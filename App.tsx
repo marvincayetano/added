@@ -7,8 +7,16 @@ import { Foods } from "./pages/Foods";
 import { YDA } from "./pages/YDA";
 import { FoodAdd } from "./components/Foods/FoodAdd";
 import { AsyncStorageGet } from "./utils/AsyncStorage";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 const Stack = createNativeStackNavigator();
+
+// TODO BUGS
+// Unresponsive Edit Macros
+// Iphone input should be closed when clicking the outside part
+// Modal should be closed when clicking the outside part
+// White bar on top of the navigation should be removed
+// After clicking new day, totalmacros are not resseting
 
 const MyTheme = {
   ...DarkTheme,
@@ -70,7 +78,20 @@ export default function App() {
             ),
           })}
         />
-        <Stack.Screen name="AddFood" component={FoodAdd} />
+        <Stack.Screen
+          name="AddFood"
+          component={FoodAdd}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <Button
+                onPress={() => navigation.navigate("Bar Code Scanner")}
+                title="Scan"
+                color={MyTheme.colors.secondary}
+              />
+            ),
+          })}
+        />
+        <Stack.Screen name="Bar Code Scanner" component={BarCodeScanner} />
       </Stack.Navigator>
     </NavigationContainer>
   );
