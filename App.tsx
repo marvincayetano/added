@@ -12,7 +12,8 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 const Stack = createNativeStackNavigator();
 
 // TODO BUGS
-// Unresponsive Edit Macros
+// DONE: Unresponsive Edit Macros
+// DONE: NaN in ModalMacros
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part
 // White bar on top of the navigation should be removed

@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
+import useIsNan from "../../hooks/useIsNan";
 import { TotalMacro } from "../../pages/Home";
 
 interface ModalMacroProps {
@@ -17,16 +18,14 @@ interface ModalMacroProps {
 
 export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [calories, setCalories] = useState<number>(0);
-  const [protein, setProtein] = useState<number>(0);
-  const [carbs, setCarbs] = useState<number>(0);
-  const [fiber, setFiber] = useState<number>(0);
-  useEffect(() => {
-    setCalories(maxValues.calories);
-    setProtein(maxValues.protein);
-    setCarbs(maxValues.carbs);
-    setFiber(maxValues.fiber);
-  }, []);
+  const { calories: cl, protein: pn, carbs: cs, fiber: fr } = maxValues;
+
+  const [calories, setCalories] = useIsNan(cl.toString());
+  const [protein, setProtein] = useIsNan(pn.toString());
+  const [carbs, setCarbs] = useIsNan(cs.toString());
+  const [fiber, setFiber] = useIsNan(fr.toString());
+
+  // setCalories("2");
 
   return (
     <View style={styles.centeredView}>
@@ -53,7 +52,7 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
               keyboardType="number-pad"
               value={`${calories}`}
               onChangeText={(text) => {
-                setCalories(parseInt(text));
+                setCalories(text);
               }}
             />
             <Text
@@ -69,7 +68,7 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
               keyboardType="number-pad"
               value={`${protein}`}
               onChangeText={(text) => {
-                setProtein(parseInt(text));
+                setProtein(text);
               }}
             />
             <Text
@@ -85,7 +84,7 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
               keyboardType="number-pad"
               value={`${carbs}`}
               onChangeText={(text) => {
-                setCarbs(parseInt(text));
+                setCarbs(text);
               }}
             />
             <Text
@@ -101,7 +100,7 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
               keyboardType="number-pad"
               value={`${fiber}`}
               onChangeText={(text) => {
-                setFiber(parseInt(text));
+                setFiber(text);
               }}
             />
 
