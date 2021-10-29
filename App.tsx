@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator();
 // TODO BUGS
 // DONE: Unresponsive Edit Macros
 // DONE: NaN in ModalMacros
+
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part
 // White bar on top of the navigation should be removed
