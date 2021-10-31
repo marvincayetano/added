@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 // DONE: After clicking new day, totalmacros are not resseting
 
 // Iphone input should be closed when clicking the outside part
-// Modal should be closed when clicking the outside part
+// Modal should be closed when clicking the outside part by Using TouchableWithoutFeedback as View
 
 // White bar on top of the navigation should be removed
 // BarCode Scanner not showing anything

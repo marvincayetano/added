@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableWithoutFeedback, Keyboard } from "react-native";
 import tailwind from "tailwind-rn";
 
 interface ModalContainerProps {
@@ -28,19 +28,21 @@ export function ModalContainer({
         elevation: 5,
       }}
     >
-      <View style={tailwind("bg-white w-full p-6 rounded-lg items-center")}>
-        <Text style={tailwind("text-gray-800 text-xl font-medium mt-4")}>
-          {title}
-        </Text>
-        {children}
-        {/* <View
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={tailwind("bg-white w-full p-6 rounded-lg items-center")}>
+          <Text style={tailwind("text-gray-800 text-xl font-medium mt-4")}>
+            {title}
+          </Text>
+          {children}
+          {/* <View
           style={tailwind(
             "bg-indigo-600 w-full py-2 items-center rounded-md mt-6"
           )}
         >
           <Text style={tailwind("text-white font-medium")}>Back Back</Text>
         </View> */}
-      </View>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 }
