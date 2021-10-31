@@ -14,12 +14,14 @@ const Stack = createNativeStackNavigator();
 // TODO BUGS
 // DONE: Unresponsive Edit Macros
 // DONE: NaN in ModalMacros
+// DONE: After clicking new day, totalmacros are not resseting
 
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part
+
 // White bar on top of the navigation should be removed
-// After clicking new day, totalmacros are not resseting
 // BarCode Scanner not showing anything
+// Better way to show added foods
 
 const MyTheme = {
   ...DarkTheme,
