@@ -7,7 +7,7 @@ import { Foods } from "./pages/Foods";
 import { YDA } from "./pages/YDA";
 import { FoodAdd } from "./components/Foods/FoodAdd";
 import { AsyncStorageGet } from "./utils/AsyncStorage";
-import { BarCodeScanner } from "expo-barcode-scanner";
+import BarCodeScanner from "./components/ui/BarCodeScanner";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +19,6 @@ const Stack = createNativeStackNavigator();
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part by Using TouchableWithoutFeedback as View
 
-// White bar on top of the navigation should be removed
 // BarCode Scanner not showing anything
 // Better way to show added foods
 
