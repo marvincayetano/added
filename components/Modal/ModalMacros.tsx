@@ -7,7 +7,9 @@ import {
   Alert,
   TouchableHighlight,
   TextInput,
+  Keyboard,
 } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import useIsNan from "../../hooks/useIsNan";
 import { TotalMacro } from "../../pages/Home";
 
@@ -37,97 +39,99 @@ export function ModalMacro({ maxValues, saveMacros }: ModalMacroProps) {
           Alert.alert("Modal has been closed.");
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text
-              style={{
-                ...styles.textTitle,
-              }}
-            >
-              CALORIES
-            </Text>
-            <TextInput
-              placeholder="1000"
-              style={styles.modalText}
-              keyboardType="number-pad"
-              value={`${calories}`}
-              onChangeText={(text) => {
-                setCalories(text);
-              }}
-            />
-            <Text
-              style={{
-                ...styles.textTitle,
-              }}
-            >
-              PROTEIN
-            </Text>
-            <TextInput
-              placeholder="1000"
-              style={styles.modalText}
-              keyboardType="number-pad"
-              value={`${protein}`}
-              onChangeText={(text) => {
-                setProtein(text);
-              }}
-            />
-            <Text
-              style={{
-                ...styles.textTitle,
-              }}
-            >
-              CARBS
-            </Text>
-            <TextInput
-              placeholder="1000"
-              style={styles.modalText}
-              keyboardType="number-pad"
-              value={`${carbs}`}
-              onChangeText={(text) => {
-                setCarbs(text);
-              }}
-            />
-            <Text
-              style={{
-                ...styles.textTitle,
-              }}
-            >
-              FIBER
-            </Text>
-            <TextInput
-              placeholder="1000"
-              style={styles.modalText}
-              keyboardType="number-pad"
-              value={`${fiber}`}
-              onChangeText={(text) => {
-                setFiber(text);
-              }}
-            />
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text
+                style={{
+                  ...styles.textTitle,
+                }}
+              >
+                CALORIES
+              </Text>
+              <TextInput
+                placeholder="1000"
+                style={styles.modalText}
+                keyboardType="number-pad"
+                value={`${calories}`}
+                onChangeText={(text) => {
+                  setCalories(text);
+                }}
+              />
+              <Text
+                style={{
+                  ...styles.textTitle,
+                }}
+              >
+                PROTEIN
+              </Text>
+              <TextInput
+                placeholder="1000"
+                style={styles.modalText}
+                keyboardType="number-pad"
+                value={`${protein}`}
+                onChangeText={(text) => {
+                  setProtein(text);
+                }}
+              />
+              <Text
+                style={{
+                  ...styles.textTitle,
+                }}
+              >
+                CARBS
+              </Text>
+              <TextInput
+                placeholder="1000"
+                style={styles.modalText}
+                keyboardType="number-pad"
+                value={`${carbs}`}
+                onChangeText={(text) => {
+                  setCarbs(text);
+                }}
+              />
+              <Text
+                style={{
+                  ...styles.textTitle,
+                }}
+              >
+                FIBER
+              </Text>
+              <TextInput
+                placeholder="1000"
+                style={styles.modalText}
+                keyboardType="number-pad"
+                value={`${fiber}`}
+                onChangeText={(text) => {
+                  setFiber(text);
+                }}
+              />
 
-            <TouchableHighlight
-              style={{
-                ...styles.openButton,
-                backgroundColor: "#40c87b",
-                marginBottom: 20,
-              }}
-              onPress={() => {
-                saveMacros({ calories, protein, carbs, fiber });
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Save</Text>
-            </TouchableHighlight>
+              <TouchableHighlight
+                style={{
+                  ...styles.openButton,
+                  backgroundColor: "#40c87b",
+                  marginBottom: 20,
+                }}
+                onPress={() => {
+                  saveMacros({ calories, protein, carbs, fiber });
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Save</Text>
+              </TouchableHighlight>
 
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>Close</Text>
-            </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Close</Text>
+              </TouchableHighlight>
+            </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
 
       <TouchableHighlight
