@@ -15,12 +15,14 @@ const Stack = createNativeStackNavigator();
 // DONE: Unresponsive Edit Macros
 // DONE: NaN in ModalMacros
 // DONE: After clicking new day, totalmacros are not resseting
+// DONE: BarCode Scanner not showing anything
 
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part by Using TouchableWithoutFeedback as View
 
-// BarCode Scanner not showing anything
 // Better way to show added foods
+// - How about we can get the value from the available foods but
+//   we can still change it
 
 const MyTheme = {
   ...DarkTheme,

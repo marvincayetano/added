@@ -37,6 +37,7 @@ export default function BarCodeScannerComponent() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
+      <View style={styles.box} />
       {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
@@ -49,5 +50,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
+  },
+  box: {
+    width: 280,
+    height: 280,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "orange",
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
   },
 });
