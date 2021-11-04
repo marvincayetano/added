@@ -20,6 +20,10 @@ const Stack = createNativeStackNavigator();
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part by Using TouchableWithoutFeedback as View
 
+// Better way to save the variables
+// - Add a state here that holds everything
+// - maybeeeeeeeee even the functions
+
 // Better way to show added foods
 // - How about we can get the value from the available foods but
 //   we can still change it
