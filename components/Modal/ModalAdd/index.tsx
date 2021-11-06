@@ -13,7 +13,6 @@ import {
 import { FormData } from "../../Foods/FoodAdd";
 import { AddManualForm } from "./AddManualForm";
 import { ModalContainer } from "../../ui/ModalContainer";
-import { AddListForm } from "./AddListForm";
 
 interface ModalAddProps {
   foods: FormData[] | undefined;
@@ -26,7 +25,6 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [currentFood, setCurrentFood] = useState<FormData | any | undefined>(
     undefined
   );
-  const [isManual, setIsManual] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
 
   function submitForm() {
@@ -47,80 +45,11 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
       >
         <View style={styles.centeredView}>
           <ModalContainer title="Add Food">
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                borderRadius: 8,
-                marginBottom: 50,
-              }}
-            >
-              <View
-                style={{
-                  width: 100,
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => setIsManual(false)}
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: 7,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: !isManual ? "green" : "blue",
-                      fontSize: 18,
-                      fontWeight: "500",
-                      textDecorationLine: "underline",
-                    }}
-                  >
-                    List
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => setIsManual(true)}
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: 7,
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: isManual ? "green" : "blue",
-                      fontSize: 18,
-                      fontWeight: "500",
-                      textDecorationLine: "underline",
-                    }}
-                  >
-                    Manual
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            {isManual ? (
-              <AddManualForm
-                setCurrentFood={setCurrentFood}
-                setQuantity={setQuantity}
-                setIsPerPiece={setIsPerPiece}
-              />
-            ) : (
-              <AddListForm
-                setCurrentFood={setCurrentFood}
-                currentFood={currentFood}
-                setIsPerPiece={setIsPerPiece}
-                isPerPiece={isPerPiece}
-                foods={foods}
-                quantity={quantity}
-                setQuantity={setQuantity}
-              />
-            )}
-
+            <AddManualForm
+              setCurrentFood={setCurrentFood}
+              setQuantity={setQuantity}
+              setIsPerPiece={setIsPerPiece}
+            />
             <TouchableHighlight
               style={{
                 ...styles.openButton,

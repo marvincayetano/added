@@ -53,7 +53,6 @@ export function AddListForm({
 
   return (
     <>
-      {/* TODO: Move this to its own component */}
       <Text style={{ ...styles.textStyle, color: "gray" }}>
         {isPerPiece ? "Per piece" : "Per 100G"}
       </Text>

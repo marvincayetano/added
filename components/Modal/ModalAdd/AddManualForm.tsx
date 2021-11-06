@@ -78,6 +78,7 @@ export function AddManualForm({
       <Input label="Fat" fnSet={setFat} />
       <Input label="Carbs" fnSet={setCarbs} />
       <Input label="Fiber" fnSet={setFiber} />
+      <Input label="Quantity" fnSet={setQuantity} />
     </View>
   );
 }
