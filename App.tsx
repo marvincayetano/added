@@ -37,6 +37,10 @@ const MyTheme = {
   },
 };
 
+interface AppData {
+  addedFoods: [FormData] | null;
+}
+
 export default function App() {
   const [addedFoods, setAddedFoods] = useState(() => {
     return AsyncStorageGet("added");

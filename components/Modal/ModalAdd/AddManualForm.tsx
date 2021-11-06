@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View, Text } from "react-native";
 import { Input } from "../../ui/Input";
+import Autocomplete from "react-native-autocomplete-input";
 
 interface AddManualFormProps {
   setCurrentFood: Function;
@@ -14,6 +15,9 @@ export function AddManualForm({
   setQuantity,
   setIsPerPiece,
 }: AddManualFormProps) {
+  const [textFood, setTextFood] = useState("@");
+  const [filteredFoods, setFilteredFoods] = useState<any>([]);
+
   const [foodName, setFoodName] = useState("");
   const [calories, setCalories] = useState("0");
   const [protein, setProtein] = useState("0");
@@ -42,6 +46,32 @@ export function AddManualForm({
         display: "flex",
       }}
     >
+      <Autocomplete
+        data={filteredFoods ?? []}
+        value={textFood}
+        onChangeText={(text) => setTextFood(text.toLowerCase())}
+        containerStyle={{
+          backgroundColor: "white",
+        }}
+        inputContainerStyle={{
+          borderWidth: 0,
+        }}
+        flatListProps={{
+          renderItem: ({ item }) => (
+            <TouchableOpacity
+              style={{ padding: 5 }}
+              onPress={() => {
+                setCurrentFood(item);
+                setTextFood(item.foodName);
+                setFilteredFoods([]);
+              }}
+            >
+              <Text>{item.foodName}</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
       <Input label="Name(Optional)" fnSet={setFoodName} />
       <Input label="Calories" fnSet={setCalories} />
       <Input label="Protein" fnSet={setProtein} />
