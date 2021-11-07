@@ -17,10 +17,14 @@ const Stack = createNativeStackNavigator();
 // DONE: After clicking new day, totalmacros are not resseting
 // DONE: BarCode Scanner not showing anything
 
+// TODAY: Redoing Data Structure
+
 // Iphone input should be closed when clicking the outside part
 // Modal should be closed when clicking the outside part by Using TouchableWithoutFeedback as View
 
 // New Foods doesnt show / add to states right after adding it
+
+// Adding Fetch to fetch REST from FatSecret
 
 // Better way to save the variables
 // - Add a state here that holds everything
