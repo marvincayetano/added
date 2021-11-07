@@ -7,6 +7,7 @@ interface AddManualFormProps {
   setCurrentFood: Function;
   setQuantity: Function;
   setIsPerPiece: Function;
+  foods: FormData[] | undefined;
 }
 
 // TODO: Switch this to hooks in the future
@@ -14,11 +15,32 @@ export function AddManualForm({
   setCurrentFood,
   setQuantity,
   setIsPerPiece,
+  foods,
 }: AddManualFormProps) {
   const [textFood, setTextFood] = useState("@");
   const [filteredFoods, setFilteredFoods] = useState<any>([]);
 
   const [foodName, setFoodName] = useState("");
+  useEffect(() => {
+    // Check if food is per piece or gram
+    let foodName = "";
+    if (textFood.charAt(0) === "@") {
+      foodName = textFood.substr(1);
+      setIsPerPiece(true);
+    } else {
+      foodName = textFood;
+      setIsPerPiece(false);
+    }
+
+    if (foods) {
+      setFilteredFoods(
+        foods.filter((food: FormData) => {
+          return food.foodName === foodName;
+        })
+      );
+    }
+  }, [textFood]);
+
   const [calories, setCalories] = useState("0");
   const [protein, setProtein] = useState("0");
   const [fat, setFat] = useState("0");
