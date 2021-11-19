@@ -14,6 +14,21 @@ interface FoodAddProps {
   navigation: any;
 }
 
+export interface FoodData {
+  name: string;
+  values: [FoodValue];
+}
+
+export interface FoodValue {
+  name: string;
+  description: string;
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+  fiber: number;
+}
+
 export interface FormData {
   foodName: string;
   caloriesPP?: string;
