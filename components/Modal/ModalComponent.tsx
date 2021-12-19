@@ -1,5 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,10 +11,12 @@ import {
 } from "react-native";
 
 interface ModalProps {
-  action: Function | undefined;
+  action?: Function;
+  btnLabel?: String;
+  children?: ReactNode;
 }
 
-export function ModalComponent({ action }: ModalProps) {
+export function ModalComponent({ action, btnLabel, children }: ModalProps) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -29,9 +30,8 @@ export function ModalComponent({ action }: ModalProps) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={{ fontSize: 25, paddingBottom: 25 }}>
-              Reset to a new day?
-            </Text>
+            <Text style={{ fontSize: 25, paddingBottom: 25 }}>{btnLabel}</Text>
+            {children && children}
 
             <TouchableHighlight
               style={{

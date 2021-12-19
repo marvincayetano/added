@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  Text,
-  Button,
-  TextInput,
-  View,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
+import { Input } from "../ui/Input";
+import { ModalComponent } from "../Modal/ModalComponent";
 
 interface FoodAddProps {
   navigation: any;
@@ -30,29 +25,15 @@ export interface FoodValue {
   fiber: number;
 }
 
-export interface FormData {
-  foodName: string;
-  caloriesPP?: string;
-  caloriesPG?: string;
-  proteinPP?: string;
-  proteinPG?: string;
-  fatPP?: string;
-  fatPG?: string;
-  carbsPP?: string;
-  carbsPG?: string;
-  fiberPP?: string;
-  fiberPG?: string;
-}
-
-const _storeData = async (data: FormData) => {
-  data.foodName = data.foodName.toLowerCase();
+const _storeData = async (data: FoodValue) => {
+  data.name = data.name.toLowerCase();
   try {
     AsyncStorage.getItem("@foods").then((value: string | null) => {
       if (value && value.length) {
-        const jsonGetValue = JSON.parse(value) as FormData[];
+        const jsonGetValue = JSON.parse(value) as [FoodValue];
         // Check if the name is already in the storage
-        const isExist = jsonGetValue.filter((food) => {
-          return food.foodName === data.foodName;
+        const isExist = jsonGetValue.filter((food: FoodValue) => {
+          return food.name === data.name;
         });
 
         if (isExist.length) {
@@ -76,287 +57,70 @@ export function FoodAdd({ navigation }: FoodAddProps) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FoodData>();
 
   const onSubmit = handleSubmit((data: any) => {
-    // Map remove empty
-    Object.keys(data).forEach((key: any) => {
-      if (data[key] === "" || data[key] === "0") {
-        delete data[key];
-      }
-    });
-
-    if (data.foodName) {
-      if (Object.keys(data.foodName).length <= 1) {
-        // TODO: Return error
-      } else {
-        // Save here
-        _storeData(data);
-        navigation.goBack();
-      }
-    }
+    // _storeData(data);
+    // navigation.goBack();
   });
+
+  const onAddNewMeasurement = () => {};
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ marginTop: 20 }}>
         <View style={styles.container}>
-          <Text style={styles.label}>Name</Text>
           <Controller
             control={control}
             rules={{
               required: true,
             }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                autoCapitalize="none"
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Banana"
-              />
+            render={({ field: { onChange } }) => (
+              <Input label="Food name" fnSet={onChange} />
             )}
-            name="foodName"
+            name="name"
             defaultValue=""
           />
-          {errors.foodName && (
+          {errors.name && (
             <Text style={{ color: "red" }}>This is required.</Text>
           )}
 
-          <View style={styles.inputContainer}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Calories per piece</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 3,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="caloriesPP"
-                defaultValue="0"
-              />
-            </View>
-
-            <View style={{ flex: 1, marginLeft: 5 }}>
-              <Text style={styles.label}>per 100G</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 3,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="caloriesPG"
-                defaultValue="0"
-              />
-            </View>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Protein per piece</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="proteinPP"
-                defaultValue="0"
-              />
-            </View>
-
-            <View style={{ flex: 1, marginLeft: 5 }}>
-              <Text style={styles.label}>per 100G</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="proteinPG"
-                defaultValue="0"
-              />
-            </View>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Fat per piece</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="fatPP"
-                defaultValue="0"
-              />
-            </View>
-
-            <View style={{ flex: 1, marginLeft: 5 }}>
-              <Text style={styles.label}>per 100G</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="fatPG"
-                defaultValue="0"
-              />
-            </View>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Carbs per piece</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="carbsPP"
-                defaultValue="0"
-              />
-            </View>
-
-            <View style={{ flex: 1, marginLeft: 5 }}>
-              <Text style={styles.label}>per 100G</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="carbsPG"
-                defaultValue="0"
-              />
-            </View>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Fiber per piece</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="fiberPP"
-                defaultValue="0"
-              />
-            </View>
-
-            <View style={{ flex: 1, marginLeft: 5 }}>
-              <Text style={styles.label}>per 100G</Text>
-              <Controller
-                control={control}
-                rules={{
-                  maxLength: 100,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="fiberPG"
-                defaultValue="0"
-              />
-            </View>
-          </View>
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange } }) => (
+              <Input label="Description" fnSet={onChange} />
+            )}
+            name="description"
+            defaultValue=""
+          />
+          {errors.name && (
+            <Text style={{ color: "red" }}>This is required.</Text>
+          )}
 
           <View style={{ marginTop: 26 }}>
-            <Button title="Save" onPress={onSubmit} />
-            {/* <Button title="Delete" onPress={onSubmit} /> */}
+            <ModalComponent
+              btnLabel={"Add New Measurement"}
+              action={onAddNewMeasurement}
+            >
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange } }) => (
+                  <Input label="Food name" fnSet={onChange} />
+                )}
+                name="name"
+                defaultValue=""
+              />
+              {errors.name && (
+                <Text style={{ color: "red" }}>This is required.</Text>
+              )}
+            </ModalComponent>
+            <Button title="Save new food" onPress={onSubmit} />
           </View>
         </View>
       </ScrollView>
@@ -367,6 +131,7 @@ export function FoodAdd({ navigation }: FoodAddProps) {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
+    backgroundColor: "white",
   },
   label: {
     marginTop: 20,
