@@ -1,13 +1,8 @@
 import React from "react";
 import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
-
-interface FoodAddProps {
-  navigation: any;
-}
 
 export interface FoodData {
   name: string;
@@ -25,51 +20,51 @@ export interface FoodValue {
   fiber: number;
 }
 
-const _storeData = async (data: FoodValue) => {
-  data.name = data.name.toLowerCase();
-  try {
-    AsyncStorage.getItem("@foods").then((value: string | null) => {
-      if (value && value.length) {
-        const jsonGetValue = JSON.parse(value) as [FoodValue];
-        // Check if the name is already in the storage
-        const isExist = jsonGetValue.filter((food: FoodValue) => {
-          return food.name === data.name;
-        });
-
-        if (isExist.length) {
-          // Return error here
-          return { error: "Food name already exists!" };
-        }
-
-        AsyncStorage.setItem("@foods", JSON.stringify([...jsonGetValue, data]));
-        return { success: "Successfully added new food!" };
-      } else {
-        AsyncStorage.setItem("@foods", JSON.stringify([data]));
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export function FoodAdd({ navigation }: FoodAddProps) {
+export function FoodAdd() {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FoodData>();
 
-  const onSubmit = handleSubmit((data: any) => {
-    // _storeData(data);
-    // navigation.goBack();
-  });
+  const onSubmitNewFood = handleSubmit((data: any) => {});
 
   const onAddNewMeasurement = () => {};
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView style={{ marginTop: 20 }}>
-        <View style={styles.container}>
+    <View style={styles.container}>
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange } }) => (
+          <Input label="Food name" fnSet={onChange} />
+        )}
+        name="name"
+        defaultValue=""
+      />
+      {errors.name && <Text style={{ color: "red" }}>This is required.</Text>}
+
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange } }) => (
+          <Input label="Description" fnSet={onChange} />
+        )}
+        name="description"
+        defaultValue=""
+      />
+      {errors.name && <Text style={{ color: "red" }}>This is required.</Text>}
+      <Button title="Save new food" onPress={onSubmitNewFood} />
+
+      <View style={{ marginTop: 26 }}>
+        <ModalComponent
+          btnLabel={"Add New Measurement"}
+          action={onAddNewMeasurement}
+        >
           <Controller
             control={control}
             rules={{
@@ -84,53 +79,19 @@ export function FoodAdd({ navigation }: FoodAddProps) {
           {errors.name && (
             <Text style={{ color: "red" }}>This is required.</Text>
           )}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange } }) => (
-              <Input label="Description" fnSet={onChange} />
-            )}
-            name="description"
-            defaultValue=""
-          />
-          {errors.name && (
-            <Text style={{ color: "red" }}>This is required.</Text>
-          )}
-
-          <View style={{ marginTop: 26 }}>
-            <ModalComponent
-              btnLabel={"Add New Measurement"}
-              action={onAddNewMeasurement}
-            >
-              <Controller
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field: { onChange } }) => (
-                  <Input label="Food name" fnSet={onChange} />
-                )}
-                name="name"
-                defaultValue=""
-              />
-              {errors.name && (
-                <Text style={{ color: "red" }}>This is required.</Text>
-              )}
-            </ModalComponent>
-            <Button title="Save new food" onPress={onSubmit} />
-          </View>
-        </View>
-      </ScrollView>
+        </ModalComponent>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: 50,
     backgroundColor: "white",
   },
   label: {
