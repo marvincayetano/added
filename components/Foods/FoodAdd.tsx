@@ -63,6 +63,7 @@ export function FoodAdd() {
       <View style={{ marginTop: 26 }}>
         <ModalComponent
           btnLabel={"Add New Measurement"}
+          modalBtnName={"Add"}
           action={onAddNewMeasurement}
         >
           <Controller
@@ -80,6 +81,48 @@ export function FoodAdd() {
             <Text style={{ color: "red" }}>This is required.</Text>
           )}
         </ModalComponent>
+      </View>
+
+      <View
+        style={{
+          display: "flex",
+          width: "100%",
+          paddingHorizontal: 50,
+          marginTop: 20,
+        }}
+      >
+        <View style={{ display: "flex", justifyContent: "flex-start" }}>
+          <Text>Measurements</Text>
+        </View>
+        <ScrollView>
+          <View style={{ display: "flex" }}>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                backgroundColor: "gray",
+              }}
+            >
+              <View>
+                <Text>Name</Text>
+                <Text>Description</Text>
+              </View>
+              <Button
+                title="Delete"
+                onPress={() => console.log("sadfadjfaslkj")}
+              />
+            </View>
+            <View>
+              <Text>Calories</Text>
+              <Text>Protein</Text>
+              <Text>Carbs</Text>
+              <Text>Fat</Text>
+              <Text>Fiber</Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );

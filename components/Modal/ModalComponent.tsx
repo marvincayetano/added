@@ -13,10 +13,16 @@ import {
 interface ModalProps {
   action?: Function;
   btnLabel?: String;
+  modalBtnName?: String;
   children?: ReactNode;
 }
 
-export function ModalComponent({ action, btnLabel, children }: ModalProps) {
+export function ModalComponent({
+  action,
+  btnLabel,
+  modalBtnName,
+  children,
+}: ModalProps) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -76,7 +82,7 @@ export function ModalComponent({ action, btnLabel, children }: ModalProps) {
             borderColor: "green",
           }}
         >
-          new day
+          {modalBtnName}
         </Text>
       </TouchableOpacity>
     </View>
