@@ -10,7 +10,6 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { FormData } from "../../Foods/FoodAdd";
 import { AddManualForm } from "./AddManualForm";
 import { ModalContainer } from "../../ui/ModalContainer";
 

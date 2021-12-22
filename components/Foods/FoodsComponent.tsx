@@ -3,7 +3,6 @@ import { View } from "react-native";
 import Swipeout from "react-native-swipeout";
 import { AsyncStorageGet, AsyncStorageSet } from "../../utils/AsyncStorage";
 import { Food } from "./Food";
-import { FormData } from "./FoodAdd";
 
 interface FoodsComponentProps {}
 

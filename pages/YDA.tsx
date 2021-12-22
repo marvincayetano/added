@@ -3,7 +3,7 @@ import { ScrollView, View } from "react-native";
 import Info from "../components/Info";
 import Macros from "../components/Table";
 import { AsyncStorageGet } from "../utils/AsyncStorage";
-import { getTotalMacros, TotalMacro } from "./Home";
+import { getTotalMacros } from "./Home";
 
 interface YDAProps {}
 

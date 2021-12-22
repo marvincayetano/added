@@ -3,7 +3,6 @@ import { ScrollView, View } from "react-native";
 import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
-import { FormData } from "../components/Foods/FoodAdd";
 import { ModalComponent } from "../components/Modal/ModalComponent";
 import {
   AsyncStorageAdd,
@@ -11,13 +10,6 @@ import {
   AsyncStorageGet,
   AsyncStorageSet,
 } from "../utils/AsyncStorage";
-
-export interface TotalMacro {
-  calories: number;
-  protein: number;
-  carbs: number;
-  fiber: number;
-}
 
 interface HomeProps {
   addedFoods: any | undefined;

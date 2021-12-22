@@ -6,7 +6,6 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { FormData } from "../../Foods/FoodAdd";
 import Autocomplete from "react-native-autocomplete-input";
 
 interface AddListFormProps {

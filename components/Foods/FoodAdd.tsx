@@ -1,24 +1,13 @@
 import React from "react";
+import tailwind from "tailwind-rn";
 import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import { MaterialIcons } from "@expo/vector-icons";
+
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
-
-export interface FoodData {
-  name: string;
-  description: string;
-  values: [FoodValue];
-}
-
-export interface FoodValue {
-  name: string;
-  description: string;
-  calories: number;
-  protein: number;
-  fat: number;
-  carbs: number;
-  fiber: number;
-}
+import { FoodData } from "../../interfaces";
+import { FoodAddListItem } from "./FoodAddListItem";
 
 export function FoodAdd() {
   const {
@@ -91,37 +80,17 @@ export function FoodAdd() {
           marginTop: 20,
         }}
       >
-        <View style={{ display: "flex", justifyContent: "flex-start" }}>
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            paddingBottom: 10,
+          }}
+        >
           <Text>Measurements</Text>
         </View>
         <ScrollView>
-          <View style={{ display: "flex" }}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor: "gray",
-              }}
-            >
-              <View>
-                <Text>Name</Text>
-                <Text>Description</Text>
-              </View>
-              <Button
-                title="Delete"
-                onPress={() => console.log("sadfadjfaslkj")}
-              />
-            </View>
-            <View>
-              <Text>Calories</Text>
-              <Text>Protein</Text>
-              <Text>Carbs</Text>
-              <Text>Fat</Text>
-              <Text>Fiber</Text>
-            </View>
-          </View>
+          <FoodAddListItem />
         </ScrollView>
       </View>
     </View>

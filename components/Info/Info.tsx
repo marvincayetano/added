@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { TextInfo } from "./TextInfo";
 import { Bar } from "react-native-progress";
 import { TotalMacro } from "../../pages/Home";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalMacro } from "../Modal/ModalMacros";
 import { AsyncStorageGet, AsyncStorageSet } from "../../utils/AsyncStorage";
 import { useTheme } from "@react-navigation/native";

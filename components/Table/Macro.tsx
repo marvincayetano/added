@@ -1,5 +1,4 @@
 import React from "react";
-import { FormData } from "../Foods/FoodAdd";
 import { StyleSheet, View, Text, Button } from "react-native";
 
 interface MacroProps {
