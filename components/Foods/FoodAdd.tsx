@@ -1,13 +1,14 @@
 import React from "react";
-import tailwind from "tailwind-rn";
 import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { MaterialIcons } from "@expo/vector-icons";
 
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
 import { FoodData } from "../../interfaces";
 import { FoodAddListItem } from "./FoodAddListItem";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+
+export const ASYNCSTORAGE_AVAILABLE_FOODS = "ASYNCSTORAGE_AVAILABLE_FOODS";
 
 export function FoodAdd() {
   const {
@@ -15,6 +16,10 @@ export function FoodAdd() {
     handleSubmit,
     formState: { errors },
   } = useForm<FoodData>();
+
+  const { getItem, setItem, mergeItem, removeItem } = useAsyncStorage(
+    ASYNCSTORAGE_AVAILABLE_FOODS
+  );
 
   const onSubmitNewFood = handleSubmit((data: any) => {});
 
