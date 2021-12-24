@@ -1,7 +1,7 @@
 export interface FoodData {
   name: string;
   description: string;
-  values: [FoodValue];
+  values: [MeasurementValue];
 }
 
 export interface MeasurementValue {
