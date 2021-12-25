@@ -16,64 +16,50 @@ interface FoodAddProps {
 }
 
 export function FoodAdd({ data }: FoodAddProps) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FoodData>();
-
-  const [food, setFood] = useState<FoodData | null>(data ?? null);
+  const [food, setFood] = useState<FoodData>(
+    data ?? {
+      name: "",
+      description: "",
+      values: [],
+    }
+  );
 
   const { getItem, setItem, mergeItem, removeItem } = useAsyncStorage(
     ASYNCSTORAGE_AVAILABLE_FOODS
   );
 
-  const onSubmitNewFood = handleSubmit((data: any) => {});
+  const onSubmitNewFood = async () => {
+    // TODO: Check if the same name already exists
+    // TODO: Get all the list
+    // TODO: Merge this food to the list if not exist
+    await setItem(JSON.stringify(food));
+  };
+
+  const onDeleteFood = () => {};
+
+  const onDeleteMeasurement = () => {};
 
   const onAddNewMeasurement = () => {};
 
   return (
     <View style={styles.container}>
-      {food ? (
-        <View>
-          <Text style={tailwind("text-xl font-bold")}>Foodname here</Text>
-          <Text style={tailwind("text-sm")}>Food description here</Text>
-        </View>
-      ) : (
-        <>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange } }) => (
-              <Input label="Food name" fnSet={onChange} />
-            )}
-            name="name"
-            defaultValue=""
-          />
-          {errors.name && (
-            <Text style={{ color: "red" }}>This is required.</Text>
-          )}
+      <>
+        <Input
+          label="Food name"
+          fnSet={(text: string) => {
+            setFood({ ...food, name: text });
+          }}
+        />
 
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange } }) => (
-              <Input label="Description" fnSet={onChange} />
-            )}
-            name="description"
-            defaultValue=""
-          />
-          {errors.name && (
-            <Text style={{ color: "red" }}>This is required.</Text>
-          )}
-          <Button title="Save new food" onPress={onSubmitNewFood} />
-        </>
-      )}
+        <Input
+          label="Description"
+          fnSet={(text: string) => {
+            setFood({ ...food, description: text });
+          }}
+        />
 
+        <Button title="Save" onPress={onSubmitNewFood} />
+      </>
       {data?.values && (
         <>
           <View style={{ marginTop: 26 }}>
@@ -82,20 +68,7 @@ export function FoodAdd({ data }: FoodAddProps) {
               modalBtnName={"Add"}
               action={onAddNewMeasurement}
             >
-              <Controller
-                control={control}
-                rules={{
-                  required: true,
-                }}
-                render={({ field: { onChange } }) => (
-                  <Input label="Food name" fnSet={onChange} />
-                )}
-                name="name"
-                defaultValue=""
-              />
-              {errors.name && (
-                <Text style={{ color: "red" }}>This is required.</Text>
-              )}
+              {/* <Input label="Food name" fnSet={onChange} /> */}
             </ModalComponent>
           </View>
 
