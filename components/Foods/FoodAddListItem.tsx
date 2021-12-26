@@ -5,11 +5,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { MeasurementValue } from "../../interfaces";
 
 interface FoodAddListItemProps {
-  id: string;
   measurement: MeasurementValue;
 }
 
-export function FoodAddListItem() {
+export function FoodAddListItem({ measurement }: FoodAddListItemProps) {
   return (
     <View
       style={tailwind(
@@ -22,17 +21,19 @@ export function FoodAddListItem() {
           alignItems: "center",
         }}
       >
-        <Text style={tailwind("text-lg font-medium")}>Per: 100G</Text>
+        <Text style={tailwind("text-lg font-medium")}>
+          Per: {measurement.measurement}
+        </Text>
       </View>
       <View style={tailwind("flex flex-row justify-between mt-2")}>
         <View style={tailwind("flex")}>
-          <Text>Calories: 450</Text>
-          <Text>Protein: 40</Text>
-          <Text>Carbs: 300</Text>
+          <Text>Calories: {measurement.calories}</Text>
+          <Text>Protein: {measurement.protein}</Text>
+          <Text>Carbs: {measurement.carbs}</Text>
         </View>
         <View>
-          <Text>Fat: 40</Text>
-          <Text>Fiber: 50</Text>
+          <Text>Fat: {measurement.fat}</Text>
+          <Text>Fiber: {measurement.fiber}</Text>
         </View>
         <MaterialIcons
           name="delete-forever"

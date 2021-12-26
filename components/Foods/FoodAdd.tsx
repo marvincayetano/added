@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
-import { useForm, Controller } from "react-hook-form";
 
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
-import { FoodData } from "../../interfaces";
+import { FoodData, MeasurementValue } from "../../interfaces";
 import { FoodAddListItem } from "./FoodAddListItem";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import tailwind from "tailwind-rn";
+import useIsNan from "../../hooks/useIsNan";
 
 export const ASYNCSTORAGE_AVAILABLE_FOODS = "ASYNCSTORAGE_AVAILABLE_FOODS";
 
 interface FoodAddProps {
   data: FoodData;
+  isNew: boolean;
 }
 
-export function FoodAdd({ data }: FoodAddProps) {
+export function FoodAdd({ data, isNew = true }: FoodAddProps) {
+  const { getItem, setItem, mergeItem, removeItem } = useAsyncStorage(
+    ASYNCSTORAGE_AVAILABLE_FOODS
+  );
+
   const [food, setFood] = useState<FoodData>(
     data ?? {
       name: "",
@@ -24,22 +28,50 @@ export function FoodAdd({ data }: FoodAddProps) {
     }
   );
 
-  const { getItem, setItem, mergeItem, removeItem } = useAsyncStorage(
-    ASYNCSTORAGE_AVAILABLE_FOODS
-  );
+  const [isAdding, setIsAdding] = useState<boolean>(isNew);
 
-  const onSubmitNewFood = async () => {
-    // TODO: Check if the same name already exists
-    // TODO: Get all the list
-    // TODO: Merge this food to the list if not exist
-    await setItem(JSON.stringify(food));
-  };
+  const [measurement, setMeasurement] = useState<string>("");
+  const [calories, setCalories] = useIsNan();
+  const [protein, setProtein] = useIsNan();
+  const [carbs, setCarbs] = useIsNan();
+  const [fat, setFat] = useIsNan();
+  const [fiber, setFiber] = useIsNan();
 
-  const onDeleteFood = () => {};
+  async function onSubmitNewFood() {
+    // Get all the list
+    const foodsResult = await getItem();
 
-  const onDeleteMeasurement = () => {};
+    if (foodsResult !== null) {
+      const foodsJSON = JSON.parse(foodsResult);
 
-  const onAddNewMeasurement = () => {};
+      // Merge this food to the list if not exist
+      await setItem(JSON.stringify({ ...foodsJSON, [food.name]: { food } }));
+    }
+
+    setIsAdding(false);
+  }
+
+  function onDeleteMeasurement() {}
+
+  function onAddNewMeasurement() {
+    const values = [
+      ...food.values,
+      { measurement, calories, protein, carbs, fat, fiber },
+    ];
+
+    setFood((prevState) => ({ ...prevState, values }));
+
+    resetModalValues();
+  }
+
+  function resetModalValues() {
+    setMeasurement("");
+    setCalories("");
+    setCarbs("");
+    setProtein("");
+    setFat("");
+    setFiber("");
+  }
 
   return (
     <View style={styles.container}>
@@ -60,7 +92,8 @@ export function FoodAdd({ data }: FoodAddProps) {
 
         <Button title="Save" onPress={onSubmitNewFood} />
       </>
-      {data?.values && (
+
+      {!isAdding && (
         <>
           <View style={{ marginTop: 26 }}>
             <ModalComponent
@@ -68,7 +101,12 @@ export function FoodAdd({ data }: FoodAddProps) {
               modalBtnName={"Add"}
               action={onAddNewMeasurement}
             >
-              {/* <Input label="Food name" fnSet={onChange} /> */}
+              <Input label="Measurement" fnSet={setMeasurement} />
+              <Input label="Calories" fnSet={setCalories} />
+              <Input label="Protein" fnSet={setProtein} />
+              <Input label="Carbs" fnSet={setCarbs} />
+              <Input label="Fat" fnSet={setFat} />
+              <Input label="Fiber" fnSet={setFiber} />
             </ModalComponent>
           </View>
 
@@ -90,7 +128,9 @@ export function FoodAdd({ data }: FoodAddProps) {
               <Text>Measurements</Text>
             </View>
             <ScrollView>
-              <FoodAddListItem />
+              {food.values.map((value) => (
+                <FoodAddListItem key={value.measurement} measurement={value} />
+              ))}
             </ScrollView>
           </View>
         </>
