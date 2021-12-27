@@ -6,9 +6,13 @@ import { MeasurementValue } from "../../interfaces";
 
 interface FoodAddListItemProps {
   measurement: MeasurementValue;
+  onDelete: Function;
 }
 
-export function FoodAddListItem({ measurement }: FoodAddListItemProps) {
+export function FoodAddListItem({
+  measurement,
+  onDelete,
+}: FoodAddListItemProps) {
   return (
     <View
       style={tailwind(
@@ -40,6 +44,7 @@ export function FoodAddListItem({ measurement }: FoodAddListItemProps) {
           size={24}
           color="red"
           style={tailwind("p-2")}
+          onPress={() => onDelete()}
         />
       </View>
     </View>

@@ -3,7 +3,7 @@ import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
 
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
-import { FoodData, MeasurementValue } from "../../interfaces";
+import { FoodData } from "../../interfaces";
 import { FoodAddListItem } from "./FoodAddListItem";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import useIsNan from "../../hooks/useIsNan";
@@ -16,9 +16,7 @@ interface FoodAddProps {
 }
 
 export function FoodAdd({ data, isNew = true }: FoodAddProps) {
-  const { getItem, setItem, mergeItem, removeItem } = useAsyncStorage(
-    ASYNCSTORAGE_AVAILABLE_FOODS
-  );
+  const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
 
   const [food, setFood] = useState<FoodData>(
     data ?? {
@@ -51,7 +49,13 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
     setIsAdding(false);
   }
 
-  function onDeleteMeasurement() {}
+  function onDeleteMeasurement(index: number) {
+    let values = [...food.values];
+
+    values.splice(index, 1);
+
+    setFood((prevState) => ({ ...prevState, values }));
+  }
 
   function onAddNewMeasurement() {
     const values = [
@@ -95,21 +99,6 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
 
       {!isAdding && (
         <>
-          <View style={{ marginTop: 26 }}>
-            <ModalComponent
-              btnLabel={"Add New Measurement"}
-              modalBtnName={"Add"}
-              action={onAddNewMeasurement}
-            >
-              <Input label="Measurement" fnSet={setMeasurement} />
-              <Input label="Calories" fnSet={setCalories} />
-              <Input label="Protein" fnSet={setProtein} />
-              <Input label="Carbs" fnSet={setCarbs} />
-              <Input label="Fat" fnSet={setFat} />
-              <Input label="Fiber" fnSet={setFiber} />
-            </ModalComponent>
-          </View>
-
           <View
             style={{
               display: "flex",
@@ -121,15 +110,34 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
             <View
               style={{
                 display: "flex",
-                justifyContent: "flex-start",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
                 paddingBottom: 10,
               }}
             >
               <Text>Measurements</Text>
+
+              <ModalComponent
+                btnLabel={"Add New Measurement"}
+                modalBtnName={"Add"}
+                action={onAddNewMeasurement}
+              >
+                <Input label="Measurement" fnSet={setMeasurement} />
+                <Input label="Calories" fnSet={setCalories} />
+                <Input label="Protein" fnSet={setProtein} />
+                <Input label="Carbs" fnSet={setCarbs} />
+                <Input label="Fat" fnSet={setFat} />
+                <Input label="Fiber" fnSet={setFiber} />
+              </ModalComponent>
             </View>
             <ScrollView>
-              {food.values.map((value) => (
-                <FoodAddListItem key={value.measurement} measurement={value} />
+              {food.values.map((value, index) => (
+                <FoodAddListItem
+                  key={value.measurement}
+                  measurement={value}
+                  onDelete={() => onDeleteMeasurement(index)}
+                />
               ))}
             </ScrollView>
           </View>
