@@ -1,27 +1,17 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
-import { FormData } from "./FoodAdd";
+import { IFood } from "../../interfaces";
 
-export function Food({
-  foodName,
-  caloriesPP,
-  caloriesPG,
-  proteinPP,
-  proteinPG,
-  fatPP,
-  fatPG,
-  carbsPP,
-  carbsPG,
-  fiberPP,
-  fiberPG,
-}: FormData) {
+interface FoodProps {
+  food: IFood;
+}
+
+export function Food({ food }: FoodProps) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.item}>{`${foodName}`}</Text>
-        <Text style={styles.subItem}>{`${caloriesPP} Calories per piece  ${
-          caloriesPG ? `| ${caloriesPG} Calories per 100g` : ""
-        } ${proteinPP ? `| ${proteinPP} Protein per piece` : ""}`}</Text>
+        <Text style={styles.item}>{`${food.name}`}</Text>
+        <Text style={styles.subItem}>{food.description}</Text>
       </View>
     </View>
   );

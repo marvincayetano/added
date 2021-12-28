@@ -1,16 +1,22 @@
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Swipeout from "react-native-swipeout";
-import { AsyncStorageGet, AsyncStorageSet } from "../../utils/AsyncStorage";
+import { IFood } from "../../interfaces";
 import { Food } from "./Food";
+import { ASYNCSTORAGE_AVAILABLE_FOODS } from "./FoodAdd";
 
 interface FoodsComponentProps {}
 
 export function FoodsComponent({}: FoodsComponentProps) {
-  const [foods, setFoods] = useState<FormData[]>([]);
+  const [foods, setFoods] = useState<IFood[]>([]);
+  const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
+
   useEffect(() => {
-    AsyncStorageGet("foods", setFoods);
-  }, [foods]);
+    getItem().then((result) => {
+      console.log(result);
+    });
+  }, []);
 
   return (
     <View>

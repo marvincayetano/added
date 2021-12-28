@@ -3,7 +3,7 @@ import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
 
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
-import { FoodData } from "../../interfaces";
+import { IFood } from "../../interfaces";
 import { FoodAddListItem } from "./FoodAddListItem";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import useIsNan from "../../hooks/useIsNan";
@@ -11,14 +11,14 @@ import useIsNan from "../../hooks/useIsNan";
 export const ASYNCSTORAGE_AVAILABLE_FOODS = "ASYNCSTORAGE_AVAILABLE_FOODS";
 
 interface FoodAddProps {
-  data: FoodData;
+  data: IFood;
   isNew: boolean;
 }
 
 export function FoodAdd({ data, isNew = true }: FoodAddProps) {
   const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
 
-  const [food, setFood] = useState<FoodData>(
+  const [food, setFood] = useState<IFood>(
     data ?? {
       name: "",
       description: "",

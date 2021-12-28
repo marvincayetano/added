@@ -1,10 +1,10 @@
-export interface FoodData {
+export interface IFood {
   name: string;
   description: string;
-  values: MeasurementValue[];
+  values: IMeasurementValue[];
 }
 
-export interface MeasurementValue {
+export interface IMeasurementValue {
   measurement: string;
   calories: string;
   protein: string;
