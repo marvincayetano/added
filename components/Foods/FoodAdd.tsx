@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Text, Button, View, StyleSheet, ScrollView } from "react-native";
 
+import uuid from "react-native-uuid";
 import { Input } from "../ui/Input";
 import { ModalComponent } from "../Modal/ModalComponent";
 import { IFood } from "../../interfaces";
@@ -20,6 +21,7 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
 
   const [food, setFood] = useState<IFood>(
     data ?? {
+      id: uuid.v4(),
       name: "",
       description: "",
       values: [],
@@ -60,7 +62,7 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
   function onAddNewMeasurement() {
     const values = [
       ...food.values,
-      { measurement, calories, protein, carbs, fat, fiber },
+      { id: uuid.v4(), measurement, calories, protein, carbs, fat, fiber },
     ];
 
     setFood((prevState) => ({ ...prevState, values }));

@@ -28,31 +28,31 @@ export function FoodsComponent({}: FoodsComponentProps) {
               key={i}
               autoClose={true}
               backgroundColor={"white"}
-              right={[
-                {
-                  text: "Delete",
-                  backgroundColor: "red",
-                  onPress: () => {
-                    const filteredArray = foods!.filter(
-                      (_: unknown, index: number) => {
-                        return i !== index;
-                      }
-                    );
+              // right={[
+              //   {
+              //     text: "Delete",
+              //     backgroundColor: "red",
+              //     onPress: () => {
+              //       const filteredArray = foods!.filter(
+              //         (_: unknown, index: number) => {
+              //           return i !== index;
+              //         }
+              //       );
 
-                    AsyncStorageSet("foods", filteredArray);
-                  },
-                },
-              ]}
-              left={[
-                {
-                  text: "Edit",
-                  backgroundColor: "white",
-                  color: "blue",
-                  onPress: () => {
-                    console.log(i);
-                  },
-                },
-              ]}
+              //       AsyncStorageSet("foods", filteredArray);
+              //     },
+              //   },
+              // ]}
+              // left={[
+              //   {
+              //     text: "Edit",
+              //     backgroundColor: "white",
+              //     color: "blue",
+              //     onPress: () => {
+              //       console.log(i);
+              //     },
+              //   },
+              // ]}
             >
               <Food
                 key={i}
