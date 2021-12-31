@@ -44,8 +44,11 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
     if (foodsResult !== null) {
       const foodsJSON = JSON.parse(foodsResult);
 
-      // Merge this food to the list if not exist
+      // Merge this food to the list
       await setItem(JSON.stringify({ ...foodsJSON, [food.name]: { food } }));
+    } else {
+      // Merge this food to the list if not exist
+      await setItem(JSON.stringify({ [food.name]: { food } }));
     }
 
     setIsAdding(false);

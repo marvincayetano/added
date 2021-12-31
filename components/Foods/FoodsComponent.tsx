@@ -10,22 +10,29 @@ interface FoodsComponentProps {}
 
 export function FoodsComponent({}: FoodsComponentProps) {
   const [foods, setFoods] = useState<IFood[]>([]);
-  const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
+  const { getItem, setItem, removeItem } = useAsyncStorage(
+    ASYNCSTORAGE_AVAILABLE_FOODS
+  );
 
   useEffect(() => {
+    // removeItem();
     getItem().then((result) => {
-      console.log(result);
+      if (result) {
+        setFoods(Object.values(JSON.parse(result)));
+      }
     });
   }, []);
 
   return (
     <View>
       {foods &&
-        foods.map((food, i) => {
+        foods.map((obj: any) => {
+          const food = obj["food"];
+
           return (
             // TODO: Make this props ...props
             <Swipeout
-              key={i}
+              key={food.id}
               autoClose={true}
               backgroundColor={"white"}
               // right={[
@@ -54,14 +61,7 @@ export function FoodsComponent({}: FoodsComponentProps) {
               //   },
               // ]}
             >
-              <Food
-                key={i}
-                foodName={food.foodName}
-                caloriesPP={food.caloriesPP}
-                caloriesPG={food.caloriesPG}
-                proteinPP={food.proteinPP}
-                proteinPG={food.proteinPG}
-              />
+              <Food key={food.id} food={food} />
             </Swipeout>
           );
         })}
