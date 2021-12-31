@@ -62,7 +62,15 @@ export function FoodAdd({ data, isNew = true }: FoodAddProps) {
   function onAddNewMeasurement() {
     const values = [
       ...food.values,
-      { id: uuid.v4(), measurement, calories, protein, carbs, fat, fiber },
+      {
+        id: uuid.v4() as string,
+        measurement,
+        calories,
+        protein,
+        carbs,
+        fat,
+        fiber,
+      },
     ];
 
     setFood((prevState) => ({ ...prevState, values }));

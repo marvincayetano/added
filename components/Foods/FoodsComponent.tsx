@@ -1,5 +1,5 @@
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { View } from "react-native";
 import Swipeout from "react-native-swipeout";
 import { IFood } from "../../interfaces";
