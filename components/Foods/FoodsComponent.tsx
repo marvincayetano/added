@@ -50,16 +50,17 @@ export function FoodsComponent({}: FoodsComponentProps) {
               //     },
               //   },
               // ]}
-              // left={[
-              //   {
-              //     text: "Edit",
-              //     backgroundColor: "white",
-              //     color: "blue",
-              //     onPress: () => {
-              //       console.log(i);
-              //     },
-              //   },
-              // ]}
+              left={[
+                {
+                  text: "Edit",
+                  backgroundColor: "white",
+                  color: "blue",
+                  onPress: () => {
+                    console.log(food);
+                    navigation.navigate("Add", { data: food });
+                  },
+                },
+              ]}
             >
               <Food key={food.id} food={food} />
             </Swipeout>
