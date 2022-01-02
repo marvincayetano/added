@@ -3,10 +3,11 @@ import { Text, TextInput, View } from "react-native";
 
 interface InputProps {
   label: string;
+  defaultValue?: string;
   fnSet: Function;
 }
 
-export function Input({ label, fnSet }: InputProps) {
+export function Input({ label, defaultValue = "", fnSet }: InputProps) {
   return (
     <View
       style={{
@@ -27,6 +28,7 @@ export function Input({ label, fnSet }: InputProps) {
         {label}
       </Text>
       <TextInput
+        defaultValue={defaultValue}
         style={{
           borderBottomWidth: 1,
           width: "100%",

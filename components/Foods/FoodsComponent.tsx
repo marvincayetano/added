@@ -58,7 +58,7 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
                   backgroundColor: "white",
                   color: "blue",
                   onPress: () => {
-                    navigation.navigate("Add", food);
+                    navigation.navigate("Add", { data: food, isNew: false });
                   },
                 },
               ]}

@@ -2,10 +2,10 @@ import React from "react";
 import tailwind from "tailwind-rn";
 import { Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { MeasurementValue } from "../../interfaces";
+import { IMeasurementValue } from "../../interfaces";
 
 interface FoodAddListItemProps {
-  measurement: MeasurementValue;
+  measurement: IMeasurementValue;
   onDelete: Function;
 }
 
