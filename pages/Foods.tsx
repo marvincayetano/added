@@ -2,13 +2,15 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import FoodsComponent from "../components/Foods";
 
-interface FoodsProps {}
+interface FoodsProps {
+  navigation: any;
+}
 
-export function Foods({}: FoodsProps) {
+export function Foods({ navigation }: FoodsProps) {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
-        <FoodsComponent />
+        <FoodsComponent navigation={navigation} />
       </ScrollView>
     </View>
   );

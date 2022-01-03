@@ -6,9 +6,11 @@ import { IFood } from "../../interfaces";
 import { Food } from "./Food";
 import { ASYNCSTORAGE_AVAILABLE_FOODS } from "./FoodAdd";
 
-interface FoodsComponentProps {}
+interface FoodsComponentProps {
+  navigation: any;
+}
 
-export function FoodsComponent({}: FoodsComponentProps) {
+export function FoodsComponent({ navigation }: FoodsComponentProps) {
   const [foods, setFoods] = useState<IFood[]>([]);
   const { getItem, setItem, removeItem } = useAsyncStorage(
     ASYNCSTORAGE_AVAILABLE_FOODS
@@ -56,8 +58,7 @@ export function FoodsComponent({}: FoodsComponentProps) {
                   backgroundColor: "white",
                   color: "blue",
                   onPress: () => {
-                    console.log(food);
-                    navigation.navigate("Add", { data: food });
+                    navigation.navigate("Add", food);
                   },
                 },
               ]}
