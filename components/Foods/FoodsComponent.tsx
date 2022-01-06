@@ -12,6 +12,7 @@ interface FoodsComponentProps {
 
 export function FoodsComponent({ navigation }: FoodsComponentProps) {
   const [foods, setFoods] = useState<IFood[]>([]);
+  const [storageData, setStorageData] = useState<any>(null);
   const { getItem, setItem, removeItem } = useAsyncStorage(
     ASYNCSTORAGE_AVAILABLE_FOODS
   );
@@ -19,10 +20,18 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
   useEffect(() => {
     getItem().then((result) => {
       if (result) {
+        setStorageData(JSON.parse(result));
         setFoods(Object.values(JSON.parse(result)));
       }
     });
   }, []);
+
+  function deleteFoodById(id: string) {
+    const temp = { ...storageData };
+    delete temp[id];
+
+    setItem(temp);
+  }
 
   return (
     <View>
@@ -44,8 +53,9 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
                     const filteredArray = foods!.filter((i: IFood) => {
                       return food.id !== i.id;
                     });
+                    setFoods(filteredArray);
 
-                    console.log(filteredArray);
+                    deleteFoodById(food.id);
                   },
                 },
               ]}
