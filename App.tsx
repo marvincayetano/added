@@ -87,7 +87,9 @@ export default function App() {
           options={({ navigation }) => ({
             headerRight: () => (
               <Button
-                onPress={() => navigation.navigate("Add")}
+                onPress={() =>
+                  navigation.navigate("Add", { data: null, isNew: true })
+                }
                 title="New"
                 color={MyTheme.colors.secondary}
               />

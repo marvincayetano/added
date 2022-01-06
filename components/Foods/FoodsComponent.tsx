@@ -17,7 +17,6 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
   );
 
   useEffect(() => {
-    // removeItem();
     getItem().then((result) => {
       if (result) {
         setFoods(Object.values(JSON.parse(result)));
@@ -37,21 +36,19 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
               key={food.id}
               autoClose={true}
               backgroundColor={"white"}
-              // right={[
-              //   {
-              //     text: "Delete",
-              //     backgroundColor: "red",
-              //     onPress: () => {
-              //       const filteredArray = foods!.filter(
-              //         (_: unknown, index: number) => {
-              //           return i !== index;
-              //         }
-              //       );
+              right={[
+                {
+                  text: "Delete",
+                  backgroundColor: "red",
+                  onPress: () => {
+                    const filteredArray = foods!.filter((i: IFood) => {
+                      return food.id !== i.id;
+                    });
 
-              //       AsyncStorageSet("foods", filteredArray);
-              //     },
-              //   },
-              // ]}
+                    console.log(filteredArray);
+                  },
+                },
+              ]}
               left={[
                 {
                   text: "Edit",

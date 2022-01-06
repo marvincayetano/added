@@ -20,8 +20,6 @@ export function FoodAdd({ route }: FoodAddProps) {
   const { data, isNew = false } = route.params;
   const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
 
-  console.log(data);
-
   const [food, setFood] = useState<IFood>(
     data ?? {
       id: uuid.v4(),
@@ -47,11 +45,14 @@ export function FoodAdd({ route }: FoodAddProps) {
     if (foodsResult !== null) {
       const foodsJSON = JSON.parse(foodsResult);
 
+      // Check if food id already exists
+      console.log(foodsJSON);
+
       // Merge this food to the list
-      await setItem(JSON.stringify({ ...foodsJSON, [food.name]: { food } }));
+      await setItem(JSON.stringify({ ...foodsJSON, [food.id]: { food } }));
     } else {
       // Merge this food to the list if not exist
-      await setItem(JSON.stringify({ [food.name]: { food } }));
+      await setItem(JSON.stringify({ [food.id]: { food } }));
     }
 
     setIsAdding(false);
