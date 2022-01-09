@@ -8,7 +8,6 @@ import { IFood } from "../../interfaces";
 import { FoodAddListItem } from "./FoodAddListItem";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import useIsNan from "../../hooks/useIsNan";
-import { useNavigationState } from "@react-navigation/native";
 
 export const ASYNCSTORAGE_AVAILABLE_FOODS = "ASYNCSTORAGE_AVAILABLE_FOODS";
 
@@ -18,7 +17,7 @@ interface FoodAddProps {
 
 export function FoodAdd({ route }: FoodAddProps) {
   const { data, isNew = false } = route.params;
-  const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
+  const { setItem, getItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
 
   const [food, setFood] = useState<IFood>(
     data ?? {

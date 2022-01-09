@@ -30,7 +30,7 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
     const temp = { ...storageData };
     delete temp[id];
 
-    setItem(temp);
+    setItem(JSON.stringify(temp));
   }
 
   return (
