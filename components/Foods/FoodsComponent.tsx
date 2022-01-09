@@ -13,9 +13,7 @@ interface FoodsComponentProps {
 export function FoodsComponent({ navigation }: FoodsComponentProps) {
   const [foods, setFoods] = useState<IFood[]>([]);
   const [storageData, setStorageData] = useState<any>(null);
-  const { getItem, setItem, removeItem } = useAsyncStorage(
-    ASYNCSTORAGE_AVAILABLE_FOODS
-  );
+  const { getItem, setItem } = useAsyncStorage(ASYNCSTORAGE_AVAILABLE_FOODS);
 
   useEffect(() => {
     getItem().then((result) => {
@@ -30,6 +28,8 @@ export function FoodsComponent({ navigation }: FoodsComponentProps) {
     const temp = { ...storageData };
     delete temp[id];
 
+    setStorageData(temp);
+    setFoods(Object.values(temp));
     setItem(JSON.stringify(temp));
   }
 
