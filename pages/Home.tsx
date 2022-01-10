@@ -1,113 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
-import Info from "../components/Info";
 import { ModalAdd } from "../components/Modal/ModalAdd";
 import Macros from "../components/Table";
 import { ModalComponent } from "../components/Modal/ModalComponent";
-import {
-  AsyncStorageAdd,
-  AsyncStorageClear,
-  AsyncStorageGet,
-  AsyncStorageSet,
-} from "../utils/AsyncStorage";
 
 interface HomeProps {
   addedFoods: any | undefined;
   setAddedFoods: Function;
 }
 
-export function getTotalMacros(foods: any): TotalMacro {
-  // CALCULATE EACH HERE
-  let returnValue: TotalMacro = {
-    calories: 0,
-    protein: 0,
-    carbs: 0,
-    fiber: 0,
-  };
-
-  const calculateValue = (value: string | undefined, qty: number): number =>
-    parseInt(value ?? "0") * qty;
-
-  foods.forEach(
-    (added: { food: FormData; isPerPiece: boolean; qty: number }) => {
-      const { food } = added;
-      if (added.isPerPiece) {
-        returnValue.calories =
-          returnValue.calories + calculateValue(food.caloriesPP, added.qty);
-        returnValue.protein =
-          returnValue.protein + calculateValue(food.proteinPP, added.qty);
-        returnValue.carbs =
-          returnValue.carbs + calculateValue(food.carbsPP, added.qty);
-        returnValue.fiber =
-          returnValue.fiber + calculateValue(food.fiberPP, added.qty);
-      } else {
-        returnValue.calories =
-          returnValue.calories + calculateValue(food.caloriesPG, added.qty);
-        returnValue.protein =
-          returnValue.protein + calculateValue(food.proteinPG, added.qty);
-        returnValue.carbs =
-          returnValue.carbs + calculateValue(food.carbsPG, added.qty);
-        returnValue.fiber =
-          returnValue.fiber + calculateValue(food.fiberPG, added.qty);
-      }
-    }
-  );
-
-  return returnValue;
-}
-
 export function Home({ addedFoods, setAddedFoods }: HomeProps) {
-  const [totalMacro, setTotalMacro] = useState<TotalMacro>({
-    calories: 0,
-    protein: 0,
-    carbs: 0,
-    fiber: 0,
-  });
-
   //   const [addedFoods, setAddedFoods] = useState<any | undefined>([]);
   const [availFoods, setAvailFoods] = useState<FormData[]>([]);
 
-  useEffect(() => {
-    // AsyncStorageClear("yda");
-    AsyncStorageClear("added");
-    AsyncStorageGet("foods", setAvailFoods);
-    AsyncStorageGet("added", (data: Object) => {
-      // TODO: THIS IS NOT WORKING
-      setAddedFoods(data);
-      setTotalMacro(getTotalMacros(data));
-    });
-  }, []);
+  useEffect(() => {}, []);
 
-  function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {
-    AsyncStorageAdd("added", { food, qty, isPerPiece });
-    setAddedFoods([...addedFoods, { food, qty, isPerPiece }]);
-    setTotalMacro(getTotalMacros([...addedFoods, { food, qty, isPerPiece }]));
-  }
+  function addNewFood(food: FormData, qty: number, isPerPiece: boolean) {}
 
-  function deleteFood(index: number) {
-    try {
-      const filteredArray = addedFoods!.filter((_: unknown, i: number) => {
-        return i !== index;
-      });
+  function deleteFood(index: number) {}
 
-      setAddedFoods(filteredArray);
-      AsyncStorageSet("added", JSON.stringify(filteredArray));
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  function moveToYDA() {
-    AsyncStorageSet("yda", addedFoods);
-    AsyncStorageClear("added");
-    setAddedFoods([]);
-    setTotalMacro({ calories: 0, protein: 0, carbs: 0, fiber: 0 });
-  }
+  function moveToYDA() {}
 
   return (
     <View style={{ flex: 1 }}>
       <ModalComponent action={moveToYDA} />
-      <Info totalMacro={totalMacro!} />
+      {/* <Info totalMacro={totalMacro!} /> */}
       <ScrollView>
         <Macros foods={addedFoods} fnDelete={deleteFood} />
       </ScrollView>

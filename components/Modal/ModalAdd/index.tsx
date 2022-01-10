@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SegmentedControlTab from "react-native-segmented-control-tab";
 import {
   View,
   Text,
@@ -6,17 +7,18 @@ import {
   StyleSheet,
   Alert,
   TouchableHighlight,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
 } from "react-native";
 import { AddManualForm } from "./AddManualForm";
 import { ModalContainer } from "../../ui/ModalContainer";
+import tailwind from "tailwind-rn";
 
 interface ModalAddProps {
   foods: FormData[] | undefined;
   fnAddFood: Function;
 }
+
+const VIEW_SEARCH = "VIEW_SEARCH";
+const VIEW_MANUAL = "VIEW_MANUAL";
 
 export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,11 +27,16 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
     undefined
   );
   const [quantity, setQuantity] = useState<number>(1);
+  const [view, setView] = useState(VIEW_SEARCH);
 
   function submitForm() {
     setModalVisible(!modalVisible);
     fnAddFood(currentFood, quantity, isPerPiece);
     console.log(currentFood);
+  }
+
+  function setCurrentView(index) {
+    setView(index === 0 ? VIEW_SEARCH : VIEW_MANUAL);
   }
 
   return (
@@ -43,12 +50,21 @@ export function ModalAdd({ foods, fnAddFood }: ModalAddProps) {
         }}
       >
         <View style={styles.centeredView}>
-          <ModalContainer title="Add Food">
-            <AddManualForm
-              setCurrentFood={setCurrentFood}
-              setQuantity={setQuantity}
-              setIsPerPiece={setIsPerPiece}
+          <ModalContainer>
+            <SegmentedControlTab
+              values={["Search", "Manual"]}
+              selectedIndex={view === VIEW_SEARCH ? 0 : 1}
+              onTabPress={setCurrentView}
             />
+            <View style={tailwind("my-4")}>
+              {view === VIEW_MANUAL && (
+                <AddManualForm
+                  setCurrentFood={setCurrentFood}
+                  setQuantity={setQuantity}
+                  setIsPerPiece={setIsPerPiece}
+                />
+              )}
+            </View>
             <TouchableHighlight
               style={{
                 ...styles.openButton,
